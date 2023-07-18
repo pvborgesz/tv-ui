@@ -111,7 +111,10 @@ export default function DiscoverChannels() {
                     </>
                         : null}
                 </div>
-                <button onClick={handleButtonClick} className='scan-button text-white text-center p-4 rounded-e-sm m-5' style={scanComplete ? { backgroundColor: "red" } : { backgroundColor: "green" }}>
+                <button onClick={handleButtonClick} className='scan-button text-white text-center p-4 rounded-e-sm m-5 ' style={scanComplete ? {
+                    backgroundColor: "#C85250",
+
+                } : { backgroundColor: "green" }}>
                     {scanComplete ? 'Fechar Busca' : isScanning ? 'Buscando...' : 'Iniciar Busca'}
                 </button>
             </div>
