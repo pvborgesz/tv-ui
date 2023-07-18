@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Footer({ href }) {
   return (
-    <footer className="flex items-center justify-between text-white mb-30 ml-10 mr-10 mb-20">
+    <footer className="flex items-center justify-between text-white ml-10 mr-10 mb-20 mt-auto">
       <div className="font-normal flex gap-5 items-center">
         <img
           src="https://cdn-icons-png.flaticon.com/512/2719/2719648.png"
