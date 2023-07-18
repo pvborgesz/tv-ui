@@ -4,20 +4,37 @@ import Footer from "../components/Footer";
 import ProfileIcon from "../components/ProfileIcon";
 import RadioDifusorIcon from "../assets/radiodifusor_icon.svg";
 import IndicacaoIcon from "../assets/indicacao.svg";
+import PlayIcon from "../assets/play.svg";
+import BtnFcIcon from "../assets/btn_fc.svg";
+import ProgBarIcon from "../assets/prog_bar.svg";
 import TitlePage from "../components/TitlePage";
 
 export default function RadioDifusor() {
   return (
     <>
       {/* div with input for nome and for sobrenome  in row*/}
-      <div className="flex flex-row h-full items-center">
+      <div className="flex flex-row h-full items-center mt-10">
 
-        <div className="bg-zinc-900 flex flex-col items-left justify-start text-white w-1/3 h-4/5 ml-10">
+        <div className="bg-zinc-900 flex flex-col items-left justify-start text-white w-1/3 h-4/5 ml-10 mr-5">
           <img src={RadioDifusorIcon} />
         </div>
 
-        <div className="bg-zinc-900 flex flex-col h-4/5 items-left justify-left text-white flex-grow ml-5 mr-10">
-          <div className="flex align-center justify-center text-white bg-slate-200 h-4/5 rounded">
+        <div className="bg-zinc-900 flex flex-col h-full items-left justify-left text-white flex-grow ml-5 mr-10">
+          <div className="flex flex-col items-center align-center justify-center text-white bg-slate-200 h-4/5 rounded">
+            
+            <div className="flex justify-center items-center h-4/5">
+              <img src={PlayIcon} />
+            </div>
+
+            <div className="flex flex-col justify-end mb-5">
+              <div className="flex flex-row justify-end">
+                <img src={BtnFcIcon} />
+              </div>
+              <div className="flex flex-row justify-center">
+                <img src={ProgBarIcon} />
+              </div>
+            </div>
+            
           </div>
 
           <div className="grid grid-cols-2">
