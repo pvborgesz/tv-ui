@@ -7,6 +7,7 @@ import SelectLanguage from "./pages/SelectLanguage.jsx";
 import SelectProfile from "./pages/SelectProfile.jsx";
 import CreateProfile from "./pages/CreateProfile.jsx";
 import UserProvider from "./contexts/userContext.jsx";
+import RadioDifusor from "./pages/Radiodifusor.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "createProfile",
         element: <CreateProfile />,
+      },
+      {
+        path: "radioDifusor",
+        element: <RadioDifusor />,
       },
     ],
   },
