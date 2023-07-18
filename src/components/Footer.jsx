@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer({ href }) {
   return (
-    <footer className="flex items-center justify-between text-white mb-30 ml-10 mr-10 mb-20">
+    <footer className="flex items-center justify-between text-white mb-30 ml-10 mr-10 mb-10">
       <div className="font-normal flex gap-5 items-center">
         <img
           src="https://cdn-icons-png.flaticon.com/512/2719/2719648.png"
@@ -19,6 +19,7 @@ export default function Footer({ href }) {
         />
         <p className="text-2sm mt-1.5">Acessível em Libras</p>
       </div>
+
       {href && (
         <div className="flex flex-row items-center gap-2 cursor-pointer hover:bg-zinc-500 p-1 rounded-sm">
           <Link className="text-2xl mt-1.5 font-normal mb-1.5" to={href}>
