@@ -7,7 +7,7 @@ export default function App() {
 
   useEffect(() => {
     if (navigate) {
-      navigate("radioDifusor");
+      navigate("radioDifusorSec");
     }
   }, []);
 
