@@ -90,13 +90,26 @@ export default function DiscoverChannels() {
                 <p className='scan-info text-2xl font-semibold text-white text-center mt-8 mb-20'>Buscando Aplicativos de TV 3.0 pela sua região...</p>
 
                 <p className='scan-info text-2xl text-white text-center'>Progresso: {scanProgress}%</p>
-                <p className='scan-info text-2xl text-white text-center'>Apps Encontrados: {channelsFound.length}</p>
+                <p className='scan-info text-2xl text-white text-center mb-10'>Apps de TV Aberta Encontrados: {channelsFound.length}</p>
                 <div className='channels-container flex flex-row items-center justify-center w-200 h-100'>
                     {channelsFound.map((card, index) => (
-                        <div className='app-card' key={index}>
+                        <div className='app-card mb-10' key={index}>
                             <AppCard icon={card.icon} />
                         </div>
                     ))}
+                </div>
+
+                <div className='flex flex-col items-center justify-center'>
+                    {isScanning ? <>
+                        <p className='scan-info text-2xl text-white text-center mb-10'>
+                            Região Identificada:
+                        </p>
+
+                        <p className='scan-info text-2xl text-white text-center mb-10'>
+                            <strong>País</strong>: Brasil  <br /> <strong>Cidade</strong>: Rio de Janeiro
+                        </p>
+                    </>
+                        : null}
                 </div>
                 <button onClick={handleButtonClick} className='scan-button text-white text-center p-4 rounded-e-sm m-5' style={scanComplete ? { backgroundColor: "red" } : { backgroundColor: "green" }}>
                     {scanComplete ? 'Fechar Busca' : isScanning ? 'Buscando...' : 'Iniciar Busca'}
