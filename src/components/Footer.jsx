@@ -20,6 +20,7 @@ export default function Footer({ href }) {
         />
         <p className="text-2sm mt-1.5">Acessível em Libras</p>
       </div>
+
       {href && (
         <div className="flex flex-row items-center gap-2 cursor-pointer hover:bg-zinc-500 p-1 rounded-sm">
           <Link className="text-2xl mt-1.5 font-normal mb-1.5" to={href}>

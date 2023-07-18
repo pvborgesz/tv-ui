@@ -1,8 +1,8 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useContext } from "react";
-import "../App.css";
 import Footer from "../components/Footer";
 import TitlePage from "../components/TitlePage";
+
+import "../App.css";
 
 export default function SelectLanguage() {
   return (
@@ -10,9 +10,11 @@ export default function SelectLanguage() {
       <header className="flex flex-col items-left justify-left text-white">
         <TitlePage name="Selecione o idioma" />
       </header>
-      <div className="bg-zinc-800 flex flex-col items-left justify-left text-white flex-grow ml-10 mt-20 gap-8 mr-10">
-        <div className="text-4  xl font-normal ">Idiomas</div>
-        <select className="text-2xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-8">
+
+      <div className="bg-zinc-800 p-4 rounded flex flex-col  items-left justify-left text-white flex-grow my-10 mx-10 gap-8 mr-10 overflow-hidden">
+        <h2 className="text-zinc- text-2xl font-semibold">Idiomas</h2>
+
+        <select className="text-lg font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4 overflow-y-scroll">
           <option value="">Português</option>
           <option value="">Inglês</option>
           <option value="">Espanhol</option>
