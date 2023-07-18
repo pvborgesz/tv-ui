@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import Footer from "../components/Footer";
-import ProfileIcon from "../components/ProfileIcon";
+import ProfileIcon from "../assets/profile.svg";
 import RadioDifusorIcon from "../assets/radiodifusor_icon.svg";
 import IndicacaoIcon from "../assets/indicacao.svg";
 import PlayIcon from "../assets/play.svg";
@@ -37,22 +37,31 @@ export default function RadioDifusorSec() {
             
           </div>
 
-          <div className="flex flex-col w-1/4 justify-center items-start ml-10">
-            
-            <div className="flex flex-col items-start justify-center w-full mb-5">
-              <h1 className="text-3xl font-normal mb-0">
-                Título do Programa Atual
-              </h1>
-              <h3 className="text-2xl">
-                hh:mm - hh:mm
-              </h3>
+          <div className="flex flex-col w-1/4 justify-between items-start ml-10 h-full">
+            <div className="flex flex-row items-center justify-right">
+              <h3 className="pr-3 text-2xl text-right text-sky-400">Nome do Telespectador</h3>
+              <img className="w-24" src={ProfileIcon} />
             </div>
 
-            <div className="flex flex-col justify-start items-start ">
-              <h1 className="text-2xl pr-5 py-2">Descrição informativa sobre o programa atual, ocupando o espaço que o radiodifusor preferir</h1>
-              <img src={IndicacaoIcon} />
+            <div className="flex flex-col w-full justify-center items-start">
+
+              <div className="flex flex-col items-start justify-center w-full mb-5">
+                <h1 className="text-3xl font-normal mb-0">
+                  Título do Programa Atual
+                </h1>
+                <h3 className="text-2xl">
+                  hh:mm - hh:mm
+                </h3>
+              </div>
+
+              <div className="flex flex-col justify-start items-start ">
+                <h1 className="text-2xl pr-5 py-2">Descrição informativa sobre o programa atual, ocupando o espaço que o radiodifusor preferir</h1>
+                <img src={IndicacaoIcon} />
+              </div>
             </div>
           </div>
+
+          
         </div>
 
         <div className="bg-zinc-900 grid grid-cols-5 grid-rows-2 text-white gap-5 w-11/12 h-4/5 ml-5 mr-5 mb-10">
