@@ -1,22 +1,21 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react'
+import React, { useEffect } from "react";
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import SelectLanguage from './pages/SelectLanguage'
-import './App.css'
-import SelectProfile from './pages/SelectProfile'
-import CreateProfile from './pages/CreateProfile'
+import { Outlet, useNavigate } from "react-router";
 
-function App() {
+export default function App() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (navigate) {
+      navigate("selectLanguage");
+    }
+  }, []);
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<SelectLanguage />} />
-        <Route path="/selectProfile" element={<SelectProfile />} />
-        <Route path="/createProfile" element={<CreateProfile />} />
-      </Routes>
-    </Router >
-  )
+    <main className="bg-zinc-600 flex flex-col w-100 h-100 min-h-screen">
+      <div className="bg-zinc-800 flex flex-col w-100 h-100 min-h-screen overflow-hidden">
+        <Outlet />
+      </div>
+    </main>
+  );
 }
-
-export default App
