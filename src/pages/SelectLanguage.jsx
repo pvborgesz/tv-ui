@@ -2,21 +2,17 @@
 import React, { useContext } from "react";
 import "../App.css";
 import Footer from "../components/Footer";
-import { UserContext } from "../contexts/userContext";
+import TitlePage from "../components/TitlePage";
 
 export default function SelectLanguage() {
-  const { user } = useContext(UserContext);
-
   return (
     <>
       <header className="flex flex-col items-left justify-left text-white">
-        <h1 className="text-4xl font-bold mt-10 ml-10 mb-0">
-          Selecione o Idioma
-        </h1>
+        <TitlePage name="Selecione o idioma" />
       </header>
       <div className="bg-zinc-800 flex flex-col items-left justify-left text-white flex-grow ml-10 mt-20 gap-8 mr-10">
-        <div className="text-4  xl font-bold ">Idiomas</div>
-        <select className="text-2xl font-bold bg-zinc-800 text-white border-2 border-white rounded-md p-8">
+        <div className="text-4  xl font-normal ">Idiomas</div>
+        <select className="text-2xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-8">
           <option value="">Português</option>
           <option value="">Inglês</option>
           <option value="">Espanhol</option>
@@ -48,8 +44,6 @@ export default function SelectLanguage() {
           <option value="">Panjabi</option>
         </select>
       </div>
-
-      <div className="text-red-500">{user}</div>
 
       <Footer href="/selectProfile" />
     </>

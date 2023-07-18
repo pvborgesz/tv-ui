@@ -2,34 +2,34 @@
 import React from "react";
 import Footer from "../components/Footer";
 import ProfileIcon from "../components/ProfileIcon";
+import TitlePage from "../components/TitlePage";
 
 export default function CreateProfile() {
   return (
     <>
       <header className="flex flex-col items-left justify-left text-white">
-        <h1 className="text-4xl font-bold mt-10 ml-10 mb-0">
-          Criar seu Novo Perfil
-        </h1>
+        <TitlePage name="Criar seu Novo Perfil" />
       </header>
 
       {/* div with input for nome and for sobrenome  in row*/}
       <div className="bg-zinc-800 flex items-left justify-left text-white flex-grow ml-10 mt-20 gap-8 mr-10">
-        <div className="text-4xl font-bold p-2 ">Nome</div>
+        <div className="text-4xl font-normal p-2 ">Nome</div>
         <input
-          className="text-2xl font-bold bg-zinc-800 text-white border-2 border-white rounded-md p-4"
+          className="text-2xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
           type="text"
           placeholder="Digite seu nome"
         />
-        <div className="text-4xl font-bold ">Sobrenome</div>
+
+        <div className="text-4xl font-normal ">Senha</div>
         <input
-          className="text-2xl font-bold bg-zinc-800 text-white border-2 border-white rounded-md p-4"
-          type="text"
-          placeholder="Digite seu sobrenome"
+          className="text-2xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
+          type="password"
+          placeholder="******"
         />
       </div>
 
       <div className="bg-zinc-800 flex flex-col items-left justify-left text-white flex-grow ml-10 mt-20 mr-10">
-        <h1 className="text-4xl font-bold  ml-10 mb-0">
+        <h1 className="text-4xl font-normal  ml-10 mb-0">
           Por qual tipo de conteúdo você se interessa?
         </h1>
 

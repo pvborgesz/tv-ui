@@ -12,8 +12,8 @@ export default function App() {
   }, []);
 
   return (
-    <main className="bg-zinc-600 flex flex-col w-100 h-100 min-h-screen">
-      <div className="bg-zinc-800 flex flex-col w-100 h-100 min-h-screen overflow-hidden">
+    <main className="bg-zinc-900 flex flex-col w-100 h-100 min-h-screen">
+      <div className="bg-zinc-900 flex flex-col w-100 h-100 min-h-screen overflow-hidden">
         <Outlet />
       </div>
     </main>

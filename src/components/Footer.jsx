@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Footer({ href }) {
   return (
     <footer className="flex items-center justify-between text-white mb-30 ml-10 mr-10 mb-20">
-      <div className="font-bold flex gap-5 items-center">
+      <div className="font-normal flex gap-5 items-center">
         <img
           src="https://cdn-icons-png.flaticon.com/512/2719/2719648.png"
           alt="arrow"
@@ -21,7 +21,7 @@ export default function Footer({ href }) {
       </div>
       {href && (
         <div className="flex flex-row items-center gap-2 cursor-pointer hover:bg-zinc-500 p-1 rounded-sm">
-          <Link className="text-2xl mt-1.5 font-bold mb-1.5" to={href}>
+          <Link className="text-2xl mt-1.5 font-normal mb-1.5" to={href}>
             Avançar
           </Link>
 
