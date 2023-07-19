@@ -11,7 +11,7 @@ export default function SelectProfile() {
       <header className="flex flex-col items-left justify-left text-white">
         <TitlePage name="Configuração Inicial de Perfil" />
       </header>
-      <div className="p-4 rounded flex items-center justify-left text-white flex-grow my-10 mx-10 gap-8 mr-10 overflow-hidden">
+      <div className="p-4 rounded flex items-center justify-center text-white flex-grow my-10 mx-10 gap-8 mr-10 overflow-hidden">
         <ProfileCard
           icon={"https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
           name={"Visitante"}
