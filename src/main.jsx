@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SelectLanguage from "./pages/SelectLanguage.jsx";
 import SelectProfile from "./pages/SelectProfile.jsx";
 import ImportProfile from "./pages/ImportProfile.jsx";
+import ChangeProfile from "./pages/ChangeProfile.jsx";
 import CreateProfile from "./pages/CreateProfile.jsx";
 import UserProvider from "./contexts/userContext.jsx";
 import RadioDifusor from "./pages/RadioDifusor.jsx";
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "importProfile",
         element: <ImportProfile />,
+      },
+      {
+        path: "changeProfile",
+        element: <ChangeProfile />,
       },
     ],
   },

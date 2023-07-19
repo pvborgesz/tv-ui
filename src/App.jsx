@@ -8,7 +8,7 @@ export default function App() {
 
   useEffect(() => {
     if (navigate) {
-      navigate("appCatUIProfile");
+      navigate("changeProfile");
     }
   }, []);
 
