@@ -4,7 +4,7 @@ import React from "react";
 import IconBordered from "./IconBordered";
 
 import { BiHomeAlt } from "react-icons/bi";
-import { FaHandsAslInterpreting } from "react-icons/fa6";
+import { MdOutlineSubtitles } from "react-icons/md";
 import NextButton from "./NextButton";
 
 export default function FooterAppCatUI({ href }) {
@@ -22,7 +22,7 @@ export default function FooterAppCatUI({ href }) {
         <div className="flex font-normal gap-3 items-center">
           <p className="text-2xl mt-1.5">Guia de Programação</p>
           <IconBordered>
-            <FaHandsAslInterpreting size={40} />
+            <MdOutlineSubtitles size={40} />
           </IconBordered>
         </div>
       </div>
