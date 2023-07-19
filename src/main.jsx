@@ -10,6 +10,7 @@ import UserProvider from "./contexts/userContext.jsx";
 import RadioDifusor from "./pages/Radiodifusor.jsx";
 import RadioDifusorSec from "./pages/RadioDifusorSec.jsx";
 import RadioDifusorSecL2 from "./pages/RadioDifusorSecL2.jsx";
+import DiscoverChannels from "./pages/DiscoverChannels.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,8 @@ const router = createBrowserRouter([
       {
         path: "radioDifusorSecL2",
         element: <RadioDifusorSecL2 />,
+        path: "discoverChannels",
+        element: <DiscoverChannels />,
       },
     ],
   },
