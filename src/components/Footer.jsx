@@ -3,27 +3,30 @@
 import React from "react";
 import IconBordered from "./IconBordered";
 
-import { PiSpeakerHighDuotone } from "react-icons/pi";
+// import { PiSpeakerHighDuotone } from "react-icons/pi";
+import AudioDescriacao from "../assets/audioDescricao.jpg";
+import libras from "../assets/libras.png";
 import { FaHandsAslInterpreting } from "react-icons/fa6";
 import NextButton from "./NextButton";
 
-export default function Footer({ href }) {
+export default function Footer({ href }, ref) {
   return (
     <footer className="flex items-center justify-between text-white mt-auto pl-10 pr-10 pb-10">
       <div className="font-normal flex gap-5 items-center">
         <IconBordered>
-          <PiSpeakerHighDuotone size={40} />
+          <img src={AudioDescriacao} className="w-10" />
         </IconBordered>
 
-        <p className="text-2sm mt-1.5">Texto Falado</p>
+        <p className="text-2sm mt-1.5">Áudio Descrição</p>
 
         <IconBordered>
-          <FaHandsAslInterpreting size={40} />
+          {/* <FaHandsAslInterpreting size={40} /> */}
+          <img src={libras} className="w-10" />
         </IconBordered>
         <p className="text-2sm mt-1.5">Acessível em Libras</p>
       </div>
 
-      {href && <NextButton href={href} />}
+      {href && <NextButton ref={ref} href={href} />}
     </footer>
   );
 }
