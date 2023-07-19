@@ -23,24 +23,24 @@ export default function AppCatUI() {
         <div className="flex flex-col justify-center items-center h-full w-full items-end">
 
           <div className="bg-zinc-900 grid grid-rows-3 grid-cols-6 text-white gap-5 w-full h-4/5 pl-5 pr-5">
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RÁDIODIFUSOR</h1></div>
           </div>
 
           <img src={ChevronDownIcon} />
