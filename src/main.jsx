@@ -12,6 +12,7 @@ import RadioDifusor from "./pages/RadioDifusor.jsx";
 import RadioDifusorSec from "./pages/RadioDifusorSec.jsx";
 import RadioDifusorSecL2 from "./pages/RadioDifusorSecL2.jsx";
 import AppCatUI from "./pages/AppCatUI.jsx";
+import AppCatUIProfile from "./pages/AppCatUIProfile.jsx";
 import DiscoverChannels from "./pages/DiscoverChannels.jsx";
 
 const router = createBrowserRouter([
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "appCatUI",
         element: <AppCatUI />,
+      },
+      {
+        path: "appCatUIProfile",
+        element: <AppCatUIProfile />,
       },
       {
         path: "importProfile",
