@@ -8,13 +8,13 @@ export default function App() {
 
   useEffect(() => {
     if (navigate) {
-      navigate("selectLanguage");
+      navigate("radioDifusorSecL2");
     }
   }, []);
 
   return (
-    <main className="bg-zinc-900 flex flex-col w-100 h-100 min-h-screen">
-      <div className="bg-zinc-900 flex flex-col w-100 h-100 min-h-screen overflow-hidden">
+    <main className="bg-zinc-900 flex flex-col w-100 h-full min-h-screen">
+      <div className="bg-zinc-900 flex flex-col justify-center w-100 h-1 min-h-screen overflow-hidden">
         <Outlet />
       </div>
     </main>
