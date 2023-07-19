@@ -15,7 +15,7 @@ export default function Footer({ href }) {
           <PiSpeakerHighDuotone size={40} />
         </IconBordered>
 
-        <p className="text-2sm mt-1.5">Texto Falado</p>
+        <p className="text-2sm mt-1.5">Áudio Descrição</p>
 
         <IconBordered>
           <FaHandsAslInterpreting size={40} />
