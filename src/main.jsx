@@ -30,6 +30,10 @@ const router = createBrowserRouter([
         element: <CreateProfile />,
       },
       {
+        path: "discoverChannels",
+        element: <DiscoverChannels />,
+      },
+      {
         path: "radioDifusor",
         element: <RadioDifusor />,
       },
@@ -40,10 +44,6 @@ const router = createBrowserRouter([
       {
         path: "radioDifusorSecL2",
         element: <RadioDifusorSecL2 />,
-      },
-      {
-        path: "discoverChannels",
-        element: <DiscoverChannels />,
       },
     ],
   },

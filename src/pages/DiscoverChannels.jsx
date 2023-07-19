@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import TitlePage from '../components/TitlePage';
 import AppCard from '../components/AppCard';
 import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const cards = [
     {
@@ -53,6 +54,7 @@ export default function DiscoverChannels() {
     const [channelsFound, setChannelsFound] = useState([]);
     const [scanComplete, setScanComplete] = useState(false);
     const [isScanning, setIsScanning] = useState(false);
+    const navigate = useNavigate();
 
     const startScan = () => {
         setScanProgress(0);
@@ -80,11 +82,14 @@ export default function DiscoverChannels() {
         }, 2000);
     };
 
-    const handleButtonClick = () => {
+
+
+
+    const handleButtonClick = async () => {
         if (scanComplete) {
-            console.log("a")
+            navigate("/RadioDifusorSec");
         } else {
-            startScan();
+            await startScan();
         }
     };
 
@@ -126,7 +131,7 @@ export default function DiscoverChannels() {
                 <button onClick={handleButtonClick} className='scan-button text-white text-center p-4 rounded-e-sm m-5' style={scanComplete ? { backgroundColor: "#E7625F" } : { backgroundColor: "green" }}>
                     {scanComplete ? 'Fechar Busca' : isScanning ? 'Buscando...' : 'Iniciar Busca'}
                 </button>
-            </div>
+            </div >
             <Footer />
         </>
     )
