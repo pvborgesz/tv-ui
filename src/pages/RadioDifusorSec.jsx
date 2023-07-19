@@ -12,7 +12,7 @@ import TitlePage from "../components/TitlePage";
 export default function RadioDifusorSec() {
   return (
     <>
-      {/* div with input for nome and for sobrenome  in row*/}
+
       <div className="flex flex-col h-full items-center mt-10">
 
         <div className="bg-zinc-900 flex flex-row h-full w-11/12 items-center justify-center text-white flex-grow mb-5">
@@ -21,7 +21,7 @@ export default function RadioDifusorSec() {
           </div>
 
           <div className="flex flex-col items-center align-center justify-center text-white bg-slate-200 h-full rounded w-11/12">
-            
+
             <div className="flex justify-center items-center h-4/5">
               <img src={PlayIcon} />
             </div>
@@ -34,7 +34,7 @@ export default function RadioDifusorSec() {
                 <img className="w-11/12" src={ProgBarIcon} />
               </div>
             </div>
-            
+
           </div>
 
           <div className="flex flex-col w-1/4 justify-between items-start ml-10 h-full">
@@ -61,7 +61,7 @@ export default function RadioDifusorSec() {
             </div>
           </div>
 
-          
+
         </div>
 
         <div className="bg-zinc-900 grid grid-cols-5 grid-rows-2 text-white gap-5 w-11/12 h-4/5 ml-5 mr-5 mb-10">

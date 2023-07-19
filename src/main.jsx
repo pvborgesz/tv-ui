@@ -11,6 +11,7 @@ import RadioDifusor from "./pages/RadioDifusor.jsx";
 import RadioDifusorSec from "./pages/RadioDifusorSec.jsx";
 import RadioDifusorSecL2 from "./pages/RadioDifusorSecL2.jsx";
 import DiscoverChannels from "./pages/DiscoverChannels.jsx";
+import HomePage from "./pages/HomePage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "createProfile",
         element: <CreateProfile />,
+      },
+      {
+        path: "homePage",
+        element: <HomePage />,
       },
       {
         path: "discoverChannels",
