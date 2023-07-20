@@ -48,7 +48,7 @@ export default function ItensRow({ cards, title, icon }) {
 
     return (
         <div className="flex flex-row justify-center align-center">
-            <div className="flex flex-col justify-center w-[100px] h-[100px] mr-20 mt-20 gap-5">
+            <div className="flex flex-col justify-center w-36 h-36 mr-20 mt-20 gap-5">
                 <img className="w-full" src={icon} />
                 <p className="text-2xl text-center text-white">{title}</p>
             </div>

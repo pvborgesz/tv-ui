@@ -84,7 +84,7 @@ export default function DiscoverChannels() {
                         </p>
 
                         <p className='scan-info text-2xl text-white text-center mb-10'>
-                            <strong>País</strong>: Brasil  <br /> <strong>Cidade</strong>: Rio de Janeiro
+                            <strong>País</strong>: Brasil  <br /> <strong>Cidade</strong>: São Paulo
                         </p>
                     </>
                         : null}
