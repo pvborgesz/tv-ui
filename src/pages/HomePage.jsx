@@ -84,8 +84,8 @@ export default function HomePage() {
             <div className="flex flex-col h-full items-center mt-10 ml-[50%]">
                 <div className="flex flex-col w-1/4 justify-between items-start ml-10 h-full">
                     <div className="flex flex-row items-center justify-right">
-                        <h3 className="pr-3 text-2xl text-right text-sky-400">Nome do Telespectador</h3>
-                        <img className="w-24" src={ProfileIcon} />
+                        <h3 className="pr-3 text-2xl text-right text-sky-400">Paulo Victor</h3>
+                        <img className="w-24" src={"https://github.com/pvborgesz.png"} />
                     </div>
                 </div>
             </div>

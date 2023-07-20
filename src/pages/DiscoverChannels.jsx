@@ -5,11 +5,12 @@ import TitlePage from '../components/TitlePage';
 import AppCard from '../components/AppCard';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
-import { cards } from '../database';
+import { cards, streaming } from '../database';
 // buscar streaming
 export default function DiscoverChannels() {
     const [scanProgress, setScanProgress] = useState(0);
     const [channelsFound, setChannelsFound] = useState([]);
+    const [streamingFound, setStreamingFound] = useState([]);
     const [scanComplete, setScanComplete] = useState(false);
     const [isScanning, setIsScanning] = useState(false);
     const navigate = useNavigate();
@@ -43,6 +44,14 @@ export default function DiscoverChannels() {
                 return oldChannels;
             });
         }, 2000);
+
+        setStreamingFound(oldStreaming => {
+            const newStreaming = streaming[oldStreaming.length];
+            if (newStreaming) {
+                return [...oldStreaming, newStreaming];
+            }
+            return oldStreaming;
+        });
     };
 
 
@@ -68,11 +77,18 @@ export default function DiscoverChannels() {
                 <p className='scan-info text-2xl font-semibold text-white text-center mt-8 mb-20'>Buscando Aplicativos de TV 3.0 pela sua região...</p>
 
                 <p className='scan-info text-2xl text-white text-center'>Progresso: {scanProgress}%</p>
-                <p className='scan-info text-2xl text-white text-center mb-10'>Apps de TV Aberta Encontrados: {channelsFound.length}</p>
-                <div className='channels-container flex flex-row items-center justify-center w-200 h-100'>
+                <p className='scan-info text-2xl text-white text-center mb-10'>Apps de TV Aberta Encontrados: {channelsFound.length + streamingFound.length}</p>
+                {/* max width then breakline */}
+                <div className='channels-container flex flex-row items-center justify-center w-200 h-100 flex-wrap'>
                     {channelsFound.map((card, index) => (
                         <div className='app-card mb-10' key={index}>
                             <AppCard icon={card.icon} />
+                        </div>
+                    ))}
+                    <br />
+                    {streamingFound.map((streaming, index) => (
+                        <div className='app-card mb-10' key={index}>
+                            <AppCard icon={streaming.icon} />
                         </div>
                     ))}
                 </div>
@@ -89,7 +105,7 @@ export default function DiscoverChannels() {
                     </>
                         : null}
                 </div>
-                <button ref={startRef} onClick={handleButtonClick} className='scan-button text-white text-center p-4 rounded-e-sm m-5' style={scanComplete ? { backgroundColor: "#E7625F" } : { backgroundColor: "green" }}>
+                <button ref={startRef} onClick={handleButtonClick} className='scan-button text-white text-center p-8 rounded-e-sm m-5 text-3xl' style={scanComplete ? { backgroundColor: "#E7625F" } : { backgroundColor: "green" }}>
                     {scanComplete ? 'Fechar Busca' : isScanning ? 'Buscando...' : 'Iniciar Busca'}
                 </button>
             </div >
