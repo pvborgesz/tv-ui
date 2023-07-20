@@ -13,6 +13,11 @@ export default function DiscoverChannels() {
     const [scanComplete, setScanComplete] = useState(false);
     const [isScanning, setIsScanning] = useState(false);
     const navigate = useNavigate();
+    const startRef = React.useRef();
+
+    useEffect(() => {
+        startRef.current.focus();
+    }, [scanProgress])
 
     const startScan = () => {
         setScanProgress(0);
@@ -43,7 +48,6 @@ export default function DiscoverChannels() {
 
     const handleButtonClick = async () => {
         if (scanComplete) {
-            // navigate("/RadioDifusorSec");
             navigate("/homePage");
         } else {
             await startScan();
@@ -85,7 +89,7 @@ export default function DiscoverChannels() {
                     </>
                         : null}
                 </div>
-                <button onClick={handleButtonClick} className='scan-button text-white text-center p-4 rounded-e-sm m-5' style={scanComplete ? { backgroundColor: "#E7625F" } : { backgroundColor: "green" }}>
+                <button ref={startRef} onClick={handleButtonClick} className='scan-button text-white text-center p-4 rounded-e-sm m-5' style={scanComplete ? { backgroundColor: "#E7625F" } : { backgroundColor: "green" }}>
                     {scanComplete ? 'Fechar Busca' : isScanning ? 'Buscando...' : 'Iniciar Busca'}
                 </button>
             </div >
