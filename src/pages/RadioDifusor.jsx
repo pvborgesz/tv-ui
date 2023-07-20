@@ -13,14 +13,26 @@ import { UrlContext } from "../App";
 export default function RadioDifusor() {
   const urlValue = localStorage.getItem("urlValue");
   const icon = localStorage.getItem("icon");
+  const [counter, setCounter] = React.useState(10);
+  const [flag, setFlag] = React.useState(false);
+
   useEffect(() => {
-    // get from localstorage
+
+    const interval = setInterval(() => {
+      setCounter((counter) => counter - 1);
+    }, 1000);
+
+    if (counter === 0 || counter < 0) {
+      setFlag(true);
+      clearInterval(interval);
+    }
+
 
     return () => {
       // cleanup localstorage
       // localStorage.removeItem("urlValue");
     };
-  }, [icon]);
+  }, [icon, flag, counter]);
 
   return (
     <>
@@ -32,7 +44,7 @@ export default function RadioDifusor() {
         <div className="bg-zinc-900 flex flex-col h-full items-left justify-left text-white flex-grow ml-5 mr-10">
           <div className="flex flex-col items-center align-center justify-center text-white h-4/5 rounded">
             <div className="flex justify-center items-center h-4/5 zIndex-9">
-              <iframe
+              {flag && <iframe
                 width="100%"
                 height="100%"
                 src={`${urlValue}`}
@@ -45,9 +57,11 @@ export default function RadioDifusor() {
                   height: "100%",
                   width: "100%",
                   transform: "translate(-50%, -50%)",
-                  zIndex: "-1",
                 }}
-              />
+              />}
+              <p>
+                Conteúdo em tela cheia em: {counter} segundos.
+              </p>
             </div>
 
             <div className="flex flex-col justify-end mb-5">

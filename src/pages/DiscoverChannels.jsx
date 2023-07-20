@@ -6,7 +6,7 @@ import AppCard from '../components/AppCard';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 import { cards } from '../database';
-
+// buscar streaming
 export default function DiscoverChannels() {
     const [scanProgress, setScanProgress] = useState(0);
     const [channelsFound, setChannelsFound] = useState([]);

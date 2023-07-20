@@ -127,7 +127,7 @@ export default function SelectLanguage() {
         <Link
           ref={advanceButtonRef}
           className="flex items-center rounded border border-white p-4 text-lg hover:bg-emerald-600 focus:bg-emerald-600 transition-all duration-300 gap-2"
-          to={'/discoverChannels'}
+          to={'/selectProfile'}
         >
           Avançar
           <BsArrowRightShort size={30} />
