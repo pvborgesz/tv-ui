@@ -58,12 +58,12 @@ export default function RadioDifusorSecL2() {
         </div>
 
         <div className="flex flex-col h-full justify-between w-4/5 items-end">
-          <div className="flex flex-row items-center justify-right m-5">
+          <div className="flex flex-row items-center justify-right mr-5 mb-5">
             <h3 className="pr-3 text-2xl text-right text-sky-400">Nome do Telespectador</h3>
             <img className="w-24" src={ProfileIcon} />
           </div>
 
-          <div className="bg-zinc-900 grid grid-rows-5 grid-cols-2 text-white gap-5 w-full h-full pl-5 pr-5">
+          <div className="bg-zinc-900 grid grid-rows-5 grid-cols-2 text-white gap-5 w-full h-4/5 pl-5 pr-5">
             <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
             <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
             <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>

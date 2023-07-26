@@ -5,11 +5,15 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SelectLanguage from "./pages/SelectLanguage.jsx";
 import SelectProfile from "./pages/SelectProfile.jsx";
+import ImportProfile from "./pages/ImportProfile.jsx";
+import ChangeProfile from "./pages/ChangeProfile.jsx";
 import CreateProfile from "./pages/CreateProfile.jsx";
 import UserProvider from "./contexts/userContext.jsx";
 import RadioDifusor from "./pages/RadioDifusor.jsx";
 import RadioDifusorSec from "./pages/RadioDifusorSec.jsx";
 import RadioDifusorSecL2 from "./pages/RadioDifusorSecL2.jsx";
+import AppCatUI from "./pages/AppCatUI.jsx";
+import AppCatUIProfile from "./pages/AppCatUIProfile.jsx";
 import DiscoverChannels from "./pages/DiscoverChannels.jsx";
 import HomePage from "./pages/HomePage.jsx";
 
@@ -49,6 +53,22 @@ const router = createBrowserRouter([
       {
         path: "radioDifusorSecL2",
         element: <RadioDifusorSecL2 />,
+      },
+      {
+        path: "appCatUI",
+        element: <AppCatUI />,
+      },
+      {
+        path: "appCatUIProfile",
+        element: <AppCatUIProfile />,
+      },
+      {
+        path: "importProfile",
+        element: <ImportProfile />,
+      },
+      {
+        path: "changeProfile",
+        element: <ChangeProfile />,
       },
     ],
   },
