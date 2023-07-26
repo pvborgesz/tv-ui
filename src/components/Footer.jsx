@@ -17,7 +17,7 @@ export default function Footer({ href }, ref) {
           <img src={AudioDescriacao} className="w-10" />
         </IconBordered>
 
-        <p className="text-2sm mt-1.5">Áudio Descrição</p>
+        <p className="text-2sm mt-1.5">Audiodescrição</p>
 
         <IconBordered>
           {/* <FaHandsAslInterpreting size={40} /> */}

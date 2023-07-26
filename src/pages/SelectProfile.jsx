@@ -126,12 +126,12 @@ export default function SelectProfile() {
 
         <Link
           className="flex flex-col items-center gap-10 cursor-pointer p-14 hover:bg-zinc-700 hover:scale-105 rounded-xl border-2 h-[370px] justify-center transition-all duration-400 focus:border-[10px]"
-          to={"/discoverChannels"}
+          to={"/createProfile"}
           ref={(el) => linksRef.current[4] = el}
         >
           <div className="flex flex-col items-center justify-center  cursor-pointer  rounded-sm ">
             <ImageIconRounded icon={"https://d2gg9evh47fn9z.cloudfront.net/1600px_COLOURBOX5697474.jpg"} />
-            <h4 className="text-xl pt-10 font-normal mb-1.5">Visitante</h4>
+            <h4 className="text-xl pt-10 font-normal mb-1.5">Adicionar Perfil</h4>
           </div>
         </Link>
 
