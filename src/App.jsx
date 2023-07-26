@@ -16,7 +16,7 @@ export default function App() {
 
   useEffect(() => {
     if (navigate) {
-      navigate("changeProfile");
+      navigate("selectLanguage");
     }
   }, []);
 
