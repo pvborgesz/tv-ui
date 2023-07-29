@@ -9,7 +9,7 @@ import NextButton from "./NextButton";
 
 export default function FooterAppCatUI({ href }) {
   return (
-    <footer className="flex items-center justify-between text-white mt-auto pl-10 pr-10 pb-10">
+    <footer className="flex flex-col items-center justify-center text-white mt-auto pl-10 pr-10 pb-10">
       <div className="font-normal flex justify-between items-center w-full">
 
         <div className="flex font-normal gap-3 items-center">
@@ -27,6 +27,7 @@ export default function FooterAppCatUI({ href }) {
         </div>
       </div>
 
+      <h3 className="text-2xl w-2/3 text-center">Em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD), cada radiodifusor solicitará sua permissão para uso dos dados de seu perfil e coleta de outras informações</h3>
       {href && <NextButton href={href} />}
     </footer>
   );

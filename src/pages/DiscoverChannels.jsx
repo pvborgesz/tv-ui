@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import TitlePage from '../components/TitlePage';
 import AppCard from '../components/AppCard';
-import Footer from '../components/Footer';
+import Footer from '../components/FooterDiscoverChannels';
 import { useNavigate } from 'react-router-dom';
 import { cards, streaming } from '../database';
 // buscar streaming

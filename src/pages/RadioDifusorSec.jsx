@@ -78,7 +78,13 @@ export default function RadioDifusorSec() {
         </div>
 
       </div>
-      <Footer />
+      <div className="flex items-center justify-center px-10 absolute bottom-0 bg-gray-400 opacity-90 h-48">
+        <h3 className="text-3xl">Os aplicativos do Radiodifusor 1 necessitam coletar informações de seu perfil e de seus hábitos de consumo para lhe entregar uma experiência personalizada. Leia nossa Política de Privacidade.</h3>
+        <div className="text-2xl flex flex-col justify-center items-center text-white">
+          <div className="border-2 border-black-700 w-[250px] flex justify-center items-center bg-slate-800 mb-5 rounded-xl p-3 cursor-pointer hover:bg-zinc-700 hover:scale-105 border-2 transition-all duration-400">Concordo</div>
+          <div className="border-2 border-black-700 w-[250px] flex justify-center items-center bg-slate-800 rounded-xl p-3 cursor-pointer hover:bg-zinc-700 hover:scale-105 border-2 transition-all duration-400">Não Concordo</div>
+        </div>
+      </div>
     </>
   );
 }
