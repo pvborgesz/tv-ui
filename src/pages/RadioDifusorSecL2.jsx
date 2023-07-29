@@ -10,6 +10,20 @@ import ProgBarIcon from "../assets/prog_bar.svg";
 import TitlePage from "../components/TitlePage";
 
 export default function RadioDifusorSecL2() {
+  const handleClick = () => {
+    let disc = document.getElementById("disclaimer")
+
+    disc.className += " h-0"
+    setInterval(() => {
+      for (const child of disc.children) {
+        child.className = "hidden"
+      }
+    }, 50)
+    setInterval(() => {
+      disc.className = "hidden"
+    }, 100)
+  }
+
   return (
     <>
       {/* div with input for nome and for sobrenome  in row*/}
@@ -79,11 +93,11 @@ export default function RadioDifusorSecL2() {
         </div>
 
       </div>
-      <div className="flex items-center justify-center px-10 absolute bottom-0 bg-gray-700 opacity-90 h-48">
+      <div id="disclaimer" className="w-full flex items-center justify-center px-10 absolute bottom-0 bg-gray-700 opacity-90 h-48 transition-all duration-400">
         <h3 className="text-3xl text-white">Nosso ecossistema de conteúdos necessita obter e processar informações de seu perfil e de suas preferências para personalizar a sua experiência. Acesse nossa Política de Privacidade.</h3>
         <div className="text-2xl flex flex-col justify-center items-center text-white">
-          <div className="border-2 border-gray-200 w-[250px] flex justify-center items-center bg-slate-800 mb-5 rounded-xl p-3 cursor-pointer hover:bg-zinc-700 hover:scale-105 border-2 transition-all duration-400">Aceito</div>
-          <div className="border-2 border-gray-200 w-[250px] flex justify-center items-center bg-slate-800 rounded-xl p-3 cursor-pointer hover:bg-zinc-700 hover:scale-105 border-2 transition-all duration-400">Não Aceito</div>
+          <div onClick={handleClick} className="border-2 border-gray-200 w-[250px] flex justify-center items-center bg-slate-800 mb-5 rounded-xl p-3 cursor-pointer hover:bg-zinc-700 hover:scale-105 border-2 transition-all duration-400">Aceito</div>
+          <div onClick={handleClick} className="border-2 border-gray-200 w-[250px] flex justify-center items-center bg-slate-800 rounded-xl p-3 cursor-pointer hover:bg-zinc-700 hover:scale-105 border-2 transition-all duration-400">Não Aceito</div>
         </div>
       </div>
     </>

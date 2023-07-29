@@ -16,7 +16,7 @@ export default function App() {
 
   useEffect(() => {
     if (navigate) {
-      navigate("discoverChannels");
+      navigate("RadioDifusorSec");
     }
   }, []);
 
