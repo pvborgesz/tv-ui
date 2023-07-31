@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import Footer from "../components/Footer";
 import ProfileIcon from "../assets/profile.svg";
 import RadioDifusorIcon from "../assets/radiodifusor2_icon.svg";
@@ -9,7 +9,15 @@ import BtnFcIcon from "../assets/btn_fc.svg";
 import ProgBarIcon from "../assets/prog_bar.svg";
 import TitlePage from "../components/TitlePage";
 
+import { cards, streaming } from '../databaseRadioDifL2';
+
 export default function RadioDifusorSecL2() {
+  const rowRefs = [useRef([]), useRef([])];
+  const urlValue = localStorage.getItem("urlValue");
+  const icon = localStorage.getItem("icon");
+  const [counter, setCounter] = React.useState(10);
+  const [flag, setFlag] = React.useState(false);
+
   const handleClick = () => {
     let disc = document.getElementById("disclaimer")
 
@@ -24,6 +32,66 @@ export default function RadioDifusorSecL2() {
     }, 100)
   }
 
+  useEffect(() => {
+
+    /*const interval = setInterval(() => {
+      setCounter((counter) => counter - 1);
+    }, 1000);
+
+    if (counter === 0 || counter < 0) {
+      setFlag(true);
+      clearInterval(interval);
+    }*/
+
+    let currentRowIndex = 0;
+    let currentCardIndex = 0;
+
+    const handleKeyDown = (event) => {
+        switch (event.code) {
+            case 'ArrowLeft':
+                event.preventDefault();
+                // Verificamos se não estamos na primeira linha para não sair do intervalo
+                if (currentRowIndex > 0) {
+                    currentRowIndex -= 1;
+                }
+                break;
+            case 'ArrowRight':
+                event.preventDefault();
+                // Verificamos se não estamos na última linha para não sair do intervalo
+                if (currentRowIndex < rowRefs.length - 1) {
+                    currentRowIndex += 1;
+                }
+                break;
+            case 'ArrowUp':
+                event.preventDefault();
+                // Verificamos se não estamos no primeiro card para não sair do intervalo
+                if (currentCardIndex > 0) {
+                    currentCardIndex -= 1;
+                }
+                break;
+            case 'ArrowDown':
+                event.preventDefault();
+                // Verificamos se não estamos no último card para não sair do intervalo
+                if (currentCardIndex < rowRefs[currentRowIndex].current.length - 1) {
+                    currentCardIndex += 1;
+                }
+                break;
+            default:
+                break;
+        }
+        // Focamos no card atual
+        rowRefs[currentRowIndex].current[currentCardIndex].focus();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      // cleanup localstorage
+      // localStorage.removeItem("urlValue");
+    };
+  }, [icon, flag, counter]);
+
   return (
     <>
       {/* div with input for nome and for sobrenome  in row*/}
@@ -31,8 +99,8 @@ export default function RadioDifusorSecL2() {
 
         <div className="bg-zinc-900 flex flex-col h-full w-11/12 items-start justify-center text-white flex-grow ml-5">
     
-          <div className="flex justify-center w-2/4 mr-10 mb-5">
-            <img className="w-full" src={RadioDifusorIcon} />
+          <div className="flex justify-center w-1/4 mr-10 mb-5">
+            <img className="w-full" src={icon} />
           </div>
 
           <div className="flex flex-col w-full justify-center items-start mt-5 mb-5">
@@ -42,7 +110,8 @@ export default function RadioDifusorSecL2() {
                 Título do Programa Atual
               </h1>
               <h3 className="text-3xl">
-                hh:mm - hh:mm
+                {/*hh:mm - hh:mm*/}
+                {new Date().toLocaleTimeString()}
               </h3>
             </div>
 
@@ -52,9 +121,30 @@ export default function RadioDifusorSecL2() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center align-center justify-center text-white bg-slate-200 h-full rounded w-full">
+
+          <div className="flex flex-col items-center align-center justify-center text-white bg-zinc-900 h-full rounded w-full">
+            <div className="flex justify-center items-center h-4/5 zIndex-9">
+              {flag && <iframe
+                width="100%"
+                height="100%"
+                src={`${urlValue}`}
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                style={{
+                  position: "absolute",
+                  left: "50%",
+                  top: "50%",
+                  height: "100%",
+                  width: "100%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              />}
+              <p>
+                Conteúdo em tela cheia em: {counter} segundos.
+              </p>
+            </div>
             
-            <div className="flex justify-center items-center h-4/5">
+            {/*<div className="flex justify-center items-center h-4/5">
               <img src={PlayIcon} />
             </div>
 
@@ -65,7 +155,7 @@ export default function RadioDifusorSecL2() {
               <div className="flex flex-row justify-center">
                 <img className="w-11/12" src={ProgBarIcon} />
               </div>
-            </div>
+            </div>*/}
             
           </div>
 
@@ -77,7 +167,37 @@ export default function RadioDifusorSecL2() {
             <img className="w-24" src={ProfileIcon} />
           </div>
 
-          <div className="bg-zinc-900 grid grid-rows-5 grid-cols-2 text-white gap-5 w-full h-4/5 pl-5 pr-5">
+
+          <div className="bg-zinc-900 grid grid-rows-9 grid-cols-2 text-white gap-5 w-full h-4/5 pl-5 pr-5">
+            {[streaming, cards].map((row, rowIndex) => (
+                <>
+                    <div className="flex flex-row justify-center align-center">
+                        <div className="flex flex-col items-center align-center justify-center text-white h-full rounded w-full cursor-pointer">
+                            {row.map((card, cardIndex) => (
+                                <>
+                                    <button
+                                        className="flex flex-col h-full items-center mt-5"
+                                        ref={(el) => rowRefs[rowIndex].current[cardIndex] = el}
+                                        tabIndex={0}
+                                        onClick={() => openChannel(card.content, card.icon)} // Estamos passando a URL do cartão para a função openChannel
+                                    >
+                                        <div className='mx-3 focus:border-cyan-200  hover:border-cyan-900 '>
+                                            <img
+                                                className="w-36 h-36 rounded-lg mx-2  hover:scale-105
+                                            focus:scale-120 transition duration-500 ease-in-out"
+                                                src={card.icon}
+                                                alt="card icon"
+                                            />
+
+                                        </div>
+                                    </button>
+                                </>
+                            ))}
+                        </div>
+                    </div>
+                </>
+            ))}
+            {/*<div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
             <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
             <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
             <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
@@ -86,8 +206,7 @@ export default function RadioDifusorSecL2() {
             <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
             <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
             <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
-            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>
+            <div className="flex justify-center items-center bg-zinc-700 rounded"><h1 className="text-1xl">RECOMENDAÇÃO</h1></div>*/}
           </div>
 
         </div>
