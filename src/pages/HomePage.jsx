@@ -76,7 +76,7 @@ export default function HomePage() {
     }, []);
 
     const rowIcons = [AppsIcon, TvAberta, AnotherIcon];
-    const rowTitles = ["TV 3.0", "Streaming", "Talvez você goste"];
+    const rowTitles = ["TV Aberta 3.0", "Streaming", "Talvez você goste"];
 
     return (
         <>
@@ -108,12 +108,15 @@ export default function HomePage() {
                                             tabIndex={0}
                                             onClick={() => openChannel(card.content, card.icon)} // Estamos passando a URL do cartão para a função openChannel
                                         >
-                                            <img
-                                                className="w-36 h-36 rounded-lg mx-2  hover:scale-105 hover:border-cyan-900 
-                                    focus:scale-120 focus:border-cyan-200 transition duration-500 ease-in-out"
-                                                src={card.icon}
-                                                alt="card icon"
-                                            />
+                                            <div className='focus:border-cyan-200  hover:border-cyan-900 '>
+                                                <img
+                                                    className="w-36 h-36 rounded-lg mx-2  hover:scale-105
+                                                focus:scale-120 transition duration-500 ease-in-out"
+                                                    src={card.icon}
+                                                    alt="card icon"
+                                                />
+
+                                            </div>
                                         </button>
                                     </>
                                 ))}

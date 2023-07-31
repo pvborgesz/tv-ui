@@ -16,7 +16,7 @@ export default function App() {
 
   useEffect(() => {
     if (navigate) {
-      navigate("selectLanguage");
+      navigate("fabricante");
     }
   }, []);
 

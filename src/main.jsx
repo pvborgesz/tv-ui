@@ -16,12 +16,17 @@ import AppCatUI from "./pages/AppCatUI.jsx";
 import AppCatUIProfile from "./pages/AppCatUIProfile.jsx";
 import DiscoverChannels from "./pages/DiscoverChannels.jsx";
 import HomePage from "./pages/HomePage.jsx";
+import Fabricante from "./pages/Fabricante.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      {
+        path: "fabricante",
+        element: <Fabricante />,
+      },
       {
         path: "selectLanguage",
         element: <SelectLanguage />,
