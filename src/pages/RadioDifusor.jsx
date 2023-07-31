@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect } from "react";
-import Footer from "../components/Footer";
+import Footer from "../components/FooterRadiodifusor";
 
 import RadioDifusorIcon from "../assets/radiodifusor_icon.svg";
 import IndicacaoIcon from "../assets/indicacao.svg";

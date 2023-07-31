@@ -4,7 +4,7 @@ import AppsIcon from "../assets/apps.png";
 import TvAberta from "../assets/tvAberta.png";
 import AnotherIcon from "../assets/anotherIcon.png";
 import ProfileIcon from "../assets/profile.svg";
-import Footer from '../components/Footer';
+import Footer from '../components/FooterHomePage';
 import { useNavigate } from "react-router";
 import { UrlContext } from "../App";
 
