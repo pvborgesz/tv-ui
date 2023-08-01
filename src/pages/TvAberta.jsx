@@ -18,6 +18,7 @@ export default function TvAberta() {
         setUrlValue(channelURL);
         localStorage.setItem("urlValue", channelURL);
         localStorage.setItem("icon", channelIcon);
+
         navigate("/radioDifusor");
     }
 
@@ -92,7 +93,7 @@ export default function TvAberta() {
                                         }}
                                         tabIndex={0}
                                         className="flex flex-col items-center justify-center h-40 w-40 rounded-lg bg-zinc-900"
-                                        onClick={() => openChannel(card.url, card.icon)}
+                                        onClick={() => openChannel(card.content, card.icon)}
                                     >
                                         <img className="w-32 h-32" src={card.icon} alt="Channel Icon" />
                                     </button>
