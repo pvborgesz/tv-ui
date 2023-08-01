@@ -83,7 +83,13 @@ export default function TvAberta() {
                                 {cards.map((card, index) => (
                                     <button
                                         key={index}
-                                        ref={(el) => (rowRefs[0].current[index] = el)}
+                                        ref={(el) => {
+                                            rowRefs[0].current[index] = el
+                                            if (el) {
+                                                el.onfocus = () => el.style.transform = "scale(1.2)";
+                                                el.onblur = () => el.style.transform = "scale(1)";
+                                            }
+                                        }}
                                         tabIndex={0}
                                         className="flex flex-col items-center justify-center h-40 w-40 rounded-lg bg-zinc-900"
                                         onClick={() => openChannel(card.url, card.icon)}
