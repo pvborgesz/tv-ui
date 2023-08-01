@@ -27,6 +27,10 @@ export default function App() {
           event.preventDefault();
           navigate(-1);
           break;
+        case 'KeyA':
+          event.preventDefault();
+          navigate('/tvAberta');
+          break;
         default:
           break;
       }
