@@ -9,12 +9,14 @@ import BtnFcIcon from "../assets/btn_fc.svg";
 import ProgBarIcon from "../assets/prog_bar.svg";
 
 import { UrlContext } from "../App";
+import { useNavigate } from "react-router";
 
 export default function RadioDifusor() {
   const urlValue = localStorage.getItem("urlValue");
   const icon = localStorage.getItem("icon");
   const [counter, setCounter] = React.useState(10);
   const [flag, setFlag] = React.useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -27,6 +29,12 @@ export default function RadioDifusor() {
       clearInterval(interval);
     }
 
+    // when press "u" key, go to RadioDifusorSecL2
+    document.addEventListener("keydown", (event) => {
+      if (event.code === "KeyU") {
+        navigate("/radioDifusorSecL2");
+      }
+    });
 
     return () => {
       // cleanup localstorage

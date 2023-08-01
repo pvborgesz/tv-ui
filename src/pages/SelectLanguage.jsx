@@ -74,9 +74,9 @@ export default function SelectLanguage() {
       </header>
 
       <div className="bg-zinc-800 p-4 rounded flex flex-col items-left justify-left text-white flex-grow my-10 mx-10 gap-8 mr-10 overflow-hidden">
-        <h2 className="text-zinc- text-2xl font-semibold">Idiomas</h2>
+        <h2 className="text-zinc- text-5xl font-semibold">Idiomas</h2>
 
-        <select tabIndex={0} ref={selectRef} className="text-lg font-normal text-black border-2 border-white rounded-md p-4 overflow-y-scroll">
+        <select tabIndex={0} ref={selectRef} className="text-4xl font-normal text-black border-2 border-white rounded-md p-4 overflow-y-scroll">
           <option value="">Português</option>
           <option value="">Inglês</option>
           <option value="">Espanhol</option>

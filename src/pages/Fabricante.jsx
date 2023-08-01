@@ -6,9 +6,8 @@ export default function Fabricante() {
 
     useEffect(() => {
         setTimeout(() => {
-            // window.location.href = "/selectLanguage";
             navigate("/selectLanguage");
-        }, 10000);
+        }, 5000);
     }, []);
 
 

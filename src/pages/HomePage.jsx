@@ -63,13 +63,11 @@ export default function HomePage() {
                 default:
                     break;
             }
-            // Focamos no card atual
             rowRefs[currentRowIndex].current[currentCardIndex].focus();
         };
 
         window.addEventListener('keydown', handleKeyDown);
 
-        // Limpar o evento quando o componente for desmontado
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
@@ -96,26 +94,30 @@ export default function HomePage() {
                     <>
                         <div className="flex flex-row justify-center align-center">
                             <div className="flex flex-col justify-center w-36 h-36 mr-20 mt-20 gap-5">
-                                <img className="w-full" src={rowIcons[rowIndex]} />
+                                <img className="w-full mt-40" src={rowIcons[rowIndex]} />
                                 <p className="text-2xl text-center text-white">{rowTitles[rowIndex]}</p>
                             </div>
                             <div className="flex flex-row items-center align-center justify-center text-white h-full rounded w-11/12 cursor-pointer">
                                 {row.map((card, cardIndex) => (
                                     <>
                                         <button
-                                            className="flex flex-col h-full items-center mt-40"
-                                            ref={(el) => rowRefs[rowIndex].current[cardIndex] = el}
+                                            className="flex flex-col items-center mt-40 hover:scale-200"
+                                            ref={(el) => {
+                                                rowRefs[rowIndex].current[cardIndex] = el;
+                                                if (el) {
+                                                    el.onfocus = () => el.style.transform = "scale(1.2)";
+                                                    el.onblur = () => el.style.transform = "scale(1)";
+                                                }
+                                            }}
                                             tabIndex={0}
                                             onClick={() => openChannel(card.content, card.icon)} // Estamos passando a URL do cartão para a função openChannel
                                         >
                                             <div className='focus:border-cyan-200  hover:border-cyan-900 '>
                                                 <img
-                                                    className="w-36 h-36 rounded-lg mx-2  hover:scale-105
-                                                focus:scale-120 transition duration-500 ease-in-out"
+                                                    className="w-36 h-36 rounded-lg mx-2  hover:scale-200 transition duration-500 ease-in-out"
                                                     src={card.icon}
                                                     alt="card icon"
                                                 />
-
                                             </div>
                                         </button>
                                     </>
