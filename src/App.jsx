@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 
 import { Outlet, useNavigate } from "react-router";
 
@@ -16,10 +16,32 @@ export default function App() {
 
   useEffect(() => {
     if (navigate) {
-      navigate("fabricante");
+      navigate("selectLanguage");
     }
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      switch (event.code) {
+        case 'Escape':
+          event.preventDefault();
+          navigate(-1);
+          break;
+        case 'KeyA':
+          event.preventDefault();
+          navigate('/tvAberta');
+          break;
+        default:
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [navigate]);
 
   return (
     <UrlContext.Provider value={{ urlValue: "", setUrlValue: () => { } }}>
