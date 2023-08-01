@@ -17,6 +17,7 @@ import AppCatUIProfile from "./pages/AppCatUIProfile.jsx";
 import DiscoverChannels from "./pages/DiscoverChannels.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import Fabricante from "./pages/Fabricante.jsx";
+import TvAberta from "./pages/TvAberta.jsx";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "changeProfile",
         element: <ChangeProfile />,
+      },
+      {
+        path: "tvAberta",
+        element: <TvAberta />,
       },
     ],
   },
