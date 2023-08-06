@@ -5,7 +5,7 @@ import TitlePage from '../components/TitlePage';
 import AppCard from '../components/AppCard';
 import Footer from '../components/FooterDiscoverChannels';
 import { useNavigate } from 'react-router-dom';
-import { cards, streaming } from '../database';
+import { cards, streaming } from '../databaseRadioDifSec';
 // buscar streaming
 export default function DiscoverChannels() {
     const [scanProgress, setScanProgress] = useState(0);

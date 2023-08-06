@@ -8,7 +8,7 @@ import BtnFcIcon from "../assets/btn_fc.svg";
 import ProgBarIcon from "../assets/prog_bar.svg";
 import TitlePage from "../components/TitlePage";
 
-import { cards, streaming } from '../database';
+import { cards, streaming } from '../databaseRadioDifSec';
 
 export default function RadioDifusorSec() {
   const rowRefs = [useRef([]), useRef([])];
@@ -104,7 +104,8 @@ export default function RadioDifusorSec() {
           <div className="flex flex-col items-center align-center justify-center text-white bg-zinc-900 h-full rounded w-11/12">
 
             <div className="flex justify-center items-center h-4/5 zIndex-9">
-              {flag && <iframe
+              {flag ?
+              <iframe
                 width="100%"
                 height="100%"
                 src={`${urlValue}`}
@@ -118,10 +119,16 @@ export default function RadioDifusorSec() {
                   width: "100%",
                   transform: "translate(-50%, -50%)",
                 }}
-              />}
-              <p>
-                Conteúdo em tela cheia em: {counter} segundos.
-              </p>
+              />
+                      :
+              <div className="flex relative">
+                <video width="1200" controls>
+                  <source src={urlValue} type="video/mp4"/>
+                </video>
+                <p className="absolute top-1/2 leading-3 left-[28%]">
+                  Conteúdo em tela cheia em: {counter} segundos.
+                </p>
+              </div>}
             </div>
             {/*<div className="flex justify-center items-center h-4/5">
               <img src={PlayIcon} />
@@ -139,7 +146,7 @@ export default function RadioDifusorSec() {
           </div>
 
           <div className="flex flex-col w-1/4 justify-between items-start ml-10 h-full">
-            <div className="flex flex-row items-center justify-right">
+            <div className="flex flex-row items-center justify-end">
               <h3 className="pr-3 text-2xl text-right text-sky-400">Nome do Telespectador</h3>
               <img className="w-24" src={ProfileIcon} />
             </div>
@@ -174,8 +181,14 @@ export default function RadioDifusorSec() {
                           {row.map((card, cardIndex) => (
                               <>
                                   <button
-                                      className="flex flex-col h-full items-center mt-5"
-                                      ref={(el) => rowRefs[rowIndex].current[cardIndex] = el}
+                                      className="flex flex-col h-full w-full items-center "
+                                      ref={(el) => {
+                                        rowRefs[rowIndex].current[cardIndex] = el
+                                        if (el) {
+                                          el.onfocus = () => el.style.transform = "scale(1.07)";
+                                          el.onblur = () => el.style.transform = "scale(1)";
+                                        }
+                                      }}
                                       tabIndex={0}
                                       onClick={() => openChannel(card.content, card.icon)} // Estamos passando a URL do cartão para a função openChannel
                                   >

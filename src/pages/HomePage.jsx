@@ -9,6 +9,7 @@ import { useNavigate } from "react-router";
 import { UrlContext } from "../App";
 
 import { cards, streaming } from '../database';
+import { BsChevronRight } from 'react-icons/bs';
 
 
 export default function HomePage() {
@@ -93,7 +94,7 @@ export default function HomePage() {
                 {[cards, streaming, cards].map((row, rowIndex) => (
                     <>
                         <div className="flex flex-row justify-center align-center h-[200px] mt-10">
-                            <div className="flex flex-col justify-center w-36 h-36 mx-3">
+                            <div className="flex flex-col justify-center w-36 mx-3">
                                 <img className="w-full" src={rowIcons[rowIndex]} />
                                 <p className="text-xl text-center text-white">{rowTitles[rowIndex]}</p>
                             </div>
@@ -101,7 +102,7 @@ export default function HomePage() {
                                 {row.map((card, cardIndex) => (
                                     <>
                                         <button
-                                            className="flex flex-col items-center justify-center hover:scale-200 w-[200px] bg-white mx-3 rounded-lg"
+                                            className="flex flex-col items-center justify-center hover:scale-200 w-[200px] mx-3 rounded-lg"
                                             ref={(el) => {
                                                 rowRefs[rowIndex].current[cardIndex] = el;
                                                 if (el) {
@@ -120,9 +121,17 @@ export default function HomePage() {
                                                 />
                                             </div>
                                         </button>
+
                                     </>
                                 ))}
                             </div>
+                            <button
+                                className="flex flex-col items-center justify-center hover:scale-200 w-[5px] mx-[-5px] rounded-lg"
+                            >
+                                <div className='focus:border-cyan-200  hover:border-cyan-900 '>
+                                    <BsChevronRight color='gray' size={30}/>
+                                </div>
+                            </button>
                         </div>
                     </>
                 ))}
