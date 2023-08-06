@@ -79,33 +79,33 @@ export default function HomePage() {
     return (
         <>
 
-            <div className="flex flex-col h-full items-center mt-20 ml-[50%]">
-                <div className="flex flex-col w-1/4 justify-between items-start ml-10 h-full">
-                    <div className="flex flex-row items-center justify-right mt-20">
+            <div className="flex justify-end">
+                <div className="flex flex-col w-1/4 justify-center items-end h-full mr-5">
+                    <div className="flex flex-row items-center justify-end mt-10">
                         <h3 className="pr-3 text-2xl text-right text-sky-400">Paulo Victor</h3>
                         <img className="w-24" src={"https://github.com/pvborgesz.png"} />
                     </div>
                 </div>
             </div>
 
-            <div className='flex flex-col h-full justify-center items-center mt-10'>
+            <div className='flex flex-col h-full justify-center items-center'>
 
                 {[cards, streaming, cards].map((row, rowIndex) => (
                     <>
-                        <div className="flex flex-row justify-center align-center">
-                            <div className="flex flex-col justify-center w-36 h-36 mr-20 mt-20 gap-5">
-                                <img className="w-full mt-40" src={rowIcons[rowIndex]} />
-                                <p className="text-2xl text-center text-white">{rowTitles[rowIndex]}</p>
+                        <div className="flex flex-row justify-center align-center h-[200px] mt-10">
+                            <div className="flex flex-col justify-center w-36 h-36 mx-3">
+                                <img className="w-full" src={rowIcons[rowIndex]} />
+                                <p className="text-xl text-center text-white">{rowTitles[rowIndex]}</p>
                             </div>
-                            <div className="flex flex-row items-center align-center justify-center text-white h-full rounded w-11/12 cursor-pointer">
+                            <div className="flex flex-row items-center align-center justify-center text-white h-full rounded w-full cursor-pointer">
                                 {row.map((card, cardIndex) => (
                                     <>
                                         <button
-                                            className="flex flex-col items-center mt-40 hover:scale-200"
+                                            className="flex flex-col items-center justify-center hover:scale-200 w-[200px] bg-white mx-3 rounded-lg"
                                             ref={(el) => {
                                                 rowRefs[rowIndex].current[cardIndex] = el;
                                                 if (el) {
-                                                    el.onfocus = () => el.style.transform = "scale(1.2)";
+                                                    el.onfocus = () => el.style.transform = "scale(1.1)";
                                                     el.onblur = () => el.style.transform = "scale(1)";
                                                 }
                                             }}

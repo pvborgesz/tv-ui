@@ -40,27 +40,27 @@ export default function CreateProfile() {
 
   return (
     <>
-      <header className="flex flex-row items-center justify-between text-white w-4/5">
+      <header className="flex flex-row items-center justify-between text-white w-11/12">
         <TitlePage name="Criando seu Perfil Smart TV" />
         <div className="flex justify-center items-center pt-20 cursor-pointer">
           <img className="w-[100px] h-[59px]" src={PcPhoneIcon} alt="" />
-          <h1 className="text-2xl pl-5">Usar app iController</h1>
+          <h1 className="text-2xl pl-2">Usar app iController</h1>
         </div>
       </header>
 
       {/* div with input for nome and for sobrenome  in row*/}
 
       <div className="flex justify-center items-evenly">
-        <div className="w-5/6 px-5 py-5 bg-zinc-800 flex flex-col justify-center text-white mx-5 mt-14 gap-8">
+        <div className="w-11/12 px-5 py-5 bg-zinc-800 flex flex-col justify-center text-white ml-2 mt-14 gap-8">
           <input
-            className="text-2xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
+            className="text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
             type="text"
             placeholder="Nome do Perfil (obrigatório)"
           />
           
           <div className="flex justify-start">
             <input
-              className="text-2xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
+              className="text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
               type="checkbox"
               placeholder="Nome do Perfil (obrigatório)"
             />
@@ -69,7 +69,7 @@ export default function CreateProfile() {
 
           <div className="flex justify-start">
             <input
-              className="w-5/6 text-2xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
+              className="w-5/6 text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
               type="password"
               placeholder="Data de nascimento dd/mm/aaaa"
             />
@@ -172,47 +172,39 @@ export default function CreateProfile() {
             </select>
           </div>
 
-          <div className="flex align-center justify-center text-white flex-grow ml-10 mt-10 mr-10 mb-10">
-            <div className="flex items-center justify-evenly mx-3 w-1/3 relative">
+          <div className="flex align-center justify-evenly text-white flex-grow mt-10 mr-10 mb-10">
+            <div className="flex items-center justify-start mr-10 w-1/4 relative">
               <div id={7} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px"/></div>
               <img id={7} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={AudioDescriacao} />
-              <h3 className="text-2xl text-white">Áudiodescrição</h3>
+              <h3 className="text-xl text-white">Áudiodescrição</h3>
             </div>
 
-            <div className="flex items-center justify-evenly mx-3 w-1/3 relative">
+            <div className="flex items-center justify-start mx-3 w-1/4 relative">
               <div id={8} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px"/></div>
               <img id={8} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={Libras} />
-              <h3 className="text-2xl text-white">Acessível em Libras</h3>
+              <h3 className="text-xl text-white">Acessível em Libras</h3>
             </div>
 
-            <div className="flex items-center justify-evenly mx-3 w-1/3 relative">
+            <div className="flex items-center justify-start mx-3 w-1/4 relative">
               <div id={9} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px"/></div>
               <img id={9} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={CC} />
-              <h3 className="text-2xl text-white">Legendas Ocultas</h3>
+              <h3 className="text-xl text-white">Legendas Ocultas</h3>
             </div>
 
-            <div className="flex items-center justify-evenly mx-3 w-1/3 relative">
+            <div className="flex items-center justify-start mx-3 w-1/4 relative">
               <div id={10} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px"/></div>
               <img id={10} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={AprimorDialogo} />
-              <h3 className="text-2xl text-white">Aprimoramento de Diálogo</h3>
+              <h3 className="text-xl text-white">Aprimoramento de Diálogo</h3>
             </div>
           </div>
 
         </div>
 
-        <div className="flex flex-col justify-center items-center">
-          <img className="w-60 pb-5" src={ProfileIcon} />
+        <div className="flex flex-col justify-center items-center mx-2">
+          <img className="w-52 pb-5" src={ProfileIcon} />
           <h3 className="text-3xl text-white text-center">Escolha seu avatar</h3>
         </div>
 
-      </div>
-
-
-      <div className="w-4/5 bg-zinc-800 flex flex-row items-left justify-left text-white flex-grow ml-5 mt-20 mr-10">
-        <input className="ml-5" type="checkbox" />
-        <h1 className="text-2xl font-normal  ml-10 mr-5">
-          Concordo com a coleta e processamento de meus dados para uma melhor experiência, em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD). <a className="text-slate-400" href="#">Saiba mais.</a>
-        </h1>
       </div>
 
       <Footer />
