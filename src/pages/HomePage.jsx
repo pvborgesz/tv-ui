@@ -58,6 +58,7 @@ export default function HomePage() {
                         currentElementIndex += 1;
                     }
                     break;
+
                 default:
                     break;
             }

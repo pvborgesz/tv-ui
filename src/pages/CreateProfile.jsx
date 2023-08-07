@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "../components/FooterCreateProfile";
 import TitlePage from "../components/TitlePage";
 
@@ -25,6 +25,53 @@ import ProfileCard from "../components/ProfileCard";
 
 export default function CreateProfile() {
   const selectRef = useRef();
+  const focusableElements = [useRef([]), useRef([]), useRef([]), useRef([]), useRef([]), useRef([]), useRef([]), useRef([]), useRef([]), useRef([]), useRef([])];
+  let currentRowIndex = 0;
+  let currentElementIndex = 0;
+
+  useEffect(() => {
+
+    const handleKeyDown = (event) => {
+      switch (event.code) {
+        case 'ArrowUp':
+          event.preventDefault();
+          if (currentRowIndex > 0) {
+            currentRowIndex -= 1;
+            currentElementIndex = 0;
+          }
+          break;
+        case 'ArrowDown':
+          event.preventDefault();
+          if (currentRowIndex < focusableElements.length - 1) {
+            currentRowIndex += 1;
+            currentElementIndex = 0;
+          }
+          break;
+        case 'ArrowLeft':
+          event.preventDefault();
+          if (currentElementIndex > 0) {
+            currentElementIndex -= 1;
+          }
+          break;
+        case 'ArrowRight':
+          event.preventDefault();
+          if (currentElementIndex < focusableElements[currentRowIndex].current.length - 1) {
+            currentElementIndex += 1;
+          }
+          break;
+        default:
+          break;
+      }
+      focusableElements[currentRowIndex].current[currentElementIndex].focus();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
 
   const handleClick = (event) => {
     const e = document.getElementById(event.target.id)
@@ -56,6 +103,7 @@ export default function CreateProfile() {
             className="text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
             type="text"
             placeholder="Nome do Perfil (obrigatório)"
+            ref={selectRef}
           />
 
           <div className="flex justify-start">
@@ -63,6 +111,7 @@ export default function CreateProfile() {
               className="text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
               type="checkbox"
               placeholder="Nome do Perfil (obrigatório)"
+              ref={focusableElements[0].current[0]}
             />
             <h3 className="text-3xl ml-5">Este é um Perfil de Grupo (ex.: família, hóspedes...)</h3>
           </div>
@@ -72,29 +121,30 @@ export default function CreateProfile() {
               className="w-5/6 text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
               type="password"
               placeholder="Data de nascimento dd/mm/aaaa"
+              ref={focusableElements[1].current[0]}
             />
             <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={1} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
+              <div id={1} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" ref={selectRef} /></div>
               <img id={1} src={ClassLivre} alt="" />
             </div>
             <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={2} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
+              <div id={2} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" ref={selectRef} /></div>
               <img id={2} src={Class10} alt="" />
             </div>
             <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={3} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
+              <div id={3} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" ref={selectRef} /></div>
               <img id={3} src={Class12} alt="" />
             </div>
             <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={4} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
+              <div id={4} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" ref={selectRef} /></div>
               <img id={4} src={Class14} alt="" />
             </div>
             <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={5} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
+              <div id={5} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" ref={selectRef} /></div>
               <img id={5} src={Class16} alt="" />
             </div>
             <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={6} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
+              <div id={6} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" ref={selectRef} /></div>
               <img id={6} src={Class18} alt="" />
             </div>
           </div>

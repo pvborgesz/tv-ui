@@ -42,6 +42,11 @@ export default function App() {
           event.preventDefault();
           navigate('/tvAberta');
           break;
+        case 'KeyV':
+          event.preventDefault();
+          // reload
+          window.location.reload();
+          break;
         default:
           break;
       }

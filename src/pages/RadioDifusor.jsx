@@ -36,6 +36,22 @@ export default function RadioDifusor() {
       }
     });
 
+    const openChannel = (channelURL) => {
+      localStorage.setItem("urlValue", channelURL);
+      navigate("/radioDifusor");
+    }
+
+    // when page up key is pressed, go to RadioDifusorSecL2
+    document.addEventListener("keydown", (event) => {
+      if (event.code === "KeyM") {
+        openChannel("https://www.youtube.com/embed/6e_4ZepAl58?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0");
+        navigate("/radioDifusorSecL2");
+      } else if (event.code === "PageDown") {
+        openChannel("https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0");
+        navigate("/radioDifusorSecL2");
+      }
+    });
+
     return () => {
       // cleanup localstorage
       // localStorage.removeItem("urlValue");

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useRef, useEffect} from "react";
+import React, { useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import Footer from "../components/Footer";
 import ProfileIcon from "../assets/profile.svg";
@@ -10,7 +10,7 @@ import BtnFcIcon from "../assets/btn_fc.svg";
 import ProgBarIcon from "../assets/prog_bar.svg";
 import TitlePage from "../components/TitlePage";
 
-import { cards, streaming } from '../databaseRadioDifL2';
+import { cards, streaming } from '../database';
 
 export default function RadioDifusorSecL2() {
   const rowRefs = [useRef([]), useRef([])];
@@ -135,30 +135,30 @@ export default function RadioDifusorSecL2() {
           <div className="flex flex-col items-center align-center justify-center text-white bg-zinc-900 h-full rounded w-full mb-10">
             <div className="flex justify-center items-center h-4/5 zIndex-9">
               {flag ?
-              <iframe
-                width="100%"
-                height="100%"
-                src={`${urlValue}`}
-                allow="autoplay; encrypted-media"
-                allowFullScreen
-                style={{
-                  position: "absolute",
-                  left: "50%",
-                  top: "50%",
-                  height: "100%",
-                  width: "100%",
-                  transform: "translate(-50%, -50%)",
-                }}
-              />
-                      :
-              <div className="flex relative">
-                <video width="1200" controls>
-                  <source src={urlValue} type="video/mp4"/>
-                </video>
-                <p className="absolute top-1/2 leading-3 left-[27%]">
-                  Conteúdo em tela cheia em: {counter} segundos.
-                </p>
-              </div>}
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={`${urlValue}`}
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                  style={{
+                    position: "absolute",
+                    left: "50%",
+                    top: "50%",
+                    height: "100%",
+                    width: "100%",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                />
+                :
+                <div className="flex relative">
+                  <video width="1200" controls>
+                    <source src={urlValue} type="video/mp4" />
+                  </video>
+                  <p className="absolute top-1/2 leading-3 left-[27%]">
+                    Conteúdo em tela cheia em: {counter} segundos.
+                  </p>
+                </div>}
             </div>
 
             {/*<div className="flex justify-center items-center h-4/5">
