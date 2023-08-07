@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useContext } from 'react';
-import AppsIcon from "../assets/apps.png";
+// import AppsIcon from "../assets/apps.png";
+import AppsIcon from "../assets/apps-icon.png";
 import TvAberta from "../assets/tvAberta.png";
 import AnotherIcon from "../assets/anotherIcon.png";
 import ProfileIcon from "../assets/profile.svg";
@@ -85,17 +86,17 @@ export default function HomePage() {
             </div>
 
             <div className='flex flex-col h-full justify-center items-center'>
-                {[cards, streaming, cards].map((row, rowIndex) => (
+                {[cards, streaming, streaming].map((row, rowIndex) => (
                     <div className="flex flex-row justify-center align-center h-[200px] mt-10">
                         <button className="flex flex-col justify-center w-36 mx-3"
                             onClick={
                                 () => {
                                     if (rowIndex === 0) {
-                                        navigate('/aplicativos');
+                                        // navigate('/aplicativos');
                                     } else if (rowIndex === 1) {
                                         navigate('/tvAberta');
                                     } else {
-                                        navigate('/talvezGoste');
+                                        // navigate('/talvezGoste');
                                     }
                                 }
                             }>
@@ -113,11 +114,11 @@ export default function HomePage() {
                                 onClick={
                                     () => {
                                         if (rowIndex === 0) {
-                                            navigate('/aplicativos');
+                                            // navigate('/aplicativos');
                                         } else if (rowIndex === 1) {
                                             navigate('/tvAberta');
                                         } else {
-                                            navigate('/talvezGoste');
+                                            // navigate('/talvezGoste');
                                         }
                                     }
                                 }
@@ -157,6 +158,11 @@ export default function HomePage() {
                         </div>
                         <button
                             className="flex flex-col items-center justify-center hover:scale-200 w-[5px] mx-[-5px] rounded-lg"
+                            onClick={
+                                () => {
+                                    navigate('/tvAberta');
+
+                                }}
                         >
                             <BsChevronRight className="w-[30px] h-[30px] text-white cursor-pointer" />
                         </button>
