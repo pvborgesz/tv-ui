@@ -14,18 +14,6 @@ import { cards, streaming, recommendations } from '../database';
 import { BsChevronRight } from 'react-icons/bs';
 
 
-
-function shuffle(array) {
-    // put the reversed of array
-    array.reverse();
-
-    return array;
-}
-
-// recomendations must be the reversed of cards
-
-
-
 export default function HomePage() {
     const navigate = useNavigate();
     const { urlValue, setUrlValue } = useContext(UrlContext);

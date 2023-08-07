@@ -25,12 +25,11 @@ import ProfileCard from "../components/ProfileCard";
 
 export default function CreateProfile() {
   const selectRef = useRef();
-  const focusableElements = [useRef([]), useRef([]), useRef([]), useRef([]), useRef([]), useRef([]), useRef([]), useRef([]), useRef([]), useRef([]), useRef([])];
+
   let currentRowIndex = 0;
   let currentElementIndex = 0;
 
   useEffect(() => {
-
     const handleKeyDown = (event) => {
       switch (event.code) {
         case 'ArrowUp':
@@ -42,10 +41,7 @@ export default function CreateProfile() {
           break;
         case 'ArrowDown':
           event.preventDefault();
-          if (currentRowIndex < focusableElements.length - 1) {
-            currentRowIndex += 1;
-            currentElementIndex = 0;
-          }
+
           break;
         case 'ArrowLeft':
           event.preventDefault();
@@ -55,14 +51,12 @@ export default function CreateProfile() {
           break;
         case 'ArrowRight':
           event.preventDefault();
-          if (currentElementIndex < focusableElements[currentRowIndex].current.length - 1) {
-            currentElementIndex += 1;
-          }
+
           break;
         default:
           break;
       }
-      focusableElements[currentRowIndex].current[currentElementIndex].focus();
+
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -111,7 +105,7 @@ export default function CreateProfile() {
               className="text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
               type="checkbox"
               placeholder="Nome do Perfil (obrigatório)"
-              ref={focusableElements[0].current[0]}
+
             />
             <h3 className="text-3xl ml-5">Este é um Perfil de Grupo (ex.: família, hóspedes...)</h3>
           </div>
@@ -121,7 +115,7 @@ export default function CreateProfile() {
               className="w-5/6 text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
               type="password"
               placeholder="Data de nascimento dd/mm/aaaa"
-              ref={focusableElements[1].current[0]}
+
             />
             <div onClick={handleClick} className="flex flex-col ml-5 relative">
               <div id={1} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" ref={selectRef} /></div>

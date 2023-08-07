@@ -90,7 +90,7 @@ export default function DiscoverChannels() {
                     <br />
                     {streamingFound.map((streaming, index) => (
                         <div className='app-card mb-5' key={index}>
-                            <AppCard icon={streaming.icon} />
+                            {streaming.icon !== TvAberta ? <AppCard icon={streaming.icon} /> : <></>}
                         </div>
                     ))}
                 </div>
