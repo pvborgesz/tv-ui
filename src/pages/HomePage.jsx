@@ -6,6 +6,7 @@ import AppsIcon from "../assets/apps-icon.png";
 import TvAberta from "../assets/tvAberta.png";
 import AnotherIcon from "../assets/anotherIcon.png";
 import ProfileIcon from "../assets/profile.svg";
+import UserImg from "../assets/user-img.png";
 import Footer from '../components/FooterHomePage';
 import { useNavigate } from "react-router";
 import { UrlContext } from "../App";
@@ -79,9 +80,9 @@ export default function HomePage() {
         <>
             <div className="flex justify-end">
                 <div className="flex flex-col w-1/4 justify-center items-end h-full mr-5">
-                    <div className="flex flex-row items-center justify-end mt-10">
+                    <div className="flex flex-row items-center justify-end mt-10 p-10">
                         <h3 className="pr-3 text-2xl text-right text-sky-400">Usuário</h3>
-                        <img className="w-24" src={ProfileIcon} />
+                        <img className="w-24" src={UserImg} />
                     </div>
                 </div>
             </div>
@@ -89,7 +90,7 @@ export default function HomePage() {
             <div className='flex flex-col h-full justify-center items-center'>
                 {[streaming, cards, recommendations].map((row, rowIndex) => (
                     <div className="flex flex-row justify-center align-center h-[200px] mt-10">
-                        <button className="flex flex-col justify-center w-36 mx-3"
+                        <button className="flex flex-col justify-center w-36 mx-3 align items-center mr-10"
                             onClick={
                                 () => {
                                     if (rowIndex === 0) {
@@ -124,9 +125,9 @@ export default function HomePage() {
                                     }
                                 }
                             />
-                            <p className="text-xl text-center text-white">{rowTitles[rowIndex]}</p>
+                            <p className="text-xl text-center text-white ">{rowTitles[rowIndex]}</p>
                         </button>
-                        <div className="flex flex-row items-center align-center justify-center text-white h-full rounded w-full cursor-pointer">
+                        <div className="flex flex-row items-center align-center justify-center text-white h-full rounded w-full cursor-pointer gap-5">
                             {row.map((card, cardIndex) => (
                                 <button
                                     className="flex flex-col items-center justify-center hover:scale-200 w-[200px] mx-3 rounded-lg"
@@ -147,9 +148,9 @@ export default function HomePage() {
                                     }
                                     }
                                 >
-                                    <div className='focus:border-cyan-200  hover:border-cyan-900 '>
+                                    <div className='focus:border-cyan-200  hover:border-cyan-900  '>
                                         <img
-                                            className="w-36 h-36 rounded-lg mx-2  hover:scale-200 transition duration-500 ease-in-out"
+                                            className="w-[450px] h-[100px] rounded-lg mx-2  hover:scale-200 transition duration-500 ease-in-out "
                                             src={card.icon}
                                             alt="card icon"
                                         />
@@ -158,7 +159,7 @@ export default function HomePage() {
                             ))}
                         </div>
                         <button
-                            className="flex flex-col items-center justify-center hover:scale-200 w-[5px] mx-[-5px] rounded-lg"
+                            className="flex flex-col items-center justify-center hover:scale-200 w-[5px] mx-[10px] rounded-lg"
                             onClick={
                                 () => {
                                     navigate('/tvAberta');

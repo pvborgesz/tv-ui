@@ -44,7 +44,7 @@ export default function DiscoverChannels() {
                 }
                 return oldChannels;
             });
-        }, 2000);
+        }, 1000);
 
         setStreamingFound(oldStreaming => {
             const newStreaming = streaming[oldStreaming.length];
@@ -88,11 +88,11 @@ export default function DiscoverChannels() {
                         </div>
                     ))}
                     <br />
-                    {streamingFound.map((streaming, index) => (
+                    {/* {streamingFound.map((streaming, index) => (
                         <div className='app-card mb-5' key={index}>
                             {streaming.icon !== TvAberta ? <AppCard icon={streaming.icon} /> : <></>}
                         </div>
-                    ))}
+                    ))} */}
                 </div>
 
                 <div className='flex flex-col items-center justify-center'>

@@ -97,7 +97,7 @@ export default function TvAberta() {
                                         <img className="w-32 h-32" src={card.icon} alt="Channel Icon" />
                                     </button>
                                 ))}
-                                {streaming.map((card, index) => (
+                                {/* {streaming.map((card, index) => (
                                     <button
                                         key={index}
                                         ref={(el) => {
@@ -113,7 +113,7 @@ export default function TvAberta() {
                                     >
                                         <img className="w-32 h-32" src={card.icon} alt="Channel Icon" />
                                     </button>
-                                ))}
+                                ))} */}
                             </div>
                         </div>
                     </div>

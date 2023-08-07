@@ -21,35 +21,93 @@ import CC from "../assets/legenda_oculta.svg";
 
 import { BsCheck } from "react-icons/bs";
 
-import ProfileCard from "../components/ProfileCard";
+// import ProfileCard from "../components/ProfileCard";
 
 export default function CreateProfile() {
-  const selectRef = useRef();
+  const nameRef = useRef();
+  const groupRef = useRef();
+  const languageRef = useRef();
+  const livreRef = useRef();
+  const dezRef = useRef();
+  const dozeRef = useRef();
+  const quatorzeRef = useRef();
+  const dezesseisRef = useRef();
+  const dezoitoRef = useRef();
 
-  let currentRowIndex = 0;
-  let currentElementIndex = 0;
+
+
 
   useEffect(() => {
+    nameRef.current.focus();
     const handleKeyDown = (event) => {
       switch (event.code) {
         case 'ArrowUp':
-          event.preventDefault();
-          if (currentRowIndex > 0) {
-            currentRowIndex -= 1;
-            currentElementIndex = 0;
+          // if focus on groupRef, go to nameRef
+          if (document.activeElement === groupRef.current) {
+            nameRef.current.focus();
           }
+          event.preventDefault();
+
           break;
         case 'ArrowDown':
           event.preventDefault();
 
+          // if focus on nameRef, go to groupRef
+          if (document.activeElement === nameRef.current) {
+            groupRef.current.focus();
+          }
+          // if focus on groupRef, go to languageRef
+          else if (document.activeElement === groupRef.current) {
+            languageRef.current.focus();
+          }
+
           break;
         case 'ArrowLeft':
-          event.preventDefault();
-          if (currentElementIndex > 0) {
-            currentElementIndex -= 1;
+          if (document.activeElement === livreRef.current) {
+            groupRef.current.focus();
           }
+          if (document.activeElement === dezRef.current) {
+            livreRef.current.focus();
+          }
+          if (document.activeElement === dozeRef.current) {
+            dezRef.current.focus();
+          }
+          if (document.activeElement === quatorzeRef.current) {
+            dozeRef.current.focus();
+          }
+          if (document.activeElement === dezesseisRef.current) {
+            quatorzeRef.current.focus();
+          }
+          if (document.activeElement === dezoitoRef.current) {
+            dezesseisRef.current.focus();
+          }
+          if (document.activeElement === groupRef.current) {
+            dezoitoRef.current.focus();
+          }
+
+          event.preventDefault();
+
           break;
         case 'ArrowRight':
+          if (document.activeElement === groupRef) {
+            livreRef.current.focus();
+          }
+          if (document.activeElement === livreRef) {
+            dezRef.current.focus();
+          }
+          if (document.activeElement === dezRef) {
+            dozeRef.current.focus();
+          }
+          if (document.activeElement === dozeRef) {
+            quatorzeRef.current.focus();
+          }
+          if (document.activeElement === quatorzeRef) {
+            dezesseisRef.current.focus();
+          }
+          if (document.activeElement === dezesseisRef) {
+            dezoitoRef.current.focus();
+          }
+
           event.preventDefault();
 
           break;
@@ -97,7 +155,7 @@ export default function CreateProfile() {
             className="text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
             type="text"
             placeholder="Nome do Perfil (obrigatório)"
-            ref={selectRef}
+            ref={nameRef}
           />
 
           <div className="flex justify-start">
@@ -115,30 +173,31 @@ export default function CreateProfile() {
               className="w-5/6 text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
               type="password"
               placeholder="Data de nascimento dd/mm/aaaa"
+              ref={groupRef}
 
             />
-            <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={1} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" ref={selectRef} /></div>
+            <div onClick={handleClick} className="flex flex-col ml-5 relative" ref={livreRef}>
+              <div id={1} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={1} src={ClassLivre} alt="" />
             </div>
-            <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={2} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" ref={selectRef} /></div>
+            <div onClick={handleClick} className="flex flex-col ml-5 relative" ref={dezRef}>
+              <div id={2} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={2} src={Class10} alt="" />
             </div>
-            <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={3} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" ref={selectRef} /></div>
+            <div onClick={handleClick} className="flex flex-col ml-5 relative" ref={dozeRef}>
+              <div id={3} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={3} src={Class12} alt="" />
             </div>
-            <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={4} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" ref={selectRef} /></div>
+            <div onClick={handleClick} className="flex flex-col ml-5 relative" ref={quatorzeRef}>
+              <div id={4} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={4} src={Class14} alt="" />
             </div>
-            <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={5} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" ref={selectRef} /></div>
+            <div onClick={handleClick} className="flex flex-col ml-5 relative" ref={dezesseisRef}>
+              <div id={5} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={5} src={Class16} alt="" />
             </div>
-            <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={6} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" ref={selectRef} /></div>
+            <div onClick={handleClick} className="flex flex-col ml-5 relative" ref={dezoitoRef}>
+              <div id={6} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={6} src={Class18} alt="" />
             </div>
           </div>
@@ -183,7 +242,7 @@ export default function CreateProfile() {
           <div className="flex items-center">
             <h3 className="text-3xl pr-5">Idioma Selecionado</h3>
 
-            <select tabIndex={0} ref={selectRef} placeholder="Selecione um Idioma" className="text-lg font-normal text-black border-2 border-white rounded-md p-4 overflow-y-scroll">
+            <select tabIndex={0} ref={languageRef} placeholder="Selecione um Idioma" className="text-lg font-normal text-black border-2 border-white rounded-md p-4 overflow-y-scroll">
               <option value="">Português</option>
               <option value="">Inglês</option>
               <option value="">Espanhol</option>

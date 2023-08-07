@@ -26,7 +26,7 @@ export default function RadioDifusorSec() {
 
     const interval = setInterval(() => {
       setCounter((counter) => counter - 1);
-    }, 1000);
+    }, 10000);
 
     if (counter === 0 || counter < 0) {
       setFlag(true);
@@ -142,9 +142,9 @@ export default function RadioDifusorSec() {
                     }}
                   />
 
-                  <p className="absolute top-1/2 leading-3 left-[27%] text-white z-20 bg-black p-2 rounded">
+                  {/* <p className="absolute top-1/2 leading-3 left-[27%] text-white z-20 bg-black p-2 rounded">
                     Conteúdo em tela cheia em: {counter} segundos.
-                  </p>
+                  </p> */}1
                 </div>}
             </div>
             {/*<div className="flex justify-center items-center h-4/5">

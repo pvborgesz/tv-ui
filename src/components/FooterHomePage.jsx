@@ -12,7 +12,7 @@ export default function Footer({ href }, ref) {
     <footer className="flex items-center justify-between text-white mt-10 pr-10 ml-5">
       <div className="font-normal flex gap-5 items-center mb-5">
         <IconBordered>
-          <img src={Settings} className="w-[85px]" />
+          <img src={Settings} className="w-[35px]" />
         </IconBordered>
 
         <p className="text-2xl mt-1.5">Configurações</p>

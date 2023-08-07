@@ -43,12 +43,15 @@ export default function RadioDifusor() {
 
     // when page up key is pressed, go to RadioDifusorSecL2
     document.addEventListener("keydown", (event) => {
-      if (event.code === "KeyM") {
-        openChannel("https://www.youtube.com/embed/6e_4ZepAl58?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0");
-        navigate("/radioDifusorSecL2");
+      if (event.code === "PageUp") {
+        openChannel("https://www.youtube.com/embed/AKeUssuu3Is?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0");
+        navigate("/radioDifusor");
       } else if (event.code === "PageDown") {
-        openChannel("https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0");
-        navigate("/radioDifusorSecL2");
+        openChannel("https://www.youtube.com/embed/tO01J-M3g0U?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0");
+        navigate("/radioDifusor");
+      }
+      if (event.code === "ContextMenu") {
+        navigate('/homePage');
       }
     });
 
@@ -90,7 +93,7 @@ export default function RadioDifusor() {
                   <iframe
                     src={`${urlValue}`}
                     allow="autoplay; encrypted-media"
-                    // allowFullScreen
+                    allowFullScreen
                     style={{
                       position: "absolute",
                       left: "50%",
@@ -101,9 +104,9 @@ export default function RadioDifusor() {
                     }}
                   />
 
-                  <p className="absolute top-1/2 leading-3 left-[35%] text-white z-20 bg-black p-2 rounded">
+                  {/* <p className="absolute top-1/2 leading-3 left-[35%] text-white z-20 bg-black p-2 rounded">
                     Conteúdo em tela cheia em: {counter} segundos.
-                  </p>
+                  </p> */}
                 </div>}
 
             </div>

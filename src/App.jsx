@@ -29,7 +29,18 @@ export default function App() {
       }
 
       switch (event.code) {
-
+        case 'Digit0':
+          event.preventDefault();
+          navigate('/homePage');
+          break;
+        case 'Digit1':
+          event.preventDefault();
+          navigate('/radioDifusorSec');
+          break;
+        case 'Digit2':
+          event.preventDefault();
+          navigate('/radioDifusorSecL2');
+          break;
         case 'Escape':
           event.preventDefault();
           navigate(-1);
