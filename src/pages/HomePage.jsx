@@ -10,8 +10,20 @@ import Footer from '../components/FooterHomePage';
 import { useNavigate } from "react-router";
 import { UrlContext } from "../App";
 
-import { cards, streaming } from '../database';
+import { cards, streaming, recommendations } from '../database';
 import { BsChevronRight } from 'react-icons/bs';
+
+
+
+function shuffle(array) {
+    // put the reversed of array
+    array.reverse();
+
+    return array;
+}
+
+// recomendations must be the reversed of cards
+
 
 
 export default function HomePage() {
@@ -73,7 +85,7 @@ export default function HomePage() {
     }, []);
 
     const rowIcons = [AppsIcon, TvAberta, AnotherIcon];
-    const rowTitles = ["Aplicativos", "TV Aberta", "Talvez você goste"];
+    const rowTitles = ["Aplicativos", "TV Aberta", "Recomendações"];
 
     return (
         <>
@@ -87,7 +99,7 @@ export default function HomePage() {
             </div>
 
             <div className='flex flex-col h-full justify-center items-center'>
-                {[cards, streaming, streaming].map((row, rowIndex) => (
+                {[streaming, cards, recommendations].map((row, rowIndex) => (
                     <div className="flex flex-row justify-center align-center h-[200px] mt-10">
                         <button className="flex flex-col justify-center w-36 mx-3"
                             onClick={

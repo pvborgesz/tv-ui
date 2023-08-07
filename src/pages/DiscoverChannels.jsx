@@ -6,6 +6,7 @@ import AppCard from '../components/AppCard';
 import Footer from '../components/FooterDiscoverChannels';
 import { useNavigate } from 'react-router-dom';
 import { cards, streaming } from '../database';
+import TvAberta from '../assets/tvAberta.png';
 
 export default function DiscoverChannels() {
     const [scanProgress, setScanProgress] = useState(0);
@@ -82,7 +83,8 @@ export default function DiscoverChannels() {
                 <div className='channels-container flex flex-row items-center justify-center w-200 h-100 flex-wrap'>
                     {channelsFound.map((card, index) => (
                         <div className='app-card mb-5' key={index}>
-                            <AppCard icon={card.icon} />
+                            {card.icon !== TvAberta ? <AppCard icon={card.icon} /> : <></>}
+
                         </div>
                     ))}
                     <br />
