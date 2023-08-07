@@ -21,7 +21,7 @@ export default function SelectProfile() {
 
   useEffect(() => {
 
-    linksRef.current[3].focus();
+    linksRef.current[0].focus();
 
     const handleKeyDown = (event) => {
       switch (event.key) {
@@ -35,7 +35,7 @@ export default function SelectProfile() {
           } else if (linksRef.current[3] === document.activeElement) {
             linksRef.current[2].focus();
           } else {
-            linksRef.current[3].focus();
+            linksRef.current[0].focus();
           }
           break;
         case "ArrowRight":
@@ -88,8 +88,8 @@ export default function SelectProfile() {
           ref={(el) => linksRef.current[0] = el}
         >
           <div className="flex flex-col items-center justify-center  cursor-pointer  rounded-sm w-[360px]">
-            <ImageIconRounded icon={"https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} />
-            <h4 className="text-2xl pt-10 font-normal mb-1.5">Continuar sem criar</h4>
+            <ImageIconRounded icon={UserImg} />
+            <h4 className="text-2xl pt-10 font-normal mb-1.5">Continuar sem criar Perfil</h4>
           </div>
         </Link>
 

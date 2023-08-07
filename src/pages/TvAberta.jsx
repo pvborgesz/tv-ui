@@ -7,9 +7,8 @@ import { UrlContext } from "../App";
 
 import { cards, streaming } from '../database';
 
-
 export default function TvAberta() {
-    const rowRefs = [useRef([]), useRef([]), useRef([])];
+    const rowRefs = [useRef([]), useRef([])];
     const navigate = useNavigate();
     // useContext
     const { urlValue, setUrlValue } = useContext(UrlContext);
@@ -34,6 +33,7 @@ export default function TvAberta() {
                     // Verificamos se não estamos na primeira linha para não sair do intervalo
                     if (currentRowIndex > 0) {
                         currentRowIndex -= 1;
+                        currentCardIndex = 0;  // reset card index when moving to another row
                     }
                     break;
                 case 'ArrowDown':
@@ -41,6 +41,7 @@ export default function TvAberta() {
                     // Verificamos se não estamos na última linha para não sair do intervalo
                     if (currentRowIndex < rowRefs.length - 1) {
                         currentRowIndex += 1;
+                        currentCardIndex = 0;  // reset card index when moving to another row
                     }
                     break;
                 case 'ArrowLeft':
@@ -70,13 +71,11 @@ export default function TvAberta() {
         };
     }, []);
 
-
     return (
         <>
             <h1 className="text-4xl text-white mt-10 mb-10 text-center">Seus aplicativos de TV Aberta</h1>
 
             <div className="flex flex-row h-full items-center">
-
                 <div className="flex flex-col h-full items-left justify-left text-white flex-grow ml-5 mr-10">
                     <div className="flex flex-col items-center align-center justify-center text-white h-4/5 rounded">
                         <div className="flex justify-center items-center h-4/5 zIndex-9">
@@ -86,6 +85,23 @@ export default function TvAberta() {
                                         key={index}
                                         ref={(el) => {
                                             rowRefs[0].current[index] = el
+                                            if (el) {
+                                                el.onfocus = () => el.style.transform = "scale(1.2)";
+                                                el.onblur = () => el.style.transform = "scale(1)";
+                                            }
+                                        }}
+                                        tabIndex={0}
+                                        className="flex flex-col items-center justify-center h-40 w-40 rounded-lg bg-zinc-900"
+                                        onClick={() => openChannel(card.content, card.icon)}
+                                    >
+                                        <img className="w-32 h-32" src={card.icon} alt="Channel Icon" />
+                                    </button>
+                                ))}
+                                {streaming.map((card, index) => (
+                                    <button
+                                        key={index}
+                                        ref={(el) => {
+                                            rowRefs[1].current[index] = el
                                             if (el) {
                                                 el.onfocus = () => el.style.transform = "scale(1.2)";
                                                 el.onblur = () => el.style.transform = "scale(1)";

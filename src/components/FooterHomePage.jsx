@@ -15,7 +15,7 @@ export default function Footer({ href }, ref) {
           <img src={Settings} className="w-[85px]" />
         </IconBordered>
 
-        <p className="text-2xl mt-1.5">Audiodescrição</p>
+        <p className="text-2xl mt-1.5">Configurações</p>
       </div>
 
       {href && <NextButton ref={ref} href={href} />}

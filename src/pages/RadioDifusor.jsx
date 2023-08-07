@@ -53,31 +53,43 @@ export default function RadioDifusor() {
           <div className="flex flex-col items-center align-center justify-center text-white h-4/5 rounded">
             <div className="flex justify-center items-center h-4/5 zIndex-9">
               {flag ?
-              <iframe
-                width="100%"
-                height="100%"
-                src={`${urlValue}`}
-                allow="autoplay; encrypted-media"
-                allowFullScreen
-                style={{
-                  position: "absolute",
-                  left: "50%",
-                  top: "50%",
-                  height: "100%",
-                  width: "100%",
-                  transform: "translate(-50%, -50%)",
-                }}
-              />
-                      :
-              <div className="flex relative">
-                <video width="1200" controls>
-                  <source src={urlValue} type="video/mp4"/>
-                </video>
-                <p className="absolute top-1/2 leading-3 left-[35%]">
-                  Conteúdo em tela cheia em: {counter} segundos.
-                </p>
-              </div>}
-              
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={`${urlValue}`}
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                  style={{
+                    position: "absolute",
+                    left: "50%",
+                    top: "50%",
+                    height: "100%",
+                    width: "100%",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                />
+                :
+                <div className="flex relative bg-black w-100">
+
+                  <iframe
+                    src={`${urlValue}`}
+                    allow="autoplay; encrypted-media"
+                    // allowFullScreen
+                    style={{
+                      position: "absolute",
+                      left: "50%",
+                      top: "50%",
+                      height: "50%",
+                      width: "50%",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                  />
+
+                  <p className="absolute top-1/2 leading-3 left-[35%] text-white z-20 bg-black p-2 rounded">
+                    Conteúdo em tela cheia em: {counter} segundos.
+                  </p>
+                </div>}
+
             </div>
 
             <div className="flex flex-col justify-end mb-5">
@@ -104,7 +116,7 @@ export default function RadioDifusor() {
             </div>
           </div>
         </div>
-      </div>
+      </div >
       <Footer />
     </>
   );
