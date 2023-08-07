@@ -57,7 +57,7 @@ export default function CreateProfile() {
             type="text"
             placeholder="Nome do Perfil (obrigatório)"
           />
-          
+
           <div className="flex justify-start">
             <input
               className="text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
@@ -74,31 +74,31 @@ export default function CreateProfile() {
               placeholder="Data de nascimento dd/mm/aaaa"
             />
             <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={1} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px"/></div>
+              <div id={1} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={1} src={ClassLivre} alt="" />
             </div>
             <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={2} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px"/></div>
+              <div id={2} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={2} src={Class10} alt="" />
             </div>
             <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={3} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px"/></div>
+              <div id={3} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={3} src={Class12} alt="" />
             </div>
             <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={4} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px"/></div>
+              <div id={4} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={4} src={Class14} alt="" />
             </div>
             <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={5} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px"/></div>
+              <div id={5} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={5} src={Class16} alt="" />
             </div>
             <div onClick={handleClick} className="flex flex-col ml-5 relative">
-              <div id={6} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px"/></div>
+              <div id={6} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={6} src={Class18} alt="" />
             </div>
           </div>
-          
+
           <div className="flex justify-start">
             <input
               className="text-2xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
@@ -174,25 +174,25 @@ export default function CreateProfile() {
 
           <div className="flex align-center justify-evenly text-white flex-grow mt-10 mr-10 mb-10">
             <div className="flex items-center justify-start mr-10 w-1/4 relative">
-              <div id={7} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px"/></div>
+              <div id={7} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={7} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={AudioDescriacao} />
               <h3 className="text-xl text-white">Áudiodescrição</h3>
             </div>
 
             <div className="flex items-center justify-start mx-3 w-1/4 relative">
-              <div id={8} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px"/></div>
+              <div id={8} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={8} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={Libras} />
               <h3 className="text-xl text-white">Acessível em Libras</h3>
             </div>
 
             <div className="flex items-center justify-start mx-3 w-1/4 relative">
-              <div id={9} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px"/></div>
+              <div id={9} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={9} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={CC} />
               <h3 className="text-xl text-white">Legendas Ocultas</h3>
             </div>
 
             <div className="flex items-center justify-start mx-3 w-1/4 relative">
-              <div id={10} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px"/></div>
+              <div id={10} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={10} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={AprimorDialogo} />
               <h3 className="text-xl text-white">Aprimoramento de Diálogo</h3>
             </div>
