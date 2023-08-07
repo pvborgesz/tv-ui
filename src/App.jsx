@@ -16,14 +16,25 @@ export default function App() {
 
   useEffect(() => {
     if (navigate) {
-      navigate("selectLanguage");
+      navigate("/fabricante");
     }
   }, []);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
+      console.log(event.code)
+      if (event.type === 'click') {
+        event.preventDefault();
+        event.code = 'Enter';
+      }
+
       switch (event.code) {
+
         case 'Escape':
+          event.preventDefault();
+          navigate(-1);
+          break;
+        case 'ContextMenu':
           event.preventDefault();
           navigate(-1);
           break;

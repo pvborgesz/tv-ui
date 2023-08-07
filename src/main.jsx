@@ -33,12 +33,12 @@ const router = createBrowserRouter([
         element: <SelectLanguage />,
       },
       {
-        path: "selectProfile",
-        element: <SelectProfile />,
-      },
-      {
         path: "createProfile",
         element: <CreateProfile />,
+      },
+      {
+        path: "selectProfile",
+        element: <SelectProfile />,
       },
       {
         path: "homePage",
@@ -79,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "tvAberta",
         element: <TvAberta />,
+      },
+      {
+        path: "RadioDifusorSecL2",
+        element: <RadioDifusorSecL2 />,
       },
     ],
   },
