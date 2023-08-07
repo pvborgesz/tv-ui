@@ -7,7 +7,7 @@ export default function Fabricante() {
     useEffect(() => {
         setTimeout(() => {
             navigate("/selectLanguage");
-        }, 5000);
+        }, 6000);
     }, []);
 
 
@@ -17,7 +17,7 @@ export default function Fabricante() {
 
             <div className="container  align-center justify-center">
 
-                <h1 className='text-9xl text-center text-white font-bold ml-[32%]'>Fabricante</h1>
+                <h1 className='text-9xl text-center text-white font-bold ml-[11%]'>Fabricante</h1>
 
             </div>
 

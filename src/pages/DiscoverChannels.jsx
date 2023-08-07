@@ -5,7 +5,7 @@ import TitlePage from '../components/TitlePage';
 import AppCard from '../components/AppCard';
 import Footer from '../components/FooterDiscoverChannels';
 import { useNavigate } from 'react-router-dom';
-import { cards, streaming } from '../database';
+import { cards, streaming, universityApps } from '../database';
 import TvAberta from '../assets/tvAberta.png';
 
 export default function DiscoverChannels() {
@@ -38,7 +38,7 @@ export default function DiscoverChannels() {
             });
 
             setChannelsFound(oldChannels => {
-                const newChannel = cards[oldChannels.length];
+                const newChannel = universityApps[oldChannels.length];
                 if (newChannel) {
                     return [...oldChannels, newChannel];
                 }
@@ -82,7 +82,7 @@ export default function DiscoverChannels() {
                 {/* max width then breakline */}
                 <div className='channels-container flex flex-row items-center justify-center w-200 h-100 flex-wrap'>
                     {channelsFound.map((card, index) => (
-                        <div className='app-card mb-5' key={index}>
+                        <div className='app-card overflow-y-auto' key={index}>
                             {card.icon !== TvAberta ? <AppCard icon={card.icon} /> : <></>}
 
                         </div>

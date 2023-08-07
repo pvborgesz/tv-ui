@@ -89,7 +89,7 @@ export default function HomePage() {
 
             <div className='flex flex-col h-full justify-center items-center'>
                 {[streaming, cards, recommendations].map((row, rowIndex) => (
-                    <div className="flex flex-row justify-center align-center h-[200px] mt-10">
+                    <div className="flex flex-row justify-center align-center h-[250px] mt-10 rounded-lg" >
                         <button className="flex flex-col justify-center w-36 mx-3 align items-center mr-10"
                             onClick={
                                 () => {
@@ -103,7 +103,7 @@ export default function HomePage() {
                                 }
                             }>
                             <img
-                                className="w-full"
+                                className="w-[8rem] h-[7rem] rounded-full"
                                 src={rowIcons[rowIndex]}
                                 ref={(el) => {
                                     focusableElements[rowIndex].current[0] = el;
@@ -150,7 +150,7 @@ export default function HomePage() {
                                 >
                                     <div className='focus:border-cyan-200  hover:border-cyan-900  '>
                                         <img
-                                            className="w-[450px] h-[100px] rounded-lg mx-2  hover:scale-200 transition duration-500 ease-in-out "
+                                            className="w-[240px] h-[135px] rounded-lg mx-2  hover:scale-200 transition duration-500 ease-in-out "
                                             src={card.icon}
                                             alt="card icon"
                                         />

@@ -6,7 +6,7 @@ import FooterHomePage from '../components/FooterTvAberta';
 import { useNavigate } from "react-router";
 import { UrlContext } from "../App";
 
-import { appsAppCatUI } from '../database';
+import { universityApps } from '../database';
 
 export default function TvAberta() {
     const rowRefs = [useRef([]), useRef([])];
@@ -81,8 +81,8 @@ export default function TvAberta() {
                 <div className="flex flex-col h-full items-left justify-left text-white flex-grow ml-5 mr-10">
                     <div className="flex flex-col items-center align-center justify-center text-white h-4/5 rounded">
                         <div className="flex justify-center items-center h-4/5 zIndex-9">
-                            <div className="grid grid-cols-6 gap-8">
-                                {appsAppCatUI.map((card, index) => (
+                            <div className="grid grid-cols-6 gap-10 mx-10">
+                                {universityApps.map((card, index) => (
                                     <button
                                         key={index}
                                         ref={(el) => {
@@ -93,10 +93,10 @@ export default function TvAberta() {
                                             }
                                         }}
                                         tabIndex={0}
-                                        className="flex flex-col items-center justify-center h-40 w-40 rounded-lg bg-zinc-900"
+                                        className="flex flex-col items-center justify-center rounded-lg bg-zinc-900"
                                         onClick={() => openChannel(card.content, card.icon)}
                                     >
-                                        <img className="w-[240px] h-[120px]" src={card.icon} alt="Channel Icon" />
+                                        <img className="w-[240px] h-[135px]" src={card.icon} alt="Channel Icon" />
                                     </button>
                                 ))}
                             </div>
