@@ -126,11 +126,23 @@ export default function RadioDifusorSec() {
                   }}
                 />
                 :
-                <div className="flex relative">
-                  <video width="1200" controls>
-                    <source src={urlValue} type="video/mp4" />
-                  </video>
-                  <p className="absolute top-1/2 leading-3 left-[28%]">
+                <div className="flex relative bg-black w-100">
+
+                  <iframe
+                    src={`${urlValue}`}
+                    allow="autoplay; encrypted-media"
+                    // allowFullScreen
+                    style={{
+                      position: "absolute",
+                      left: "50%",
+                      top: "50%",
+                      height: "500px",
+                      width: "800px",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                  />
+
+                  <p className="absolute top-1/2 leading-3 left-[27%] text-white z-20 bg-black p-2 rounded">
                     Conteúdo em tela cheia em: {counter} segundos.
                   </p>
                 </div>}
