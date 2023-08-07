@@ -95,8 +95,8 @@ export default function RadioDifusor() {
                       position: "absolute",
                       left: "50%",
                       top: "50%",
-                      height: "50%",
-                      width: "50%",
+                      height: "500px",
+                      width: "800px",
                       transform: "translate(-50%, -50%)",
                     }}
                   />
