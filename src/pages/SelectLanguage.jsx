@@ -112,21 +112,21 @@ export default function SelectLanguage() {
       <footer className="flex items-center justify-between text-white mt-auto pl-10 pr-10 pb-10">
         <div className="font-normal flex gap-5 items-center">
           <IconBordered>
-            <img src={AudioDescriacao} className="w-10" />
+            <img src={AudioDescriacao} className="w-[85px]" />
           </IconBordered>
 
-          <p className="text-2sm mt-1.5">Audiodescrição</p>
+          <p className="text-4xl mt-1.5">Audiodescrição</p>
 
           <IconBordered>
             {/* <FaHandsAslInterpreting size={40} /> */}
-            <img src={libras} className="w-10" />
+            <img src={libras} className="w-[85px]" />
           </IconBordered>
-          <p className="text-2sm mt-1.5">Acessível em Libras</p>
+          <p className="text-4xl mt-1.5">Acessível em Libras</p>
         </div>
 
         <Link
           ref={advanceButtonRef}
-          className="flex items-center rounded border border-white p-4 text-lg hover:bg-emerald-600 focus:bg-emerald-600 transition-all duration-300 gap-2"
+          className="flex items-center rounded border border-white p-4 text-4xl hover:bg-emerald-600 focus:bg-emerald-600 transition-all duration-300 gap-2"
           to={'/selectProfile'}
         >
           Avançar

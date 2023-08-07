@@ -52,7 +52,8 @@ export default function RadioDifusor() {
         <div className="bg-zinc-900 flex flex-col h-full items-left justify-left text-white flex-grow ml-5 mr-10">
           <div className="flex flex-col items-center align-center justify-center text-white h-4/5 rounded">
             <div className="flex justify-center items-center h-4/5 zIndex-9">
-              {flag && <iframe
+              {flag ?
+              <iframe
                 width="100%"
                 height="100%"
                 src={`${urlValue}`}
@@ -66,10 +67,17 @@ export default function RadioDifusor() {
                   width: "100%",
                   transform: "translate(-50%, -50%)",
                 }}
-              />}
-              <p>
-                Conteúdo em tela cheia em: {counter} segundos.
-              </p>
+              />
+                      :
+              <div className="flex relative">
+                <video width="1200" controls>
+                  <source src={urlValue} type="video/mp4"/>
+                </video>
+                <p className="absolute top-1/2 leading-3 left-[35%]">
+                  Conteúdo em tela cheia em: {counter} segundos.
+                </p>
+              </div>}
+              
             </div>
 
             <div className="flex flex-col justify-end mb-5">

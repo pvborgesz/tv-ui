@@ -85,20 +85,20 @@ export default function SelectProfile() {
         <Link
           className="flex flex-col items-center gap-10 cursor-pointer p-14 hover:bg-zinc-700 hover:scale-105 rounded-xl border-2 h-[370px] justify-center transition-all duration-400 focus:border-[10px]"
           to={"/discoverChannels"}
-          ref={(el) => linksRef.current[3] = el}
+          ref={(el) => linksRef.current[0] = el}
         >
-          <div className="flex flex-col items-center justify-center  cursor-pointer  rounded-sm ">
-            <ImageIconRounded icon={UserImg} />
-            <h4 className="text-2xl pt-10 font-normal mb-1.5 text-center ">Continuar sem criar <br />Perfil</h4>
+          <div className="flex flex-col items-center justify-center  cursor-pointer  rounded-sm w-[360px]">
+            <ImageIconRounded icon={"https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} />
+            <h4 className="text-2xl pt-10 font-normal mb-1.5">Continuar sem criar</h4>
           </div>
         </Link>
 
         <Link
           className="flex flex-col items-center gap-10 cursor-pointer p-14 hover:bg-zinc-700 hover:scale-105 rounded-xl border-2 h-[370px] justify-center transition-all duration-400 focus:border-[10px]"
           to={"/createProfile"}
-          ref={(el) => linksRef.current[4] = el}
+          ref={(el) => linksRef.current[1] = el}
         >
-          <div className="flex flex-col items-center justify-center  cursor-pointer  rounded-sm ">
+          <div className="flex flex-col items-center justify-center  cursor-pointer  rounded-sm w-[360px]">
             <ImageIconRounded icon={"https://d2gg9evh47fn9z.cloudfront.net/1600px_COLOURBOX5697474.jpg"} />
             <h4 className="text-2xl pt-10 font-normal mb-1.5">Adicionar Perfil</h4>
           </div>

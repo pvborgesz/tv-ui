@@ -5,7 +5,7 @@ import TitlePage from '../components/TitlePage';
 import AppCard from '../components/AppCard';
 import Footer from '../components/FooterDiscoverChannels';
 import { useNavigate } from 'react-router-dom';
-import { cards, streaming } from '../database';
+import { cards, streaming } from '../databaseRadioDifSec';
 // buscar streaming
 export default function DiscoverChannels() {
     const [scanProgress, setScanProgress] = useState(0);
@@ -74,20 +74,20 @@ export default function DiscoverChannels() {
                 <div className='scan-progress flex flex-row text-white m'
                     style={{ width: `${scanProgress}%` }}>
                 </div>
-                <p className='scan-info text-2xl font-semibold text-white text-center mt-8 mb-20'>Buscando Aplicativos de TV 3.0 pela sua região...</p>
+                <p className='scan-info text-4xl font-semibold text-white text-center mt-5 mb-5'>Procurando por aplicativos de TV aberta de sua região...</p>
 
                 <p className='scan-info text-2xl text-white text-center'>Progresso: {scanProgress}%</p>
-                <p className='scan-info text-2xl text-white text-center mb-10'>Apps de TV Aberta Encontrados: {channelsFound.length + streamingFound.length}</p>
+                <p className='scan-info text-2xl text-white text-center mb-5'>Apps de TV Aberta Encontrados: {channelsFound.length + streamingFound.length}</p>
                 {/* max width then breakline */}
                 <div className='channels-container flex flex-row items-center justify-center w-200 h-100 flex-wrap'>
                     {channelsFound.map((card, index) => (
-                        <div className='app-card mb-10' key={index}>
+                        <div className='app-card mb-5' key={index}>
                             <AppCard icon={card.icon} />
                         </div>
                     ))}
                     <br />
                     {streamingFound.map((streaming, index) => (
-                        <div className='app-card mb-10' key={index}>
+                        <div className='app-card mb-5' key={index}>
                             <AppCard icon={streaming.icon} />
                         </div>
                     ))}

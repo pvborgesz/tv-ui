@@ -29,7 +29,7 @@ export const cards = [
     content:
       'https://www.youtube.com/embed/6e_4ZepAl58?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
-  /*{
+  {
     name: 'UFMA',
     icon: 'https://www.ufpb.br/educacaofinanceira/contents/imagens/brasoes-universidades/ufma.png/@@images/image.png',
     content:
@@ -52,7 +52,7 @@ export const cards = [
     icon: 'https://www.infoescola.com/wp-content/uploads/2016/12/Logo-do-ITA.jpg',
     content:
       'https://www.youtube.com/embed/4taGOvPA-74?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
-  },*/
+  },
 ];
 
 export const streaming = [
@@ -86,7 +86,7 @@ export const streaming = [
     content:
       'https://www.youtube.com/embed/9n7E12UzLFI?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
-  /*{
+  {
     name: 'BBC IPLAYER',
     icon: 'https://rts.org.uk/sites/default/files/styles/9_column_landscape/public/iplayer_0.jpeg?itok=Msv3GN0A',
     content:
@@ -109,7 +109,7 @@ export const streaming = [
     icon: 'https://hbomax-images.warnermediacdn.com/2020-05/square%20social%20logo%20400%20x%20400_0.png',
     content:
       'https://www.youtube.com/embed/9in2XZuFs?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
-  },*/
+  },
 ];
 
 // app:VUDU

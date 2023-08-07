@@ -14,20 +14,20 @@ export default function FooterAppCatUI({ href }) {
 
         <div className="flex font-normal gap-3 items-center">
           <IconBordered>
-            <BiHomeAlt size={40} />
+            <BiHomeAlt size={70} />
           </IconBordered>
-          <p className="text-2xl mt-1.5">Home</p>
+          <p className="text-3xl mt-1.5">Home</p>
         </div>
 
         <div className="flex font-normal gap-3 items-center">
-          <p className="text-2xl mt-1.5">Guia de Programação</p>
+          <p className="text-3xl mt-1.5">Guia de Programação</p>
           <IconBordered>
-            <MdOutlineSubtitles size={40} />
+            <MdOutlineSubtitles size={70} />
           </IconBordered>
         </div>
       </div>
 
-      <h3 className="text-2xl w-2/3 text-center">Em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD), cada radiodifusor solicitará sua permissão para uso dos dados de seu perfil e coleta de outras informações</h3>
+      <h3 className="text-xl w-2/3 text-center">Em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD), cada radiodifusor solicitará sua permissão para uso dos dados de seu perfil e coleta de outras informações</h3>
       {href && <NextButton href={href} />}
     </footer>
   );

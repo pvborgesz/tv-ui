@@ -14,16 +14,16 @@ export default function Footer({ href }, ref) {
     <footer className="flex items-center justify-between text-white mt-auto pl-10 pr-10 pb-10 mb-20 ml-10">
       <div className="font-normal flex gap-5 items-center mb-5">
         <IconBordered>
-          <img src={AudioDescriacao} className="w-10" />
+          <img src={AudioDescriacao} className="w-[85px]" />
         </IconBordered>
 
-        <p className="text-2sm mt-1.5">Audiodescrição</p>
+        <p className="text-4xl mt-1.5">Audiodescrição</p>
 
         <IconBordered>
           {/* <FaHandsAslInterpreting size={40} /> */}
-          <img src={libras} className="w-10" />
+          <img src={libras} className="w-[85px]" />
         </IconBordered>
-        <p className="text-2sm mt-1.5">Acessível em Libras</p>
+        <p className="text-4xl mt-1.5">Acessível em Libras</p>
       </div>
 
       {href && <NextButton ref={ref} href={href} />}

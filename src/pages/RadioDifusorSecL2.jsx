@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect} from "react";
+import { useNavigate } from "react-router";
 import Footer from "../components/Footer";
 import ProfileIcon from "../assets/profile.svg";
 import RadioDifusorIcon from "../assets/radiodifusor2_icon.svg";
@@ -13,10 +14,11 @@ import { cards, streaming } from '../databaseRadioDifL2';
 
 export default function RadioDifusorSecL2() {
   const rowRefs = [useRef([]), useRef([])];
-  const urlValue = localStorage.getItem("urlValue");
+  let urlValue = localStorage.getItem("urlValue");
   const icon = localStorage.getItem("icon");
   const [counter, setCounter] = React.useState(10);
   const [flag, setFlag] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     let disc = document.getElementById("disclaimer")
@@ -34,14 +36,14 @@ export default function RadioDifusorSecL2() {
 
   useEffect(() => {
 
-    /*const interval = setInterval(() => {
+    const interval = setInterval(() => {
       setCounter((counter) => counter - 1);
     }, 1000);
 
     if (counter === 0 || counter < 0) {
       setFlag(true);
       clearInterval(interval);
-    }*/
+    }
 
     let currentRowIndex = 0;
     let currentCardIndex = 0;
@@ -92,6 +94,14 @@ export default function RadioDifusorSecL2() {
     };
   }, [icon, flag, counter]);
 
+  const openChannel = (channelURL, channelIcon) => {
+    urlValue = channelURL;
+    // put on localstorage
+    localStorage.setItem("urlValue", channelURL);
+    localStorage.setItem("icon", channelIcon);
+    navigate("/radioDifusorSec");
+  }
+
   return (
     <>
       {/* div with input for nome and for sobrenome  in row*/}
@@ -122,9 +132,10 @@ export default function RadioDifusorSecL2() {
           </div>
 
 
-          <div className="flex flex-col items-center align-center justify-center text-white bg-zinc-900 h-full rounded w-full">
+          <div className="flex flex-col items-center align-center justify-center text-white bg-zinc-900 h-full rounded w-full mb-10">
             <div className="flex justify-center items-center h-4/5 zIndex-9">
-              {flag && <iframe
+              {flag ?
+              <iframe
                 width="100%"
                 height="100%"
                 src={`${urlValue}`}
@@ -138,10 +149,16 @@ export default function RadioDifusorSecL2() {
                   width: "100%",
                   transform: "translate(-50%, -50%)",
                 }}
-              />}
-              <p>
-                Conteúdo em tela cheia em: {counter} segundos.
-              </p>
+              />
+                      :
+              <div className="flex relative">
+                <video width="1200" controls>
+                  <source src={urlValue} type="video/mp4"/>
+                </video>
+                <p className="absolute top-1/2 leading-3 left-[27%]">
+                  Conteúdo em tela cheia em: {counter} segundos.
+                </p>
+              </div>}
             </div>
 
             {/*<div className="flex justify-center items-center h-4/5">
@@ -176,8 +193,14 @@ export default function RadioDifusorSecL2() {
                     {row.map((card, cardIndex) => (
                       <>
                         <button
-                          className="flex flex-col h-full items-center mt-5"
-                          ref={(el) => rowRefs[rowIndex].current[cardIndex] = el}
+                          className="flex flex-col h-full items-center"
+                          ref={(el) => {
+                            rowRefs[rowIndex].current[cardIndex] = el
+                            if (el) {
+                              el.onfocus = () => el.style.transform = "scale(1.07)";
+                              el.onblur = () => el.style.transform = "scale(1)";
+                            }
+                          }}
                           tabIndex={0}
                           onClick={() => openChannel(card.content, card.icon)} // Estamos passando a URL do cartão para a função openChannel
                         >
