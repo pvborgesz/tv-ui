@@ -11,7 +11,7 @@ import Footer from '../components/FooterHomePage';
 import { useNavigate } from "react-router";
 import { UrlContext } from "../App";
 
-import { cards, streaming, recommendations } from '../database';
+import { cards, streaming, recommendations } from '../database2';
 import { BsChevronRight } from 'react-icons/bs';
 
 

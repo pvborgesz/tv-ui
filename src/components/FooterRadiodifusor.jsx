@@ -15,9 +15,9 @@ export default function FooterAppCatUI({ href }) {
         <Link to="#">
           <div className="flex flex-col justify-center font-normal gap-1 items-center">
             <IconBordered>
-              <MdOutlineSubtitles size={70} />
+              <MdOutlineSubtitles size={40} />
             </IconBordered>
-            <p className="text-4xl mt-1.5">Guia de Programação</p>
+            <p className="text-2xl mt-1.5">Guia de Programação</p>
           </div>
         </Link>
       </div>
