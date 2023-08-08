@@ -22,10 +22,20 @@ export default function RadioDifusor() {
   const navigate = useNavigate();
 
   const _onReady = (event) => {
-    console.log("INICIO EM:", start.current)
+    // console.log(event.target)
+    // console.log("INICIO EM:", start.current)
     event.target.loadVideoById({
       videoId: urlValue,
-      startSeconds: start.current
+      startSeconds: 10 // start.current
+    })
+    event.target.playVideo()
+  }
+  
+  const _onReadyMini = (event) => {
+    // console.log(event.target)
+    // console.log("INICIO EM:", start.current)
+    event.target.loadVideoById({
+      videoId: urlValue,
     })
     event.target.playVideo()
   }
@@ -34,9 +44,9 @@ export default function RadioDifusor() {
 
     const interval = setInterval(() => {
       setCounter((counter) => counter - 1);
-      console.log(counter)
-      start.current += 1;
-    }, 1000);
+      // console.log(counter)
+      // start.current += 1;
+    }, 3000);
 
     if (counter === 0 || counter < 0) {
       setFlag(true);
@@ -112,9 +122,7 @@ export default function RadioDifusor() {
                 :
                 <div className="flex relative bg-black w-100">
                   <Youtube 
-                    videoId={urlValue}
-
-                    onReady={_onReady}
+                    onReady={_onReadyMini}
 
                     opts={{
                       width: "100%",

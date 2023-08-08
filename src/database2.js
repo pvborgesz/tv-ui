@@ -29,31 +29,31 @@ export const cards = [
     name: 'UFJF',
     icon: UFJF,
     content:
-      '-UUV_1mwFqk?',
+      '-UUV_1mwFqk',
   },
   {
     name: 'UFC',
     icon: UFC,
     content:
-      '-UUV_1mwFqk?',
+      '-UUV_1mwFqk',
   },
   {
     name: 'UFF',
     icon: UFF,
     content:
-      '-UUV_1mwFqk?',
+      '-UUV_1mwFqk',
   },
   {
     name: 'UFMA',
     icon: UFMA,
     content:
-      '-UUV_1mwFqk?',
+      '-UUV_1mwFqk',
   },
   {
     name: 'UFPB',
     icon: UFPB,
     content:
-      '-UUV_1mwFqk?',
+      '-UUV_1mwFqk',
   },
   // {
   //   name: 'Telemidia',

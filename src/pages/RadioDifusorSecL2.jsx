@@ -10,6 +10,8 @@ import BtnFcIcon from "../assets/btn_fc.svg";
 import ProgBarIcon from "../assets/prog_bar.svg";
 import TitlePage from "../components/TitlePage";
 
+import Youtube from "react-youtube"
+
 import { cards, streaming } from '../database';
 
 export default function RadioDifusorSecL2() {
@@ -19,6 +21,24 @@ export default function RadioDifusorSecL2() {
   const [counter, setCounter] = React.useState(10);
   const [flag, setFlag] = React.useState(false);
   const navigate = useNavigate();
+
+  const _onReady = (event) => {
+    // console.log("INICIO EM:", start.current)
+    event.target.loadVideoById({
+      videoId: urlValue,
+      startSeconds: 10 // start.current
+    })
+    event.target.playVideo()
+  }
+
+  const _onReadyMini = (event) => {
+    // console.log(event.target)
+    // console.log("INICIO EM:", start.current)
+    event.target.loadVideoById({
+      videoId: urlValue,
+    })
+    event.target.playVideo()
+  }
 
   const handleClick = () => {
     let disc = document.getElementById("disclaimer")
@@ -36,14 +56,14 @@ export default function RadioDifusorSecL2() {
 
   useEffect(() => {
 
-    /*const interval = setInterval(() => {
+    const interval = setInterval(() => {
       setCounter((counter) => counter - 1);
-    }, 10000);
+    }, 3000);
 
     if (counter === 0 || counter < 0) {
       setFlag(true);
       clearInterval(interval);
-    }*/
+    }
 
     let currentRowIndex = 0;
     let currentCardIndex = 0;
@@ -138,12 +158,20 @@ export default function RadioDifusorSecL2() {
 
           <div className="flex justify-start items-center w-full h-4/5 zIndex-9">
             {flag ?
-              <iframe
-                width="100%"
-                height="100%"
-                src={`${urlValue}`}
-                allow="autoplay; encrypted-media"
-                allowFullScreen
+              <Youtube 
+                onReady={_onReady}
+
+                opts={{
+                  width: "100%",
+                  height: "100%",
+                  playerVars: {
+                    allowFullScreen: 1,
+                    autoplay: 1,
+                    // controls: 0
+                    // encrypted-media: 1,
+                  },
+                }}
+
                 style={{
                   position: "absolute",
                   left: "50%",
@@ -155,20 +183,24 @@ export default function RadioDifusorSecL2() {
               />
               :
               
+              <Youtube 
+                onReady={_onReadyMini}
 
-                <iframe
-                  src={`${urlValue}`}
-                  allow="autoplay; encrypted-media"
-                  // allowFullScreen
-                  style={{
-                    /*position: "absolute",
-                    left: "50%",
-                    top: "50%",*/
-                    height: "720px",
-                    width: "1280px",
-                    // transform: "translate(-50%, -50%)",
-                  }}
-                />
+                opts={{
+                  width: "100%",
+                  height: "100%",
+                  playerVars: {
+                    autoplay: 1,
+                    // controls: 0
+                    // encrypted-media: 1,
+                  },
+                }}
+
+                style={{
+                  height: "720px",
+                  width: "1280px",
+                }}
+              />
 
                 }
 

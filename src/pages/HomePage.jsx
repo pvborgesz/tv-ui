@@ -24,6 +24,7 @@ export default function HomePage() {
     let currentElementIndex = 0;
 
     const openChannel = (channelURL, channelIcon) => {
+        console.log(channelURL)
         setUrlValue(channelURL);
         localStorage.setItem("urlValue", channelURL);
         localStorage.setItem("icon", channelIcon);
