@@ -167,7 +167,7 @@ export default function RadioDifusorSecL2() {
                   playerVars: {
                     allowFullScreen: 1,
                     autoplay: 1,
-                    // controls: 0
+                    controls: 0
                     // encrypted-media: 1,
                   },
                 }}
@@ -191,7 +191,7 @@ export default function RadioDifusorSecL2() {
                   height: "100%",
                   playerVars: {
                     autoplay: 1,
-                    // controls: 0
+                    controls: 0
                     // encrypted-media: 1,
                   },
                 }}
