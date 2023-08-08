@@ -23,6 +23,12 @@ import UFRN from './assets/UFRN.png';
 import UNB from './assets/UNB.png';
 import UFPE from './assets/UFPE.png';
 import UFRJ from './assets/UFRJ.png';
+import IME from './assets/IME.png';
+import CEFET from './assets/CEFET.png';
+import UECE from './assets/UECE.png';
+import UEMA from './assets/UEMA.png';
+import UFMG from './assets/UFMG.png';
+import UFPA from './assets/UFPA.png';
 
 export const cards = [
   {
@@ -361,6 +367,42 @@ export const universityApps = [
   {
     name: 'USP',
     icon: USP,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+  {
+    name: 'IME',
+    icon: IME,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+  {
+    name: 'CEFET',
+    icon: CEFET,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+  {
+    name: 'UECE',
+    icon: UECE,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+  {
+    name: 'UEMA',
+    icon: UEMA,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+  {
+    name: 'UFMG',
+    icon: UFMG,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+  {
+    name: 'UFPA',
+    icon: UFPA,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
