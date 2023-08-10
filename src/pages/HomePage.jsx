@@ -11,7 +11,7 @@ import Footer from '../components/FooterHomePage';
 import { useNavigate } from "react-router";
 import { UrlContext } from "../App";
 
-import { cards, streaming, recommendations } from '../database2';
+import { cards, streaming, recommendations } from '../database';
 import { BsChevronRight } from 'react-icons/bs';
 
 
@@ -24,7 +24,6 @@ export default function HomePage() {
     let currentElementIndex = 0;
 
     const openChannel = (channelURL, channelIcon) => {
-        console.log(channelURL)
         setUrlValue(channelURL);
         localStorage.setItem("urlValue", channelURL);
         localStorage.setItem("icon", channelIcon);
@@ -82,7 +81,7 @@ export default function HomePage() {
             <div className="flex justify-end">
                 <div className="flex flex-col w-1/4 justify-center items-end h-full mr-5">
                     <div className="flex flex-row items-center justify-end mt-10 p-10">
-                        <h3 className="pr-3 text-2xl text-right text-sky-400">Usuário</h3>
+                        <h3 className="pr-3 text-2xl text-right text-sky-400">Telespectador</h3>
                         <img className="w-24" src={UserImg} />
                     </div>
                 </div>

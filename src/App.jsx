@@ -16,7 +16,8 @@ export default function App() {
 
   useEffect(() => {
     if (navigate) {
-      navigate("/homePage");
+      // navigate("/radioDifusorSec");
+      navigate("/fabricante");
     }
   }, []);
 
@@ -54,6 +55,11 @@ export default function App() {
           navigate('/tvAberta');
           break;
         case 'KeyV':
+          event.preventDefault();
+          // reload
+          window.location.reload();
+          break;
+        case 'Digit7':
           event.preventDefault();
           // reload
           window.location.reload();

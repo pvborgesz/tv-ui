@@ -8,7 +8,7 @@ import BtnFcIcon from "../assets/btn_fc.svg";
 import ProgBarIcon from "../assets/prog_bar.svg";
 import TitlePage from "../components/TitlePage";
 
-import { cards, streaming } from '../database';
+import { cards, streaming, recommendationsApps } from '../database';
 
 export default function RadioDifusorSec() {
   const rowRefs = [useRef([]), useRef([])];
@@ -191,14 +191,14 @@ export default function RadioDifusorSec() {
         </div>
 
         <div className="bg-zinc-900 grid grid-cols-1 grid-rows-3 text-white gap-5 w-11/12 h-4/5 ml-5 mr-5 mb-10">
-          {[streaming, cards].map((row, rowIndex) => (
+          {[recommendationsApps].map((row, rowIndex) => (
             <>
               <div className="flex flex-row justify-center align-center">
                 <div className="flex flex-row items-center align-center justify-center text-white h-full rounded w-full cursor-pointer">
                   {row.map((card, cardIndex) => (
                     <>
                       <button
-                        className="flex flex-col h-full w-full items-center "
+                        className="flex flex-col items-center "
                         ref={(el) => {
                           rowRefs[rowIndex].current[cardIndex] = el
                           if (el) {
@@ -211,8 +211,9 @@ export default function RadioDifusorSec() {
                       >
                         <div className='mx-3 focus:border-cyan-200  hover:border-cyan-900 '>
                           <img
-                            className="w-36 h-36 rounded-lg mx-2  hover:scale-105
-                                          focus:scale-120 transition duration-500 ease-in-out"
+                            className=" h-[200px] rounded-lg mx-2  hover:scale-105
+                                          focus:scale-120 transition duration-500 ease-in-out
+                                         "
                             src={card.icon}
                             alt="card icon"
                           />

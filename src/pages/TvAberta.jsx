@@ -6,7 +6,7 @@ import FooterHomePage from '../components/FooterTvAberta';
 import { useNavigate } from "react-router";
 import { UrlContext } from "../App";
 
-import { universityApps } from '../database2';
+import { universityApps } from '../database';
 
 export default function TvAberta() {
     const rowRefs = [useRef([]), useRef([])];

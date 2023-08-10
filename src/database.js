@@ -30,12 +30,19 @@ import UEMA from './assets/UEMA.png';
 import UFMG from './assets/UFMG.png';
 import UFPA from './assets/UFPA.png';
 
+import recommendation1 from './assets/recommendation1.png';
+import recommendation2 from './assets/recommendation2.png';
+import recommendation3 from './assets/recommendation3.png';
+import recommendation4 from './assets/recommendation4.png';
+import recommendation5 from './assets/recommendation5.png';
+
+import ufjfVideo from './assets/ufjfVideo1.mp4';
+
 export const cards = [
   {
     name: 'UFJF',
     icon: UFJF,
-    content:
-      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+    content: ufjfVideo,
   },
   {
     name: 'UFC',
@@ -196,8 +203,7 @@ export const appsAppCatUI = [
   {
     name: 'UFJF',
     icon: 'https://play-lh.googleusercontent.com/jK1lhjL_Iu9xIz3C_qdmR13RRAMZz1DvXEnE5WLyNLvxqv78yySK4DNF-SMVI2fC3ig=w240-h480-rw',
-    content:
-      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+    content: ufjfVideo,
   },
   {
     name: 'UFJF',
@@ -307,8 +313,7 @@ export const universityApps = [
   {
     name: 'UFJF',
     icon: UFJF,
-    content:
-      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+    content: ufjfVideo,
   },
   {
     name: 'UFC',
@@ -325,6 +330,12 @@ export const universityApps = [
   {
     name: 'UFMA',
     icon: UFMA,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+  {
+    name: 'UFRJ',
+    icon: UFRJ,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
@@ -403,6 +414,71 @@ export const universityApps = [
   {
     name: 'UFPA',
     icon: UFPA,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+];
+
+export const recommendationsApps = [
+  {
+    name: 'UFPA',
+    icon: recommendation1,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+  {
+    name: 'UFPA',
+    icon: recommendation2,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+  {
+    name: 'UFPA',
+    icon: recommendation3,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+  {
+    name: 'UFPA',
+    icon: recommendation4,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+  {
+    name: 'UFPA',
+    icon: recommendation5,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+];
+
+export const secondCards = [
+  {
+    name: 'UFJF',
+    icon: UFJF,
+    content: ufjfVideo,
+  },
+  {
+    name: 'UFC',
+    icon: UFC,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+  {
+    name: 'UFF',
+    icon: UFF,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+  {
+    name: 'UFMA',
+    icon: UFMA,
+    content:
+      'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+  },
+  {
+    name: 'UFPB',
+    icon: UFPB,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
