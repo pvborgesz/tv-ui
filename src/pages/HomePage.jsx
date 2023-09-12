@@ -13,7 +13,7 @@ import { UrlContext } from "../App";
 
 import { cards, streaming, recommendations } from '../database';
 import { BsChevronRight } from 'react-icons/bs';
-
+import ReactAudioPlayer from 'react-audio-player';
 
 export default function HomePage() {
     const navigate = useNavigate();
@@ -29,6 +29,11 @@ export default function HomePage() {
         localStorage.setItem("icon", channelIcon);
         navigate("/radioDifusor");
     }
+
+    const playAudioDescription = (audioFile) => {
+        const audio = new Audio(audioFile);
+        audio.play();
+    };
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -78,6 +83,11 @@ export default function HomePage() {
 
     return (
         <>
+            {/* <ReactAudioPlayer
+                src="my_audio_file.ogg"
+                autoPlay
+                controls
+            /> */}
             <div className="flex justify-end">
                 <div className="flex flex-col w-1/4 justify-center items-end h-full mr-5">
                     <div className="flex flex-row items-center justify-end mt-10 p-10">
@@ -110,6 +120,7 @@ export default function HomePage() {
                                     if (el) {
                                         el.onfocus = () => el.style.transform = "scale(1.1)";
                                         el.onblur = () => el.style.transform = "scale(1)";
+                                        playAudioDescription(`/path/to/audio/description-${rowIndex}.mp3`);
                                     }
                                 }}
                                 tabIndex={0}

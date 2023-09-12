@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import { cards, streaming, universityApps } from '../database';
 import TvAberta from '../assets/tvAberta.png';
 
+
+import audioFile from "../audios/05.mp3";
+
 export default function DiscoverChannels() {
     const [scanProgress, setScanProgress] = useState(0);
     const [channelsFound, setChannelsFound] = useState([]);
@@ -16,6 +19,14 @@ export default function DiscoverChannels() {
     const [isScanning, setIsScanning] = useState(false);
     const navigate = useNavigate();
     const startRef = React.useRef();
+
+    useEffect(() => {
+        const audio = new Audio(audioFile);
+        audio.play().catch((error) => {
+            console.error("Falha ao tocar áudio:", error);
+        });
+    }, []);
+
 
     useEffect(() => {
         startRef.current.focus();

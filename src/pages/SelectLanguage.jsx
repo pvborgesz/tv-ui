@@ -1,24 +1,45 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
-import Footer from '../components/Footer';
+
 import TitlePage from '../components/TitlePage';
 import IconBordered from "../components/IconBordered";
 
 import AudioDescriacao from "../assets/audioDescricao.jpg";
 import libras from "../assets/libras.png";
+import audioFile from "../audios/01.mp3";
+import audioFile2 from "../audios/02.mp3";
 import { FaHandsAslInterpreting } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { BsArrowRightShort } from "react-icons/bs";
 import '../App.css';
+import ReactAudioPlayer from 'react-audio-player';
 
 export default function SelectLanguage() {
   const selectRef = useRef();
   const advanceButtonRef = useRef();
 
+  useEffect(() => {
+    const audio = new Audio(audioFile);
+    audio.play().catch((error) => {
+      console.error("Falha ao tocar áudio:", error);
+    });
+
+    // play it after 9 seconds
+    const audio2 = new Audio(audioFile2);
+    setTimeout(() => {
+      audio2.play().catch((error) => {
+        console.error("Falha ao tocar áudio:", error);
+      });
+    }, 9000);
+  }, []);
+
+
 
   useEffect(() => {
     // open page with focus in input
+
     selectRef.current.focus();
     const handleKeyDown = (event) => {
       switch (event.code) {
@@ -69,6 +90,11 @@ export default function SelectLanguage() {
 
   return (
     <>
+      <ReactAudioPlayer
+        src="../audios/01.mp3"
+        autoPlay={true}
+        controls={false}
+      />
       <header className="flex flex-col items-left justify-left text-white">
         <TitlePage name="Selecione o idioma" />
       </header>

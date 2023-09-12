@@ -8,6 +8,8 @@ import TitlePage from "../components/TitlePage";
 import { Link } from "react-router-dom";
 import ImageIconRounded from "../components/ImageIconRounded";
 import UserImg from '../assets/user-img.png'
+import audioFile from "../audios/03.mp3";
+
 export default function SelectProfile() {
   const location = useLocation();
   const navigate = useNavigation();
@@ -18,6 +20,14 @@ export default function SelectProfile() {
     "/discoverChannels",
     "/discoverChannels",
   ];
+
+  useEffect(() => {
+    const audio = new Audio(audioFile);
+    audio.play().catch((error) => {
+      console.error("Falha ao tocar áudio:", error);
+    });
+  }, []);
+
 
   useEffect(() => {
 

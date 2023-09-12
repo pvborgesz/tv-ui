@@ -21,6 +21,8 @@ import CC from "../assets/legenda_oculta.svg";
 
 import { BsCheck } from "react-icons/bs";
 
+import audioFile from "../audios/04.mp3";
+
 // import ProfileCard from "../components/ProfileCard";
 
 export default function CreateProfile() {
@@ -34,8 +36,12 @@ export default function CreateProfile() {
   const dezesseisRef = useRef();
   const dezoitoRef = useRef();
 
-
-
+  useEffect(() => {
+    const audio = new Audio(audioFile);
+    audio.play().catch((error) => {
+      console.error("Falha ao tocar áudio:", error);
+    });
+  }, []);
 
   useEffect(() => {
     nameRef.current.focus();

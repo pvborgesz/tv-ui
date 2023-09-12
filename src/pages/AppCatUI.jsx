@@ -4,6 +4,7 @@ import Footer from "../components/FooterAppCatUI";
 import ProfileIcon from "../assets/profile_gray.svg";
 import ChevronDownIcon from "../assets/chevron_down.svg";
 import TitlePage from "../components/TitlePage";
+import ReactAudioPlayer from 'react-audio-player';
 
 export default function AppCatUI() {
   return (
