@@ -12,7 +12,7 @@ export default function AppCatUIProfile() {
       <div className="flex flex-col h-full items-end mt-10 mb-5">
 
         <div className="flex w-full justify-between items-start">
-          <TitlePage name="Seus aplicativos de TV 3.0 aberta" />
+          <TitlePage name="Suas Emissoras de TV 3.0 aberta" />
 
           <div className="flex flex-row items-center justify-right mr-5 mb-5">
             <h3 className="pr-3 text-2xl text-right text-blue-300">Nome do Perfil</h3>

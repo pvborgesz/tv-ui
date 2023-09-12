@@ -75,7 +75,7 @@ export default function TvAberta() {
 
     return (
         <>
-            <h1 className="text-4xl text-white text-center mt-20">Seus aplicativos de TV Aberta</h1>
+            <h1 className="text-4xl text-white text-center mt-20">Suas Emissoras de TV Aberta</h1>
 
             <div className="flex flex-row h-full items-center mt-40">
                 <div className="flex flex-col h-full items-left justify-left text-white flex-grow ml-5 mr-10">

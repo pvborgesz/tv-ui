@@ -86,7 +86,7 @@ export default function DiscoverChannels() {
                 <div className='scan-progress flex flex-row text-white m'
                     style={{ width: `${scanProgress}%` }}>
                 </div>
-                <p className='scan-info text-4xl font-semibold text-white text-center mt-5 mb-5'>Procurando por aplicativos de TV aberta de sua região...</p>
+                <p className='scan-info text-4xl font-semibold text-white text-center mt-5 mb-5'>Procurando por Emissoras de TV aberta de sua região...</p>
 
                 <p className='scan-info text-2xl text-white text-center'>Progresso: {scanProgress}%</p>
                 <p className='scan-info text-2xl text-white text-center mb-5'>Apps de TV Aberta Encontrados: {channelsFound.length + streamingFound.length}</p>
