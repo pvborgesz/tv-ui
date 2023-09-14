@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 // import AppsIcon from "../assets/apps.png";
 import AppsIcon from "../assets/apps-icon.png";
 import TvAberta from "../assets/tvAberta.png";
@@ -17,7 +17,17 @@ import ReactAudioPlayer from 'react-audio-player';
 
 export default function HomePage() {
     const navigate = useNavigate();
+
     const { urlValue, setUrlValue } = useContext(UrlContext);
+    const [currentRecommendations, setCurrentRecommendations] = useState(recommendations);
+
+    const updateRecommendations = (appName) => {
+        const app = streaming.find(a => a.name === appName);
+        if (app && app.relatedRecommendations) {
+            setCurrentRecommendations(app.relatedRecommendations);
+        }
+    };
+
 
     const focusableElements = [useRef([]), useRef([]), useRef([]), useRef([])];
     let currentRowIndex = 0;
@@ -83,11 +93,6 @@ export default function HomePage() {
 
     return (
         <>
-            {/* <ReactAudioPlayer
-                src="my_audio_file.ogg"
-                autoPlay
-                controls
-            /> */}
             <div className="flex justify-end">
                 <div className="flex flex-col w-1/4 justify-center items-end h-full mr-5">
                     <div className="flex flex-row items-center justify-end mt-10 p-10">
@@ -98,7 +103,7 @@ export default function HomePage() {
             </div>
 
             <div className='flex flex-col h-full justify-center items-center'>
-                {[streaming, cards, recommendations].map((row, rowIndex) => (
+                {[streaming, cards, currentRecommendations].map((row, rowIndex) => (
                     <div className="flex flex-row justify-center align-center h-[250px] mt-10 rounded-lg" >
                         <button className="flex flex-col justify-center w-36 mx-3 align items-center mr-10"
                             onClick={
@@ -156,8 +161,12 @@ export default function HomePage() {
                                         } else {
                                             openChannel(card.content, card.icon)
                                         }
-                                    }
-                                    }
+                                    }}
+                                    onFocus={() => {
+                                        if (rowIndex === 0) { // Se for a linha de aplicativos
+                                            updateRecommendations(card.name); // Atualize as recomendações
+                                        }
+                                    }}
                                 >
                                     <div className='focus:border-cyan-200  hover:border-cyan-900  '>
                                         <img
@@ -173,8 +182,7 @@ export default function HomePage() {
                             className="flex flex-col items-center justify-center hover:scale-200 w-[5px] mx-[10px] rounded-lg"
                             onClick={
                                 () => {
-                                    navigate('/tvAberta');
-
+                                    // ... (código existente)
                                 }}
                         >
                             <BsChevronRight className="w-[30px] h-[30px] text-white cursor-pointer" />
@@ -182,8 +190,8 @@ export default function HomePage() {
                     </div>
                 ))}
             </div>
-
             <Footer />
         </>
     );
+
 }

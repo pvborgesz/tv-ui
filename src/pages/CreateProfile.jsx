@@ -41,9 +41,6 @@ export default function CreateProfile() {
     audio.play().catch((error) => {
       console.error("Falha ao tocar áudio:", error);
     });
-  }, []);
-
-  useEffect(() => {
     nameRef.current.focus();
     const handleKeyDown = (event) => {
       switch (event.code) {
@@ -149,11 +146,10 @@ export default function CreateProfile() {
         <TitlePage name="Criando seu Perfil Smart TV" />
         <div className="flex justify-center items-center pt-20 cursor-pointer">
           <img className="w-[100px] h-[59px]" src={PcPhoneIcon} alt="" />
-          <h1 className="text-2xl pl-2">Usar app iController</h1>
+          <h1 className="text-2xl pl-2">Usar Smartphone</h1>
         </div>
       </header>
 
-      {/* div with input for nome and for sobrenome  in row*/}
 
       <div className="flex justify-center items-evenly">
         <div className="w-11/12 px-5 py-5 bg-zinc-800 flex flex-col justify-center text-white ml-2 mt-14 gap-8">
