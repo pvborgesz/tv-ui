@@ -38,33 +38,73 @@ import recommendation5 from './assets/recommendation5.png';
 
 import ufjfVideo from './assets/ufjfVideo1.mp4';
 
+import Group1 from './assets/Group1.png';
+import Group2 from './assets/Group2.png';
+import Group3 from './assets/Group3.png';
+
+import image2 from './assets/image2.png';
+import image3 from './assets/Group1.png';
+import image4 from './assets/image4.png';
+import image5 from './assets/image5.png';
+import image6 from './assets/image6.png';
+import image7 from './assets/image7.png';
+
+import image9 from './assets/image9.png';
+import image10 from './assets/image10.png';
+import image11 from './assets/image11.png';
+import image12 from './assets/image15.png';
+import image13 from './assets/image13.png';
+import image17 from './assets/image17.png';
+import image18 from './assets/image18.png';
+import image19 from './assets/image19.png';
+import image20 from './assets/image20.png';
+
+import hbo from './assets/hbo.png';
+import netflix from './assets/netflix.png';
+import prime from './assets/prime.png';
+import hulu from './assets/hulu.png';
+import TvAbertaIcone from './assets/TV-ABERTA-icone.png';
 export const cards = [
   {
     name: 'UFJF',
-    icon: UFJF,
+    icon: image2,
     content: ufjfVideo,
+    relatedRecommendations: [
+      { name: 'Rec1', icon: image9 },
+      { name: 'Rec2', icon: image7 },
+      { name: 'Rec1', icon: image5 },
+      { name: 'Rec2', icon: image2 },
+      { name: 'Rec1', icon: Group3 },
+    ],
   },
   {
     name: 'UFC',
-    icon: UFC,
+    icon: image3,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+    relatedRecommendations: [
+      { name: 'Rec1', icon: Group1 },
+      { name: 'Rec2', icon: Group2 },
+      { name: 'Rec1', icon: UFPB },
+      { name: 'Rec2', icon: Group3 },
+      { name: 'Rec1', icon: UFMA },
+    ],
   },
   {
     name: 'UFF',
-    icon: UFF,
+    icon: image4,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UFMA',
-    icon: UFMA,
+    icon: image5,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UFPB',
-    icon: UFPB,
+    icon: image6,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
@@ -72,10 +112,36 @@ export const cards = [
 export const streaming = [
   {
     name: 'App1',
-    icon: App1,
+    icon: hbo,
     content:
       'https://www.youtube.com/embed/6jtOBIICfJc?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
     relatedRecommendations: [
+      { name: 'Rec1', icon: image7 },
+      { name: 'Rec2', icon: image9 },
+      { name: 'Rec1', icon: image11 },
+      { name: 'Rec2', icon: image10 },
+      { name: 'Rec1', icon: Group2 },
+    ],
+  },
+  {
+    name: 'TV Aberta',
+    icon: TvAbertaIcone,
+    content:
+      'https://www.youtube.com/embed/K86o2jF2x2I?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+    relatedRecommendations: [
+      { name: 'Rec1', icon: Group1 },
+      { name: 'Rec2', icon: Group2 },
+      { name: 'Rec1', icon: UFPB },
+      { name: 'Rec2', icon: Group3 },
+      { name: 'Rec1', icon: UFMA },
+    ],
+  },
+  {
+    name: 'App2',
+    icon: prime,
+    content:
+      'https://www.youtube.com/embed/K86o2jF2x2I?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+    relatedRecommendations: [
       { name: 'Rec1', icon: UFPB },
       { name: 'Rec2', icon: UFMA },
       { name: 'Rec1', icon: UFPB },
@@ -85,48 +151,20 @@ export const streaming = [
   },
   {
     name: 'TV Aberta',
-    icon: tvAberta,
+    icon: netflix,
     content:
       'https://www.youtube.com/embed/K86o2jF2x2I?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
     relatedRecommendations: [
-      { name: 'Rec1', icon: App5 },
-      { name: 'Rec2', icon: App3 },
       { name: 'Rec1', icon: UFPB },
-      { name: 'Rec2', icon: App2 },
-      { name: 'Rec1', icon: App2 },
-      // ... mais recomendações relacionadas à TV Aberta
+      { name: 'Rec2', icon: UFMA },
+      { name: 'Rec1', icon: UFPB },
+      { name: 'Rec2', icon: UFMA },
+      { name: 'Rec1', icon: UFPB },
     ],
   },
   {
     name: 'App2',
-    icon: App2,
-    content:
-      'https://www.youtube.com/embed/K86o2jF2x2I?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
-    relatedRecommendations: [
-      { name: 'Rec1', icon: UFPB },
-      { name: 'Rec2', icon: UFMA },
-      { name: 'Rec1', icon: UFPB },
-      { name: 'Rec2', icon: UFMA },
-      { name: 'Rec1', icon: UFPB },
-    ],
-  },
-  {
-    name: 'TV Aberta',
-    icon: tvAberta,
-    content:
-      'https://www.youtube.com/embed/K86o2jF2x2I?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
-    relatedRecommendations: [
-      { name: 'Rec1', icon: UFPB },
-      { name: 'Rec2', icon: UFMA },
-      { name: 'Rec1', icon: UFPB },
-      { name: 'Rec2', icon: UFMA },
-      { name: 'Rec1', icon: UFPB },
-      // ... mais recomendações relacionadas à TV Aberta
-    ],
-  },
-  {
-    name: 'App2',
-    icon: App2,
+    icon: hulu,
     content:
       'https://www.youtube.com/embed/K86o2jF2x2I?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
     relatedRecommendations: [
@@ -144,6 +182,7 @@ export const recommendations = [
   {
     name: 'App3',
     icon: App3,
+
     content:
       'https://www.youtube.com/embed/L2XF-cKm8jg?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
@@ -287,108 +326,108 @@ export const appsAppCatUI = [
 export const universityApps = [
   {
     name: 'UFJF',
-    icon: UFJF,
+    icon: Group1,
     content: ufjfVideo,
   },
   {
     name: 'UFC',
-    icon: UFC,
+    icon: Group2,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UFF',
-    icon: UFF,
+    icon: Group3,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UFMA',
-    icon: UFMA,
+    icon: image2,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UFRJ',
-    icon: UFRJ,
+    icon: image3,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UFPB',
-    icon: UFPB,
+    icon: image4,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'ufpe',
-    icon: UFPE,
+    icon: image5,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UFRJ',
-    icon: UFRJ,
+    icon: image6,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UFRN',
-    icon: UFRN,
+    icon: image7,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UNB',
-    icon: UNB,
+    icon: image9,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UNICAMP',
-    icon: UNICAMP,
+    icon: image10,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'USP',
-    icon: USP,
+    icon: image11,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'IME',
-    icon: IME,
+    icon: image12,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'CEFET',
-    icon: CEFET,
+    icon: image13,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UECE',
-    icon: UECE,
+    icon: image20,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UEMA',
-    icon: UEMA,
+    icon: image17,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UFMG',
-    icon: UFMG,
+    icon: image18,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UFPA',
-    icon: UFPA,
+    icon: image19,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },

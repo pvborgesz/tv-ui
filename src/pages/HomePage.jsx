@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useRef, useContext } from 'react';
-// import AppsIcon from "../assets/apps.png";
+
 import AppsIcon from "../assets/apps-icon.png";
 import TvAberta from "../assets/tvAberta.png";
-import AnotherIcon from "../assets/anotherIcon.png";
+import AnotherIcon from "../assets/popular-recommendation.png";
 import ProfileIcon from "../assets/profile.svg";
 import UserImg from "../assets/user-img.png";
 import Footer from '../components/FooterHomePage';
@@ -13,7 +13,8 @@ import { UrlContext } from "../App";
 
 import { cards, streaming, recommendations } from '../database';
 import { BsChevronRight } from 'react-icons/bs';
-import ReactAudioPlayer from 'react-audio-player';
+
+import TvAbertaIcone from '../assets/TV-ABERTA-icone.png';
 
 export default function HomePage() {
     const navigate = useNavigate();
@@ -21,9 +22,13 @@ export default function HomePage() {
     const { urlValue, setUrlValue } = useContext(UrlContext);
     const [currentRecommendations, setCurrentRecommendations] = useState(recommendations);
 
-    const updateRecommendations = (appName) => {
-        const app = streaming.find(a => a.name === appName);
+    const updateRecommendations = (appName, row) => {
+        console.log(appName);
+        let app;
+        if (row === 0) app = streaming.find(a => a.name === appName);
+        else if (row === 1) app = cards.find(a => a.name === appName);
         if (app && app.relatedRecommendations) {
+            console.log(app.relatedRecommendations);
             setCurrentRecommendations(app.relatedRecommendations);
         }
     };
@@ -106,6 +111,7 @@ export default function HomePage() {
                 {[streaming, cards, currentRecommendations].map((row, rowIndex) => (
                     <div className="flex flex-row justify-center align-center h-[250px] mt-10 rounded-lg" >
                         <button className="flex flex-col justify-center w-36 mx-3 align items-center mr-10"
+
                             onClick={
                                 () => {
                                     if (rowIndex === 0) {
@@ -123,9 +129,12 @@ export default function HomePage() {
                                 ref={(el) => {
                                     focusableElements[rowIndex].current[0] = el;
                                     if (el) {
-                                        el.onfocus = () => el.style.transform = "scale(1.1)";
+                                        el.onfocus = () => {
+                                            el.style.transform = "scale(1.1)"
+                                            // Atualize as recomendações
+
+                                        };
                                         el.onblur = () => el.style.transform = "scale(1)";
-                                        playAudioDescription(`/path/to/audio/description-${rowIndex}.mp3`);
                                     }
                                 }}
                                 tabIndex={0}
@@ -152,19 +161,22 @@ export default function HomePage() {
                                         if (el) {
                                             el.onfocus = () => el.style.transform = "scale(1.1)";
                                             el.onblur = () => el.style.transform = "scale(1)";
+
                                         }
+
                                     }}
                                     tabIndex={0}
                                     onClick={() => {
-                                        if (card.icon === TvAberta) {
+                                        if (card.icon === TvAberta || card.icon === TvAbertaIcone) {
                                             navigate('/tvAberta');
                                         } else {
                                             openChannel(card.content, card.icon)
                                         }
                                     }}
                                     onFocus={() => {
-                                        if (rowIndex === 0) { // Se for a linha de aplicativos
-                                            updateRecommendations(card.name); // Atualize as recomendações
+                                        if (rowIndex < 2) { // Para todas as linhas exceto a última
+                                            updateRecommendations(card.name, rowIndex); // Atualize as recomendações
+
                                         }
                                     }}
                                 >
@@ -173,7 +185,11 @@ export default function HomePage() {
                                             className="w-[240px] h-[135px] rounded-lg mx-2  hover:scale-200 transition duration-500 ease-in-out "
                                             src={card.icon}
                                             alt="card icon"
+                                            onFocus={() => {
+                                                updateRecommendations(rowTitles[rowIndex]); // Atualize as recomendações
+                                            }}
                                         />
+
                                     </div>
                                 </button>
                             ))}
@@ -184,6 +200,7 @@ export default function HomePage() {
                                 () => {
                                     // ... (código existente)
                                 }}
+
                         >
                             <BsChevronRight className="w-[30px] h-[30px] text-white cursor-pointer" />
                         </button>
