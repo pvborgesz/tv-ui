@@ -19,20 +19,50 @@ import ReactAudioPlayer from 'react-audio-player';
 export default function SelectLanguage() {
   const selectRef = useRef();
   const advanceButtonRef = useRef();
+  const isPlayed1 = useRef(false);
+  const isPlayed2 = useRef(false);
+
 
   useEffect(() => {
-    const audio = new Audio(audioFile);
-    audio.play().catch((error) => {
-      console.error("Falha ao tocar áudio:", error);
-    });
+    const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
 
-    // play it after 9 seconds
-    const audio2 = new Audio(audioFile2);
-    setTimeout(() => {
-      audio2.play().catch((error) => {
+    if (!hasPlayedAudio) {
+      const audio = new Audio(audioFile);
+      audio.play().catch((error) => {
         console.error("Falha ao tocar áudio:", error);
       });
-    }, 9000);
+      localStorage.setItem('hasPlayedAudio2', 'true');
+    }
+  }, []);
+
+  useEffect(() => {
+    // const audio = new Audio(audioFile);
+
+    // if (isPlayed1.current) {
+    //   return;
+    // } else {
+    //   audio.play().then(() => {
+    //     isPlayed1.current = true;
+    //   }).catch((error) => {
+    //     console.error("Falha ao tocar áudio:", error);
+    //   });
+    // }
+
+    // play it after 9 seconds
+
+    if (isPlayed2.current) {
+      return;
+    } else {
+      isPlayed2.current = true;
+      const audio2 = new Audio(audioFile2);
+      setTimeout(() => {
+        audio2.play().then(() => {
+          isPlayed2.current = true;
+        }).catch((error) => {
+          console.error("Falha ao tocar áudio:", error);
+        });
+      }, 12000);
+    }
   }, []);
 
 

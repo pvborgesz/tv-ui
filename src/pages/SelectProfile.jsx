@@ -10,6 +10,7 @@ import ImageIconRounded from "../components/ImageIconRounded";
 import UserImg from '../assets/user-img.png'
 import audioFile from "../audios/03.mp3";
 
+
 export default function SelectProfile() {
   const location = useLocation();
   const navigate = useNavigation();
@@ -22,10 +23,15 @@ export default function SelectProfile() {
   ];
 
   useEffect(() => {
-    const audio = new Audio(audioFile);
-    audio.play().catch((error) => {
-      console.error("Falha ao tocar áudio:", error);
-    });
+    const hasPlayedAudio = localStorage.getItem('hasPlayedAudio99');
+
+    if (!hasPlayedAudio) {
+      const audio = new Audio(audioFile);
+      audio.play().catch((error) => {
+        console.error("Falha ao tocar áudio:", error);
+      });
+      localStorage.setItem('hasPlayedAudio99', 'true');
+    }
   }, []);
 
 

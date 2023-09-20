@@ -20,13 +20,18 @@ export default function DiscoverChannels() {
     const navigate = useNavigate();
     const startRef = React.useRef();
 
-    useEffect(() => {
-        const audio = new Audio(audioFile);
-        audio.play().catch((error) => {
-            console.error("Falha ao tocar áudio:", error);
-        });
-    }, []);
 
+    useEffect(() => {
+        const hasPlayedAudio = localStorage.getItem('hasPlayedAudi43');
+
+        if (!hasPlayedAudio) {
+            const audio = new Audio(audioFile);
+            audio.play().catch((error) => {
+                console.error("Falha ao tocar áudio:", error);
+            });
+            localStorage.setItem('hasPlayedAudio4', 'true');
+        }
+    }, []);
 
     useEffect(() => {
         startRef.current.focus();

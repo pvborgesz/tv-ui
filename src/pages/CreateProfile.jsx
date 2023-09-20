@@ -36,11 +36,29 @@ export default function CreateProfile() {
   const dezesseisRef = useRef();
   const dezoitoRef = useRef();
 
+
+
   useEffect(() => {
-    const audio = new Audio(audioFile);
-    audio.play().catch((error) => {
-      console.error("Falha ao tocar áudio:", error);
-    });
+    const hasPlayedAudio = localStorage.getItem('hasPlayedAudio3');
+
+    if (!hasPlayedAudio) {
+      const audio = new Audio(audioFile);
+      audio.play().catch((error) => {
+        console.error("Falha ao tocar áudio:", error);
+      });
+      localStorage.setItem('hasPlayedAudio3', 'true');
+    }
+  }, []);
+
+
+  useEffect(() => {
+    // // play once the audio
+    // const audio = new Audio(audioFile);
+    // audio.play().catch((error) => {
+    //   console.error("Falha ao tocar áudio:", error);
+    // });
+
+
     nameRef.current.focus();
     const handleKeyDown = (event) => {
       switch (event.code) {

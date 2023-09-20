@@ -64,6 +64,13 @@ import netflix from './assets/netflix.png';
 import prime from './assets/prime.png';
 import hulu from './assets/hulu.png';
 import TvAbertaIcone from './assets/TV-ABERTA-icone.png';
+import discovery from './assets/discovery.png';
+import firetv from './assets/firetv.png';
+import disney from './assets/disney.png';
+import sho from './assets/sho.png';
+import globoplay from './assets/globoplay.png';
+import nacional from './assets/nacional.png';
+
 export const cards = [
   {
     name: 'UFJF',
@@ -95,18 +102,39 @@ export const cards = [
     icon: image4,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+    relatedRecommendations: [
+      { name: 'Rec1', icon: Group2 },
+      { name: 'Rec2', icon: UFMA },
+      { name: 'Rec1', icon: Group3 },
+      { name: 'Rec2', icon: UFPB },
+      { name: 'Rec1', icon: Group1 },
+    ],
   },
   {
     name: 'UFMA',
     icon: image5,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+    relatedRecommendations: [
+      { name: 'Rec1', icon: image2 },
+      { name: 'Rec2', icon: image4 },
+      { name: 'Rec1', icon: image3 },
+      { name: 'Rec2', icon: image20 },
+      { name: 'Rec1', icon: image5 },
+    ],
   },
   {
     name: 'UFPB',
     icon: image6,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+    relatedRecommendations: [
+      { name: 'Rec1', icon: image9 },
+      { name: 'Rec2', icon: image12 },
+      { name: 'Rec1', icon: image11 },
+      { name: 'Rec2', icon: image13 },
+      { name: 'Rec1', icon: image19 },
+    ],
   },
 ];
 export const streaming = [
@@ -114,13 +142,13 @@ export const streaming = [
     name: 'App1',
     icon: hbo,
     content:
-      'https://www.youtube.com/embed/6jtOBIICfJc?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+      'https://www.youtube.com/embed/F3OxA9Cz17A?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
     relatedRecommendations: [
-      { name: 'Rec1', icon: image7 },
-      { name: 'Rec2', icon: image9 },
-      { name: 'Rec1', icon: image11 },
-      { name: 'Rec2', icon: image10 },
-      { name: 'Rec1', icon: Group2 },
+      { name: 'Rec1', icon: netflix },
+      { name: 'Rec2', icon: disney },
+      { name: 'Rec1', icon: prime },
+      { name: 'Rec2', icon: hulu },
+      { name: 'Rec1', icon: image4 },
     ],
   },
   {
@@ -140,33 +168,33 @@ export const streaming = [
     name: 'App2',
     icon: prime,
     content:
-      'https://www.youtube.com/embed/K86o2jF2x2I?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+      'https://www.youtube.com/embed/FfAueqEab30?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
     relatedRecommendations: [
-      { name: 'Rec1', icon: UFPB },
-      { name: 'Rec2', icon: UFMA },
-      { name: 'Rec1', icon: UFPB },
-      { name: 'Rec2', icon: UFMA },
-      { name: 'Rec1', icon: UFPB },
+      { name: 'Rec1', icon: firetv },
+      { name: 'Rec2', icon: disney },
+      { name: 'Rec1', icon: sho },
+      { name: 'Rec2', icon: discovery },
+      { name: 'Rec1', icon: globoplay },
     ],
   },
   {
     name: 'TV Aberta',
     icon: netflix,
     content:
-      'https://www.youtube.com/embed/K86o2jF2x2I?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+      'https://www.youtube.com/embed/oZn3qSgmLqI?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
     relatedRecommendations: [
-      { name: 'Rec1', icon: UFPB },
-      { name: 'Rec2', icon: UFMA },
-      { name: 'Rec1', icon: UFPB },
-      { name: 'Rec2', icon: UFMA },
-      { name: 'Rec1', icon: UFPB },
+      { name: 'Rec1', icon: discovery },
+      { name: 'Rec2', icon: globoplay },
+      { name: 'Rec1', icon: disney },
+      { name: 'Rec2', icon: sho },
+      { name: 'Rec1', icon: firetv },
     ],
   },
   {
     name: 'App2',
     icon: hulu,
     content:
-      'https://www.youtube.com/embed/K86o2jF2x2I?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
+      'https://www.youtube.com/embed/1iyz4d8WoqQ?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
     relatedRecommendations: [
       { name: 'Rec1', icon: UFPB },
       { name: 'Rec2', icon: UFMA },
@@ -349,7 +377,7 @@ export const universityApps = [
   },
   {
     name: 'UFRJ',
-    icon: image3,
+    icon: nacional,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
@@ -469,30 +497,30 @@ export const recommendationsApps = [
 export const secondCards = [
   {
     name: 'UFJF',
-    icon: UFJF,
+    icon: image2,
     content: ufjfVideo,
   },
   {
     name: 'UFC',
-    icon: UFC,
+    icon: image4,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UFF',
-    icon: UFF,
+    icon: image3,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UFMA',
-    icon: UFMA,
+    icon: image9,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
   {
     name: 'UFPB',
-    icon: UFPB,
+    icon: image20,
     content:
       'https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0',
   },
