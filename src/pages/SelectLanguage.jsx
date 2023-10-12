@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 
 import TitlePage from '../components/TitlePage';
 import IconBordered from "../components/IconBordered";
+
+import { AudiodescContext } from '../App';
 
 import AudioDescriacao from "../assets/audioDescricao.jpg";
 import libras from "../assets/libras.png";
@@ -22,8 +24,12 @@ export default function SelectLanguage() {
   const isPlayed1 = useRef(false);
   const isPlayed2 = useRef(false);
 
+  const {audioContext, setAudioContext, audioRef, setAudio} = useContext(AudiodescContext);
+  const track = useRef(null);
+  const audio = useRef(audioRef);
 
-  useEffect(() => {
+
+  /*useEffect(() => {
     const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
 
     if (!hasPlayedAudio) {
@@ -33,9 +39,9 @@ export default function SelectLanguage() {
       });
       localStorage.setItem('hasPlayedAudio2', 'true');
     }
-  }, []);
+  }, []);*/
 
-  useEffect(() => {
+  /*useEffect(() => {
     // const audio = new Audio(audioFile);
 
     // if (isPlayed1.current) {
@@ -54,7 +60,7 @@ export default function SelectLanguage() {
       return;
     } else {
       isPlayed2.current = true;
-      const audio2 = new Audio(audioFile2);
+      const audio2 = new Audio(audioFile);
       setTimeout(() => {
         audio2.play().then(() => {
           isPlayed2.current = true;
@@ -63,13 +69,13 @@ export default function SelectLanguage() {
         });
       }, 12000);
     }
-  }, []);
+  }, []);*/
 
 
 
   useEffect(() => {
     // open page with focus in input
-
+    pauseAudio()
     selectRef.current.focus();
     const handleKeyDown = (event) => {
       switch (event.code) {
@@ -89,12 +95,16 @@ export default function SelectLanguage() {
           event.preventDefault();
           if (document.activeElement === selectRef.current) {
             advanceButtonRef.current.focus();
+            pauseAudio()
+            playAudio(audioFile)
           }
           break;
         case 'ArrowLeft':
           event.preventDefault();
           if (document.activeElement === advanceButtonRef.current) {
             selectRef.current.focus();
+            pauseAudio()
+            playAudio(audioFile2)
           }
           break;
         case 'Enter':
@@ -116,15 +126,39 @@ export default function SelectLanguage() {
   }, []);
 
 
+  const playAudio = (file) => {
+    console.log("playAudio")
+    // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
 
+    audio.current = new Audio(file);
+    track.current = audioContext.createMediaElementSource(audio.current);
+    console.log(audio.current)
+    track.current.connect(audioContext.destination);
+
+    audio.current.play().catch((error) => {
+      console.error("Falha ao tocar áudio:", error);
+    });
+    // localStorage.setItem('hasPlayedAudio2', 'true');
+  }
+
+  const pauseAudio = () => {
+    // console.log("pauseAudio")
+    // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
+    console.log(audio.current)
+    if (track.current != null){
+      // const audio = track.current.mediaElement;
+      audio.current.pause();
+      // localStorage.setItem('hasPlayedAudio2', 'true');
+    }
+  }
 
   return (
     <>
-      <ReactAudioPlayer
+      {/*<ReactAudioPlayer
         src="../audios/01.mp3"
         autoPlay={true}
         controls={false}
-      />
+      />*/}
       <header className="flex flex-col items-left justify-left text-white">
         <TitlePage name="Selecione o idioma" />
       </header>
@@ -180,14 +214,16 @@ export default function SelectLanguage() {
           <p className="text-4xl mt-1.5">Acessível em Libras</p>
         </div>
 
-        <Link
-          ref={advanceButtonRef}
-          className="flex items-center rounded border border-white p-4 text-4xl hover:bg-emerald-600 focus:bg-emerald-600 transition-all duration-300 gap-2"
-          to={'/selectProfile'}
-        >
-          Avançar
-          <BsArrowRightShort size={30} />
-        </Link>
+        <AudiodescContext.Provider value={{audioContext, setAudioContext}}>
+          <Link
+            ref={advanceButtonRef}
+            className="flex items-center rounded border border-white p-4 text-4xl hover:bg-emerald-600 focus:bg-emerald-600 transition-all duration-300 gap-2"
+            to={'/selectProfile'}
+            >
+            Avançar
+            <BsArrowRightShort size={30} />
+          </Link>
+        </AudiodescContext.Provider>
 
       </footer >
     </>

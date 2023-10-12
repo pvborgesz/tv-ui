@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import { useLocation, useNavigation } from "react-router-dom";
 
 import Footer from "../components/Footer";
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import ImageIconRounded from "../components/ImageIconRounded";
 import UserImg from '../assets/user-img.png'
 import audioFile from "../audios/03.mp3";
+import { AudiodescContext } from "../App";
 
 
 export default function SelectProfile() {
@@ -22,7 +23,16 @@ export default function SelectProfile() {
     "/discoverChannels",
   ];
 
+  const {audioContext, setAudioContext} = useContext(AudiodescContext);
+  const track = useRef(null);
+  const audio = useRef(null);
+
   useEffect(() => {
+    audioContext.close()
+    setAudioContext(new AudioContext())
+    
+    // audioContext = new AudioContext()
+
     const hasPlayedAudio = localStorage.getItem('hasPlayedAudio99');
 
     if (!hasPlayedAudio) {
@@ -53,6 +63,8 @@ export default function SelectProfile() {
           } else {
             linksRef.current[0].focus();
           }
+          pauseAudio()
+          playAudio(audioFile)
           break;
         case "ArrowRight":
           if (linksRef.current[0] === document.activeElement) {
@@ -66,6 +78,8 @@ export default function SelectProfile() {
           } else {
             linksRef.current[0].focus();
           }
+          pauseAudio()
+          playAudio(audioFile)
           break;
         case "ArrowUp":
           linksRef.current[2].focus();
@@ -89,6 +103,32 @@ export default function SelectProfile() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [location, navigate]);
+
+  const playAudio = (file) => {
+    console.log("playAudio")
+    // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
+
+    audio.current = new Audio(file);
+    track.current = audioContext.createMediaElementSource(audio.current);
+    console.log(audio.current)
+    track.current.connect(audioContext.destination);
+
+    audio.current.play().catch((error) => {
+      console.error("Falha ao tocar áudio:", error);
+    });
+    // localStorage.setItem('hasPlayedAudio2', 'true');
+  }
+
+  const pauseAudio = () => {
+    // console.log("pauseAudio")
+    // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
+    console.log(audio.current)
+    if (track.current != null){
+      // const audio = track.current.mediaElement;
+      audio.current.pause();
+      // localStorage.setItem('hasPlayedAudio2', 'true');
+    }
+  }
 
   return (
     <>

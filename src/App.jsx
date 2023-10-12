@@ -10,6 +10,11 @@ export const UrlContext = React.createContext({
   setUrlValue: () => { },
 });
 
+export const AudiodescContext = React.createContext({
+  audioContext: new AudioContext(),
+  setAudioContext: () => {return new AudioContext()},
+})
+
 
 export default function App() {
   const navigate = useNavigate();
@@ -19,7 +24,7 @@ export default function App() {
       // navigate("/radioDifusorSec");
       navigate("/fabricante");
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
