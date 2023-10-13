@@ -1,6 +1,6 @@
 /* eslint-disable no-constant-condition */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import TitlePage from '../components/TitlePage';
 import AppCard from '../components/AppCard';
 import Footer from '../components/FooterDiscoverChannels';
@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { cards, streaming, universityApps } from '../database';
 import TvAberta from '../assets/tvAberta.png';
 
+import { AudiodescContext } from '../App';
 
 import audioFile from "../audios/05.mp3";
 
@@ -20,22 +21,51 @@ export default function DiscoverChannels() {
     const navigate = useNavigate();
     const startRef = React.useRef();
 
+    const {audioContext} = useContext(AudiodescContext);
+    const track = useRef(null);
+    const audio = useRef(null);
+    const audioQueue = [audioFile]
 
-    useEffect(() => {
-        const hasPlayedAudio = localStorage.getItem('hasPlayedAudi43');
+    /*useEffect(() => {
+        const hasPlayedAudio = localStorage.getItem('hasPlayedAudi4');
 
         if (!hasPlayedAudio) {
-            const audio = new Audio(audioFile);
-            audio.play().catch((error) => {
+            playAudio(audioFile)
+            /*audio.current = new Audio(audioFile);
+            audio.current.play().catch((error) => {
                 console.error("Falha ao tocar áudio:", error);
             });
             localStorage.setItem('hasPlayedAudio4', 'true');
         }
-    }, []);
+    }, []);*/
 
     useEffect(() => {
         startRef.current.focus();
-    }, [scanProgress])
+        audioQueue.push(audioFile); // Tem que ser o audio do btn que recebe o foco primeiro na página
+
+        const handleKeyDown = (event) => {
+            switch (event.code) {
+              case 'Escape':
+                pauseAudio()
+                break;
+              default:
+                break;
+            }
+          };
+          window.addEventListener('keydown', handleKeyDown);
+      
+          playAudio(audioQueue[0])
+          audio.current.addEventListener("ended", (e) => {
+            console.log("Cabou o audio")
+            audioQueue.shift()
+            playAudio(audioQueue[0])
+          })
+
+          // Limpando o evento quando o componente é desmontado
+          return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+          };
+    }, [/*scanProgress*/])
 
     const startScan = () => {
         setScanProgress(0);
@@ -75,10 +105,37 @@ export default function DiscoverChannels() {
     const handleButtonClick = async () => {
         if (scanComplete) {
             navigate("/homePage");
+            pauseAudio()
         } else {
             await startScan();
         }
     };
+
+    const playAudio = (file) => {
+        console.log("playAudio")
+        // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
+    
+        audio.current = new Audio(file);
+        track.current = audioContext.createMediaElementSource(audio.current);
+        console.log(audio.current)
+        track.current.connect(audioContext.destination);
+    
+        audio.current.play().catch((error) => {
+          console.error("Falha ao tocar áudio:", error);
+        });
+        // localStorage.setItem('hasPlayedAudio2', 'true');
+      }
+    
+      const pauseAudio = () => {
+        // console.log("pauseAudio")
+        // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
+        console.log(audio.current)
+        if (track.current != null){
+          // const audio = track.current.mediaElement;
+          audio.current.pause();
+          // localStorage.setItem('hasPlayedAudio2', 'true');
+        }
+      }
 
     return (
         <>

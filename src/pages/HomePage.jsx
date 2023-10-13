@@ -16,11 +16,19 @@ import { BsChevronRight } from 'react-icons/bs';
 
 import TvAbertaIcone from '../assets/TV-ABERTA-icone.png';
 
+import { AudiodescContext } from '../App';
+import audioFile from "../audios/04.mp3";
+
 export default function HomePage() {
     const navigate = useNavigate();
 
     const { urlValue, setUrlValue } = useContext(UrlContext);
     const [currentRecommendations, setCurrentRecommendations] = useState(recommendations);
+
+    const {audioContext} = useContext(AudiodescContext);
+    const track = useRef(null);
+    const audio = useRef(null);
+    const audioQueue = [audioFile]
 
     const updateRecommendations = (appName, row) => {
         console.log(appName);
@@ -42,6 +50,7 @@ export default function HomePage() {
         setUrlValue(channelURL);
         localStorage.setItem("urlValue", channelURL);
         localStorage.setItem("icon", channelIcon);
+        pauseAudio()
         navigate("/radioDifusor");
     }
 
@@ -79,19 +88,55 @@ export default function HomePage() {
                         currentElementIndex += 1;
                     }
                     break;
-
+                case 'Escape':
+                    pauseAudio()
+                    break;
                 default:
                     break;
             }
             focusableElements[currentRowIndex].current[currentElementIndex].focus();
+            audioQueue.push(audioFile);
         };
 
         window.addEventListener('keydown', handleKeyDown);
+
+        playAudio(audioQueue[0])
+        audio.current.addEventListener("ended", (e) => {
+          console.log("Cabou o audio")
+          audioQueue.shift()
+          playAudio(audioQueue[0])
+        })
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, []);
+
+    const playAudio = (file) => {
+        // console.log("playAudio")
+        // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
+    
+        audio.current = new Audio(file);
+        track.current = audioContext.createMediaElementSource(audio.current);
+        console.log(audio.current)
+        track.current.connect(audioContext.destination);
+    
+        audio.current.play().catch((error) => {
+          console.error("Falha ao tocar áudio:", error);
+        });
+        // localStorage.setItem('hasPlayedAudio2', 'true');
+      }
+    
+      const pauseAudio = () => {
+        // console.log("pauseAudio")
+        // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
+        console.log(audio.current)
+        if (track.current != null){
+          // const audio = track.current.mediaElement;
+          audio.current.pause();
+          // localStorage.setItem('hasPlayedAudio2', 'true');
+        }
+      }
 
     const rowIcons = [AppsIcon, TvAberta, AnotherIcon];
     const rowTitles = ["Aplicativos", "TV Aberta", "Recomendações"];
@@ -117,6 +162,7 @@ export default function HomePage() {
                                     if (rowIndex === 0) {
                                         // navigate('/aplicativos');
                                     } else if (rowIndex === 1) {
+                                        pauseAudio()
                                         navigate('/tvAberta');
                                     } else {
                                         // navigate('/talvezGoste');
@@ -143,6 +189,7 @@ export default function HomePage() {
                                         if (rowIndex === 0) {
                                             // navigate('/aplicativos');
                                         } else if (rowIndex === 1) {
+                                            pauseAudio()
                                             navigate('/tvAberta');
                                         } else {
                                             // navigate('/talvezGoste');
@@ -168,6 +215,7 @@ export default function HomePage() {
                                     tabIndex={0}
                                     onClick={() => {
                                         if (card.icon === TvAberta || card.icon === TvAbertaIcone) {
+                                            pauseAudio()
                                             navigate('/tvAberta');
                                         } else {
                                             openChannel(card.content, card.icon)

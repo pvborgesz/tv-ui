@@ -8,7 +8,15 @@ import { UrlContext } from "../App";
 
 import { universityApps } from '../database';
 
+import audioFile from "../audios/01.mp3"
+import { AudiodescContext } from '../App';
+
 export default function TvAberta() {
+    const {audioContext} = useContext(AudiodescContext);
+    const track = useRef(null);
+    const audio = useRef(null);
+    const audioQueue = [audioFile]
+
     const rowRefs = [useRef([]), useRef([])];
     const navigate = useNavigate();
     // useContext
@@ -59,19 +67,56 @@ export default function TvAberta() {
                         currentCardIndex += 1;
                     }
                     break;
+                case 'Escape':
+                    pauseAudio()
+                    break;
                 default:
                     break;
             }
 
             rowRefs[currentRowIndex].current[currentCardIndex].focus();
+            audioQueue.push(audioFile);
         };
 
         window.addEventListener('keydown', handleKeyDown);
+
+        playAudio(audioQueue[0])
+        audio.current.addEventListener("ended", (e) => {
+          console.log("Cabou o audio")
+          audioQueue.shift()
+          playAudio(audioQueue[0])
+        })
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, []);
+
+    const playAudio = (file) => {
+      // console.log("playAudio")
+      // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
+    
+      audio.current = new Audio(file);
+      track.current = audioContext.createMediaElementSource(audio.current);
+      console.log(audio.current)
+      track.current.connect(audioContext.destination);
+    
+      audio.current.play().catch((error) => {
+        console.error("Falha ao tocar áudio:", error);
+      });
+      // localStorage.setItem('hasPlayedAudio2', 'true');
+    }
+    
+    const pauseAudio = () => {
+      // console.log("pauseAudio")
+      // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
+      console.log(audio.current)
+      if (track.current != null){
+        // const audio = track.current.mediaElement;
+        audio.current.pause();
+        // localStorage.setItem('hasPlayedAudio2', 'true');
+      }
+    }
 
     return (
         <>

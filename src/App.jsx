@@ -12,7 +12,6 @@ export const UrlContext = React.createContext({
 
 export const AudiodescContext = React.createContext({
   audioContext: new AudioContext(),
-  setAudioContext: () => {return new AudioContext()},
 })
 
 

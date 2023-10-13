@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useContext, useRef } from "react";
+import { AudiodescContext } from "../App";
 import IconBordered from "./IconBordered";
 
 // import { PiSpeakerHighDuotone } from "react-icons/pi";
@@ -10,6 +11,36 @@ import { FaHandsAslInterpreting } from "react-icons/fa6";
 import NextButton from "./NextButton";
 
 export default function Footer({ href }, ref) {
+  const {audioContext} = useContext(AudiodescContext);
+  const track = useRef(null);
+  const audio = useRef(null);
+  
+  const playAudio = (file) => {
+    console.log("playAudio")
+    // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
+
+    audio.current = new Audio(file);
+    track.current = audioContext.createMediaElementSource(audio.current);
+    console.log(audio.current)
+    track.current.connect(audioContext.destination);
+
+    audio.current.play().catch((error) => {
+      console.error("Falha ao tocar áudio:", error);
+    });
+    // localStorage.setItem('hasPlayedAudio2', 'true');
+  }
+
+  const pauseAudio = () => {
+    // console.log("pauseAudio")
+    // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
+    console.log(audio.current)
+    if (track.current != null){
+      // const audio = track.current.mediaElement;
+      audio.current.pause();
+      // localStorage.setItem('hasPlayedAudio2', 'true');
+    }
+  }
+
   return (
     <footer className="flex items-center justify-between text-white mt-auto pl-10 pr-10 pb-10 mb-20 ml-10">
       <div className="font-normal flex gap-5 items-center mb-5">

@@ -24,22 +24,24 @@ export default function SelectLanguage() {
   const isPlayed1 = useRef(false);
   const isPlayed2 = useRef(false);
 
-  const {audioContext, setAudioContext, audioRef, setAudio} = useContext(AudiodescContext);
+  const {audioContext} = useContext(AudiodescContext);
   const track = useRef(null);
-  const audio = useRef(audioRef);
+  const audio = useRef(null);
+  const audioQueue = [audioFile]
 
 
-  /*useEffect(() => {
+  useEffect(() => {
     const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
 
     if (!hasPlayedAudio) {
-      const audio = new Audio(audioFile);
+      playAudio(audioFile)
+      /*const audio = new Audio(audioFile);
       audio.play().catch((error) => {
         console.error("Falha ao tocar áudio:", error);
-      });
+      });*/
       localStorage.setItem('hasPlayedAudio2', 'true');
     }
-  }, []);*/
+  }, []);
 
   /*useEffect(() => {
     // const audio = new Audio(audioFile);
@@ -75,8 +77,10 @@ export default function SelectLanguage() {
 
   useEffect(() => {
     // open page with focus in input
-    pauseAudio()
+    // pauseAudio()
     selectRef.current.focus();
+    audioQueue.push(audioFile2);
+
     const handleKeyDown = (event) => {
       switch (event.code) {
         case 'ArrowUp':
@@ -113,21 +117,35 @@ export default function SelectLanguage() {
             advanceButtonRef.current.click();
           }
           break;
+        case 'Escape':
+          pauseAudio()
+          break;
         default:
           break;
       }
     };
     window.addEventListener('keydown', handleKeyDown);
 
+    /*audioQueue.forEach(element => {
+      playAudio(element)
+    })*/
+    playAudio(audioQueue[0])
+    audio.current.addEventListener("ended", (e) => {
+      console.log("Cabou o audio")
+      audioQueue.shift()
+      playAudio(audioQueue[0])
+    })
+
     // Limpando o evento quando o componente é desmontado
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
+
   }, []);
 
 
   const playAudio = (file) => {
-    console.log("playAudio")
+    // console.log("playAudio")
     // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
 
     audio.current = new Audio(file);
@@ -214,8 +232,9 @@ export default function SelectLanguage() {
           <p className="text-4xl mt-1.5">Acessível em Libras</p>
         </div>
 
-        <AudiodescContext.Provider value={{audioContext, setAudioContext}}>
+        <AudiodescContext.Provider value={AudiodescContext}>
           <Link
+            onClick={pauseAudio}
             ref={advanceButtonRef}
             className="flex items-center rounded border border-white p-4 text-4xl hover:bg-emerald-600 focus:bg-emerald-600 transition-all duration-300 gap-2"
             to={'/selectProfile'}

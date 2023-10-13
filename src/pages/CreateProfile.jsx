@@ -1,9 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Footer from "../components/FooterCreateProfile";
 import TitlePage from "../components/TitlePage";
 
+import IconBordered from "../components/IconBordered";
+import { Link } from "react-router-dom";
+import { AiOutlinePlus } from "react-icons/ai";
+import NextButton from "../components/NextButton";
+import { AiOutlineArrowRight } from "react-icons/ai";
+
 import { useRef } from 'react';
+
+import { AudiodescContext } from '../App';
 
 import ClassLivre from "../assets/indicacao.svg"
 import Class10 from "../assets/indicacao_10.svg"
@@ -36,17 +44,21 @@ export default function CreateProfile() {
   const dezesseisRef = useRef();
   const dezoitoRef = useRef();
 
-
+  const {audioContext} = useContext(AudiodescContext);
+  const track = useRef(null);
+  const audio = useRef(null);
+  const audioQueue = [audioFile]
 
   useEffect(() => {
     const hasPlayedAudio = localStorage.getItem('hasPlayedAudio3');
 
     if (!hasPlayedAudio) {
-      const audio = new Audio(audioFile);
+      playAudio(audioFile)
+      /*const audio = new Audio(audioFile);
       audio.play().catch((error) => {
         console.error("Falha ao tocar áudio:", error);
       });
-      localStorage.setItem('hasPlayedAudio3', 'true');
+      localStorage.setItem('hasPlayedAudio3', 'true');*/
     }
   }, []);
 
@@ -60,6 +72,8 @@ export default function CreateProfile() {
 
 
     nameRef.current.focus();
+    audioQueue.push(audioFile); // Tem que ser o audio do btn que recebe o foco primeiro na página
+
     const handleKeyDown = (event) => {
       switch (event.code) {
         case 'ArrowUp':
@@ -132,6 +146,9 @@ export default function CreateProfile() {
           event.preventDefault();
 
           break;
+          case 'Escape':
+            pauseAudio()
+            break;
         default:
           break;
       }
@@ -139,6 +156,13 @@ export default function CreateProfile() {
     };
 
     window.addEventListener('keydown', handleKeyDown);
+
+    playAudio(audioQueue[0])
+    audio.current.addEventListener("ended", (e) => {
+      console.log("Cabou o audio")
+      audioQueue.shift()
+      playAudio(audioQueue[0])
+    })
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
@@ -155,6 +179,32 @@ export default function CreateProfile() {
       e.className = "hidden absolute top-[-1.3rem] left-[-1rem] items-center"
     } else if (classe == "hidden absolute top-[-1.3rem] left-[-1rem] items-center") {
       e.className = "flex absolute top-[-1.3rem] left-[-1rem] items-center"
+    }
+  }
+
+  const playAudio = (file) => {
+    console.log("playAudio")
+    // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
+
+    audio.current = new Audio(file);
+    track.current = audioContext.createMediaElementSource(audio.current);
+    console.log(audio.current)
+    track.current.connect(audioContext.destination);
+
+    audio.current.play().catch((error) => {
+      console.error("Falha ao tocar áudio:", error);
+    });
+    // localStorage.setItem('hasPlayedAudio2', 'true');
+  }
+
+  const pauseAudio = () => {
+    // console.log("pauseAudio")
+    // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
+    console.log(audio.current)
+    if (track.current != null){
+      // const audio = track.current.mediaElement;
+      audio.current.pause();
+      // localStorage.setItem('hasPlayedAudio2', 'true');
     }
   }
 
@@ -330,7 +380,36 @@ export default function CreateProfile() {
 
       </div>
 
-      <Footer />
+      {/*<Footer onClick={pauseAudio}/>*/}
+      <footer className="flex items-center justify-end text-white mb-5 mt-auto pl-3 pr-10 pb-10">
+      <div className="font-normal flex justify-end items-center w-full mt-5">
+
+        <div className="w-full bg-zinc-800 flex flex-row items-left justify-left text-white flex-grow mr-10">
+          <input className="ml-5" type="checkbox" />
+          <h1 className="text-2xl font-normal  ml-10 mr-5">
+            Concordo com a coleta e processamento de meus dados para uma melhor experiência, em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD). <a className="text-slate-400" href="#">Saiba mais.</a>
+          </h1>
+        </div>
+
+        <Link onClick={pauseAudio} to="/createProfile">
+          <div className="flex font-normal gap-3 items-center">
+            <p className="text-2xl mt-1.5 w-24 text-center">Criar Outro</p>
+            <IconBordered>
+              <AiOutlinePlus size={40} />
+            </IconBordered>
+          </div>
+        </Link>
+
+        <Link onClick={pauseAudio} to="/discoverChannels">
+          <div className="flex font-normal gap-3 items-center pl-5">
+            <p className="text-2xl mt-1.5 w-24 text-center">Avançar</p>
+            <IconBordered>
+              <AiOutlineArrowRight size={40} />
+            </IconBordered>
+          </div>
+        </Link>
+      </div>
+    </footer>
     </>
   );
 }

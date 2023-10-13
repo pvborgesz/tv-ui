@@ -23,23 +23,23 @@ export default function SelectProfile() {
     "/discoverChannels",
   ];
 
-  const {audioContext, setAudioContext} = useContext(AudiodescContext);
+  const {audioContext} = useContext(AudiodescContext);
   const track = useRef(null);
   const audio = useRef(null);
+  const audioQueue = [audioFile]
 
   useEffect(() => {
-    audioContext.close()
-    setAudioContext(new AudioContext())
-    
+    // pauseAudio()
     // audioContext = new AudioContext()
 
     const hasPlayedAudio = localStorage.getItem('hasPlayedAudio99');
 
     if (!hasPlayedAudio) {
-      const audio = new Audio(audioFile);
+      playAudio(audioFile)
+      /*const audio = new Audio(audioFile);
       audio.play().catch((error) => {
         console.error("Falha ao tocar áudio:", error);
-      });
+      });*/
       localStorage.setItem('hasPlayedAudio99', 'true');
     }
   }, []);
@@ -48,6 +48,7 @@ export default function SelectProfile() {
   useEffect(() => {
 
     linksRef.current[0].focus();
+    audioQueue.push(audioFile); // Tem que ser o audio do btn que recebe o foco primeiro na página
 
     const handleKeyDown = (event) => {
       switch (event.key) {
@@ -93,6 +94,7 @@ export default function SelectProfile() {
           break;
         case 'Escape':
           event.preventDefault();
+          pauseAudio()
           navigate(-1)
           break;
         default:
@@ -101,6 +103,14 @@ export default function SelectProfile() {
     };
 
     window.addEventListener('keydown', handleKeyDown);
+
+    playAudio(audioQueue[0])
+    audio.current.addEventListener("ended", (e) => {
+      console.log("Cabou o audio")
+      audioQueue.shift()
+      playAudio(audioQueue[0])
+    })
+
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [location, navigate]);
 
@@ -142,6 +152,7 @@ export default function SelectProfile() {
           className="flex flex-col items-center gap-10 cursor-pointer p-14 hover:bg-zinc-700 hover:scale-105 rounded-xl border-2 h-[370px] justify-center transition-all duration-400 focus:border-[10px]"
           to={"/discoverChannels"}
           ref={(el) => linksRef.current[0] = el}
+          onClick={pauseAudio}
         >
           <div className="flex flex-col items-center justify-center  cursor-pointer  rounded-sm w-[360px]">
             <ImageIconRounded icon={UserImg} />
@@ -153,6 +164,7 @@ export default function SelectProfile() {
           className="flex flex-col items-center gap-10 cursor-pointer p-14 hover:bg-zinc-700 hover:scale-105 rounded-xl border-2 h-[370px] justify-center transition-all duration-400 focus:border-[10px]"
           to={"/createProfile"}
           ref={(el) => linksRef.current[1] = el}
+          onClick={pauseAudio}
         >
           <div className="flex flex-col items-center justify-center  cursor-pointer  rounded-sm w-[360px]">
             <ImageIconRounded icon={"https://d2gg9evh47fn9z.cloudfront.net/1600px_COLOURBOX5697474.jpg"} />
