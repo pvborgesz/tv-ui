@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useRef, useContext } from 'react';
+import React, { useEffect, useRef, useContext, useState } from 'react';
 
 import TitlePage from '../components/TitlePage';
 import IconBordered from "../components/IconBordered";
@@ -12,23 +12,39 @@ import { AudiodescFlag } from '../App';
 import AudioDescriacao from "../assets/audioDescricao.jpg";
 import libras from "../assets/libras.png";
 import audioFile from "../audios/01.mp3";
-import audioFile2 from "../audios/02.mp3";
+import audioFile2 from "../audios/SelecioneIdiomaTitulo.wav";
+import audioFile3 from "../audios/PortuguesBotao.mp3";
+import audioFile4 from "../audios/AvancarBotao.mp3";
+import audioFile5 from "../audios/AudiodescricaoBotao.mp3";
 import { FaHandsAslInterpreting } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { BsArrowRightShort } from "react-icons/bs";
 import '../App.css';
 import ReactAudioPlayer from 'react-audio-player';
+import { useGlobalAudioPlayer, useAudioPlayer } from 'react-use-audio-player';
 
 export default function SelectLanguage() {
   const selectRef = useRef();
   const advanceButtonRef = useRef();
+  const audiodescRef = useRef();
+  const signRef = useRef();
   const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag);
-
+  
   const {audioContext} = useContext(AudiodescContext);
   const track = useRef(null);
   const audio = useRef(null);
-  const audioQueue = [audioFile]
 
+  const { load, pause } = useAudioPlayer();
+
+  const [queueIndex, setQueueIndex] = useState(0)
+  const audiosObj = {
+    "advanceRef": [audioFile4],
+    "selectRef": [audioFile3]
+  }
+  
+  const focusedElementRef = useRef('selectRef')
+  const selectedIndexRef = useRef(0)
+  const audioQueue = [audioFile, audioFile2, ...audiosObj[focusedElementRef.current]]
 
   /*useEffect(() => {
     const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
@@ -43,43 +59,13 @@ export default function SelectLanguage() {
     }
   }, []);*/
 
-  /*useEffect(() => {
-    // const audio = new Audio(audioFile);
-
-    // if (isPlayed1.current) {
-    //   return;
-    // } else {
-    //   audio.play().then(() => {
-    //     isPlayed1.current = true;
-    //   }).catch((error) => {
-    //     console.error("Falha ao tocar áudio:", error);
-    //   });
-    // }
-
-    // play it after 9 seconds
-
-    if (isPlayed2.current) {
-      return;
-    } else {
-      isPlayed2.current = true;
-      const audio2 = new Audio(audioFile);
-      setTimeout(() => {
-        audio2.play().then(() => {
-          isPlayed2.current = true;
-        }).catch((error) => {
-          console.error("Falha ao tocar áudio:", error);
-        });
-      }, 12000);
-    }
-  }, []);*/
-
-
-
   useEffect(() => {
     // open page with focus in input
     // pauseAudio()
-    selectRef.current.focus();
-    audioQueue.push(audioFile2);
+    // selectRef.current.focus();
+    document.getElementById(focusedElementRef.current).focus()
+
+    // audioQueue.push([...audioQueue, ...audiosObj[focusedElementRef.current]])
 
     const handleKeyDown = (event) => {
       switch (event.code) {
@@ -87,6 +73,13 @@ export default function SelectLanguage() {
           event.preventDefault();
           if (selectRef.current.selectedIndex > 0) {
             selectRef.current.selectedIndex -= 1;
+          }
+          else if (document.activeElement === audiodescRef.current) {
+            selectRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              playAudio(audioFile2)
+            }
           }
           break;
         case 'ArrowDown':
@@ -100,8 +93,10 @@ export default function SelectLanguage() {
           if (document.activeElement === selectRef.current) {
             advanceButtonRef.current.focus();
             if(flagAudiodesc) {
-              pauseAudio()
-              playAudio(audioFile)
+              pause()
+              load(audioFile4, {
+                autoplay: true
+              })
             }
           }
           break;
@@ -110,8 +105,19 @@ export default function SelectLanguage() {
           if (document.activeElement === advanceButtonRef.current) {
             selectRef.current.focus();
             if(flagAudiodesc) {
-              pauseAudio()
-              playAudio(audioFile2)
+              pause()
+              load(audioFile2, {
+                autoplay: true
+              })
+            }
+          }
+          else if (document.activeElement === selectRef.current) {
+            audiodescRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile5, {
+                autoplay: true
+              })
             }
           }
           break;
@@ -122,41 +128,45 @@ export default function SelectLanguage() {
           }
           break;
         case 'Escape':
-          pauseAudio()
+          pause()
           break;
         case 'F2':
+          focusedElementRef.current = document.activeElement.id
+          selectedIndexRef.current = selectRef.current.selectedIndex
+
           if (flagAudiodesc) {
-            pauseAudio()
+            pause()
             setFlagAudiodesc(false)
+            setQueueIndex(0)
           }
           else setFlagAudiodesc(true)
           break;
         case 'Digit0':
-          pauseAudio()
+          pause()
           navigate('/homePage');
           break;
         case 'Digit1':
-          pauseAudio()
+          pause()
           navigate('/radioDifusorSec');
           break;
         case 'Digit2':
-          pauseAudio()
+          pause()
           navigate('/radioDifusorSecL2');
           break;
         case 'ContextMenu':
-          pauseAudio()
+          pause()
           navigate(-1);
           break;
         case 'KeyA':
-          pauseAudio()
+          pause()
           navigate('/tvAberta');
           break;
         case 'KeyV':
-          pauseAudio()
+          pause()
           window.location.reload();
           break;
         case 'Digit7':
-          pauseAudio()
+          pause()
           window.location.reload();
           break;
         default:
@@ -168,14 +178,14 @@ export default function SelectLanguage() {
     /*audioQueue.forEach(element => {
       playAudio(element)
     })*/
-    if(flagAudiodesc) {
+    /*if(flagAudiodesc) {
       playAudio(audioQueue[0])
       audio.current.addEventListener("ended", (e) => {
         console.log("Cabou o audio")
         audioQueue.shift()
         playAudio(audioQueue[0])
       })
-    }
+    }*/
 
     // Limpando o evento quando o componente é desmontado
     return () => {
@@ -184,6 +194,19 @@ export default function SelectLanguage() {
 
   }, [flagAudiodesc]);
 
+  useEffect(() => {
+    console.log(queueIndex)
+    if(flagAudiodesc && queueIndex < audioQueue.length){
+
+      load(audioQueue[queueIndex], {
+        autoplay: true,
+        onend: () => {
+          setQueueIndex(index => {return queueIndex + 1})
+        }
+      });
+    }
+      
+  }, [queueIndex, load, flagAudiodesc])
 
   const playAudio = (file) => {
     // console.log("playAudio")
@@ -225,7 +248,7 @@ export default function SelectLanguage() {
       <div className="bg-zinc-800 p-4 rounded flex flex-col items-left justify-left text-white flex-grow my-10 mx-10 gap-8 mr-10 overflow-hidden">
         <h2 className="text-zinc- text-5xl font-semibold">Idiomas</h2>
 
-        <select tabIndex={0} ref={selectRef} className="text-4xl font-normal text-black border-2 border-white rounded-md p-4 overflow-y-scroll">
+        <select id="selectRef" tabIndex={selectedIndexRef} ref={selectRef} className="text-4xl font-normal text-black border-2 border-white rounded-md p-4 overflow-y-scroll">
           <option value="">Português</option>
           <option value="">Inglês</option>
           <option value="">Espanhol</option>
@@ -264,17 +287,18 @@ export default function SelectLanguage() {
             <img src={AudioDescriacao} className="w-[85px]" />
           </IconBordered>
 
-          <p className="text-4xl mt-1.5">Audiodescrição</p>
+          <p ref={audiodescRef} className="text-4xl mt-1.5 focus:border-white-400">Audiodescrição</p>
 
           <IconBordered>
             {/* <FaHandsAslInterpreting size={40} /> */}
             <img src={libras} className="w-[85px]" />
           </IconBordered>
-          <p className="text-4xl mt-1.5">Acessível em Libras</p>
+          <p ref={signRef} className="text-4xl mt-1.5">Acessível em Libras</p>
         </div>
 
         <AudiodescFlag.Provider value={[flagAudiodesc, setFlagAudiodesc]}>
           <Link
+            id="advanceRef"
             onClick={pauseAudio}
             ref={advanceButtonRef}
             className="flex items-center rounded border border-white p-4 text-4xl hover:bg-emerald-600 focus:bg-emerald-600 transition-all duration-300 gap-2"

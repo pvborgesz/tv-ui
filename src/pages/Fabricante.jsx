@@ -2,16 +2,20 @@
 import React, { useEffect, useRef, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { AudiodescContext } from '../App';
+// import { AudiodescContext } from '../App';
 // import { AudiodescFlag } from '../App';
 import audioFile from '../audios/fabricante.mp3'
+
+import { useAudioPlayer } from 'react-use-audio-player';
 
 export default function Fabricante() {
     const navigate = useNavigate();
 
-    const {audioContext} = useContext(AudiodescContext);
+    /*const {audioContext} = useContext(AudiodescContext);
     const track = useRef(null);
-    const audio = useRef(null);
+    const audio = useRef(null);*/
+
+    const { load } = useAudioPlayer()
 
     // const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag)
 
@@ -28,16 +32,18 @@ export default function Fabricante() {
 
     useEffect(() => {
         // if (flagAudiodesc) {
-            playAudio(audioFile)
+            load(audioFile, {
+              autoplay: true
+            })
         // }
 
         setTimeout(() => {
-            pauseAudio()
+            // pauseAudio()
             navigate("/selectLanguage");
         }, 6000);
     }, []);
 
-    const playAudio = (file) => {
+    /*const playAudio = (file) => {
       // console.log("playAudio")
       // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
     
@@ -50,9 +56,9 @@ export default function Fabricante() {
         console.error("Falha ao tocar áudio:", error);
       });
       // localStorage.setItem('hasPlayedAudio2', 'true');
-    }
+    }*/
     
-    const pauseAudio = () => {
+    /*const pauseAudio = () => {
       // console.log("pauseAudio")
       // const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
       console.log(audio.current)
@@ -61,7 +67,7 @@ export default function Fabricante() {
         audio.current.pause();
         // localStorage.setItem('hasPlayedAudio2', 'true');
       }
-    }
+    }*/
 
     return (
         <>

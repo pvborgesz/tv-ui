@@ -54,6 +54,7 @@ export default function CreateProfile() {
   const dezoitoRef = useRef();
 
   const focusedElementRef = useRef('nameRef');
+  const selectedIndexRef = useRef(0)
 
   const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag);
   const navigate = useNavigate()
@@ -122,7 +123,8 @@ export default function CreateProfile() {
           break;
         case 'F2':
           focusedElementRef.current = document.activeElement.id
-          console.log(focusedElementRef.current)
+          selectedIndexRef.current = document.getElementById("languageRef").tabIndex
+
           if (flagAudiodesc) {
             pauseAudio()
             setFlagAudiodesc(false)
@@ -392,7 +394,7 @@ export default function CreateProfile() {
           <div className="flex items-center">
             <h3 className="text-3xl pr-5">Idioma Selecionado</h3>
 
-            <select id="languageRef" tabIndex={0} ref={languageRef} placeholder="Selecione um Idioma" className="text-lg font-normal text-black border-2 border-white rounded-md p-4 overflow-y-scroll">
+            <select id="languageRef" tabIndex={selectedIndexRef.current} ref={languageRef} placeholder="Selecione um Idioma" className="text-lg font-normal text-black border-2 border-white rounded-md p-4 overflow-y-scroll">
               <option value="">Português</option>
               <option value="">Inglês</option>
               <option value="">Espanhol</option>

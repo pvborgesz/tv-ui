@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useRef, useEffect, useContext } from "react";
+import React, { useRef, useEffect, useContext, useState } from "react";
 import { useLocation, useNavigation } from "react-router-dom";
 
 import Footer from "../components/Footer";
@@ -8,11 +8,14 @@ import TitlePage from "../components/TitlePage";
 import { Link } from "react-router-dom";
 import ImageIconRounded from "../components/ImageIconRounded";
 import UserImg from '../assets/user-img.png'
-import audioFile from "../audios/03.mp3";
+import audioFile from "../audios/ConfPerfilTitulo.mp3";
+import audioFile2 from "../audios/ContSemPerfil.mp3";
+import audioFile3 from "../audios/ContSemPerfil.mp3";
 
 import { AudiodescContext } from "../App";
 import { AudiodescFlag } from "../App";
 
+import { useAudioPlayer } from "react-use-audio-player";
 
 export default function SelectProfile() {
   const location = useLocation();
@@ -28,12 +31,24 @@ export default function SelectProfile() {
   const {audioContext} = useContext(AudiodescContext);
   const track = useRef(null);
   const audio = useRef(null);
-  const audioQueue = [audioFile]
+  
+  const [queueIndex, setQueueIndex] = useState(0)
+  const audiosObj = {
+    "linksRef0": [audioFile2],
+    "linksRef1": [audioFile3]
+  }
+
+  const focusedElementRef = useRef('linksRef0');
+  const audioQueue = [audioFile, ...audiosObj[focusedElementRef.current]]
+
+  const { load, pause } = useAudioPlayer()
+
 
   const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag);
 
   /*useEffect(() => {
     // pauseAudio()
+    pause()
     // audioContext = new AudioContext()
 
     const hasPlayedAudio = localStorage.getItem('hasPlayedAudio99');
@@ -51,15 +66,21 @@ export default function SelectProfile() {
 
   useEffect(() => {
 
-    linksRef.current[0].focus();
+    // linksRef.current[0].focus();
+    console.log(audioQueue)
+
+    document.getElementById(focusedElementRef.current).focus()
     audioQueue.push(audioFile); // Tem que ser o audio do btn que recebe o foco primeiro na página
 
     const handleKeyDown = (event) => {
       switch (event.key) {
         case 'F2':
+          focusedElementRef.current = document.activeElement.id
+
           if (flagAudiodesc) {
-            pauseAudio()
+            pause()
             setFlagAudiodesc(false)
+            setQueueIndex(0)
           }
           else setFlagAudiodesc(true)
           break;
@@ -76,8 +97,10 @@ export default function SelectProfile() {
             linksRef.current[0].focus();
           }
           if(flagAudiodesc) {
-            pauseAudio()
-            playAudio(audioFile)
+            pause()
+            load(audioFile2, {
+              autoplay: true
+            })
           }
           break;
         case "ArrowRight":
@@ -93,8 +116,10 @@ export default function SelectProfile() {
             linksRef.current[0].focus();
           }
           if(flagAudiodesc) {
-            pauseAudio()
-            playAudio(audioFile)
+            pause()
+            load(audioFile3, {
+              autoplay: true
+            })
           }
           break;
         case "ArrowUp":
@@ -109,7 +134,7 @@ export default function SelectProfile() {
           break;
         case 'Escape':
           event.preventDefault();
-          pauseAudio()
+          pause()
           navigate(-1)
           break;
         default:
@@ -119,17 +144,22 @@ export default function SelectProfile() {
 
     window.addEventListener('keydown', handleKeyDown);
 
-    if(flagAudiodesc) {
-      playAudio(audioQueue[0])
-      audio.current.addEventListener("ended", (e) => {
-        console.log("Cabou o audio")
-        audioQueue.shift()
-        playAudio(audioQueue[0])
-      })
-    }
-
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [location, navigate, flagAudiodesc]);
+
+  useEffect(() => {
+    console.log(queueIndex)
+    if(flagAudiodesc && queueIndex < audioQueue.length){
+
+      load(audioQueue[queueIndex], {
+        autoplay: true,
+        onend: () => {
+          setQueueIndex(index => {return queueIndex + 1})
+        }
+      });
+    }
+      
+  }, [queueIndex, load, flagAudiodesc])
 
   const playAudio = (file) => {
     console.log("playAudio")
@@ -164,25 +194,28 @@ export default function SelectProfile() {
       </header>
 
       <div className="p-4 rounded flex items-center justify-center text-white flex-grow my-10 mx-10 gap-8 mr-10 overflow-hidden">
-
-        <Link
-          className="flex flex-col items-center gap-10 cursor-pointer p-14 hover:bg-zinc-700 hover:scale-105 rounded-xl border-2 h-[370px] justify-center transition-all duration-400 focus:border-[10px]"
-          to={"/discoverChannels"}
-          ref={(el) => linksRef.current[0] = el}
-          onClick={pauseAudio}
-        >
-          <div className="flex flex-col items-center justify-center  cursor-pointer  rounded-sm w-[360px]">
-            <ImageIconRounded icon={UserImg} />
-            <h4 className="text-2xl pt-10 font-normal mb-1.5">Continuar sem criar Perfil</h4>
-          </div>
-        </Link>
+        <AudiodescFlag.Provider value={[flagAudiodesc, setFlagAudiodesc]}>
+          <Link
+            id="linksRef0"
+            className="flex flex-col items-center gap-10 cursor-pointer p-14 hover:bg-zinc-700 hover:scale-105 rounded-xl border-2 h-[370px] justify-center transition-all duration-400 focus:border-[10px]"
+            to={"/discoverChannels"}
+            ref={(el) => linksRef.current[0] = el}
+            onClick={pause}
+          >
+            <div className="flex flex-col items-center justify-center  cursor-pointer  rounded-sm w-[360px]">
+              <ImageIconRounded icon={UserImg} />
+              <h4 className="text-2xl pt-10 font-normal mb-1.5">Continuar sem criar Perfil</h4>
+            </div>
+          </Link>
+        </AudiodescFlag.Provider>
 
         <AudiodescFlag.Provider value={[flagAudiodesc, setFlagAudiodesc]}>
           <Link
+            id="linksRef1"
             className="flex flex-col items-center gap-10 cursor-pointer p-14 hover:bg-zinc-700 hover:scale-105 rounded-xl border-2 h-[370px] justify-center transition-all duration-400 focus:border-[10px]"
             to={"/createProfile"}
             ref={(el) => linksRef.current[1] = el}
-            onClick={pauseAudio}
+            onClick={pause}
           >
             <div className="flex flex-col items-center justify-center  cursor-pointer  rounded-sm w-[360px]">
               <ImageIconRounded icon={"https://d2gg9evh47fn9z.cloudfront.net/1600px_COLOURBOX5697474.jpg"} />
