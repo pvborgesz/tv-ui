@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { AudiodescContext } from '../App';
+// import { AudiodescFlag } from '../App';
 import audioFile from '../audios/fabricante.mp3'
 
 export default function Fabricante() {
@@ -12,8 +13,23 @@ export default function Fabricante() {
     const track = useRef(null);
     const audio = useRef(null);
 
+    // const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag)
+
     useEffect(() => {
-        playAudio(audioFile)
+        const handleKeyDown = (event) => {
+            console.log(event.code)
+            switch (event.code) {
+              default:
+                break;
+            }
+          };
+          window.addEventListener('keydown', handleKeyDown);
+    }, [])
+
+    useEffect(() => {
+        // if (flagAudiodesc) {
+            playAudio(audioFile)
+        // }
 
         setTimeout(() => {
             pauseAudio()

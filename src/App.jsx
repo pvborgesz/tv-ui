@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 
 import { Outlet, useNavigate } from "react-router";
 
@@ -14,9 +14,12 @@ export const AudiodescContext = React.createContext({
   audioContext: new AudioContext(),
 })
 
+export const AudiodescFlag = React.createContext()
 
 export default function App() {
   const navigate = useNavigate();
+
+  const [flagAudiodesc, setFlagAudiodesc] = useState(true);
 
   useEffect(() => {
     if (navigate) {
@@ -68,6 +71,11 @@ export default function App() {
           // reload
           window.location.reload();
           break;
+        /*case 'F2':
+          if (flagAudiodesc) {
+            setFlagAudiodesc(false)
+          } else setFlagAudiodesc(true)
+          break;*/
         default:
           break;
       }
@@ -84,7 +92,9 @@ export default function App() {
     <UrlContext.Provider value={{ urlValue: "", setUrlValue: () => { } }}>
       <main className="bg-zinc-900 flex flex-col w-100 h-full min-h-screen">
         <div className="bg-zinc-900 flex flex-col justify-center w-100 h-1 min-h-screen overflow-hidden">
-          <Outlet />
+          <AudiodescFlag.Provider value={[flagAudiodesc, setFlagAudiodesc]}>
+            <Outlet />
+          </AudiodescFlag.Provider>
         </div>
       </main>
     </UrlContext.Provider>

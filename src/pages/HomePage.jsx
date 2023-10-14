@@ -17,6 +17,7 @@ import { BsChevronRight } from 'react-icons/bs';
 import TvAbertaIcone from '../assets/TV-ABERTA-icone.png';
 
 import { AudiodescContext } from '../App';
+import { AudiodescFlag } from '../App';
 import audioFile from "../audios/04.mp3";
 
 export default function HomePage() {
@@ -25,10 +26,15 @@ export default function HomePage() {
     const { urlValue, setUrlValue } = useContext(UrlContext);
     const [currentRecommendations, setCurrentRecommendations] = useState(recommendations);
 
+    const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag);
+
     const {audioContext} = useContext(AudiodescContext);
     const track = useRef(null);
     const audio = useRef(null);
     const audioQueue = [audioFile]
+
+    const currentRowIndexRef = useRef(0)
+    const currentElementIndexRef = useRef(0)
 
     const updateRecommendations = (appName, row) => {
         console.log(appName);
@@ -43,8 +49,8 @@ export default function HomePage() {
 
 
     const focusableElements = [useRef([]), useRef([]), useRef([]), useRef([])];
-    let currentRowIndex = 0;
-    let currentElementIndex = 0;
+    let currentRowIndex = currentRowIndexRef.current;
+    let currentElementIndex = currentElementIndexRef.current;
 
     const openChannel = (channelURL, channelIcon) => {
         setUrlValue(channelURL);
@@ -62,11 +68,53 @@ export default function HomePage() {
     useEffect(() => {
         const handleKeyDown = (event) => {
             switch (event.code) {
+                case 'Digit0':
+                  pauseAudio()
+                  navigate('/homePage');
+                  break;
+                case 'Digit1':
+                  pauseAudio()
+                  navigate('/radioDifusorSec');
+                  break;
+                case 'Digit2':
+                  pauseAudio()
+                  navigate('/radioDifusorSecL2');
+                  break;
+                case 'ContextMenu':
+                  pauseAudio()
+                  navigate(-1);
+                  break;
+                case 'KeyA':
+                  pauseAudio()
+                  navigate('/tvAberta');
+                  break;
+                case 'KeyV':
+                  pauseAudio()
+                  window.location.reload();
+                  break;
+                case 'Digit7':
+                  pauseAudio()
+                  window.location.reload();
+                  break;
+                case 'F2':
+                  if (flagAudiodesc) {
+                    pauseAudio()
+                    setFlagAudiodesc(false)
+                  }
+                  else setFlagAudiodesc(true)
+
+                  currentRowIndexRef.current = currentRowIndex
+                  currentElementIndexRef.current = currentElementIndex
+                  break;
                 case 'ArrowUp':
                     event.preventDefault();
                     if (currentRowIndex > 0) {
                         currentRowIndex -= 1;
                         currentElementIndex = 0;
+                    }
+                    if (flagAudiodesc) {
+                        pauseAudio()
+                        playAudio(audioFile)
                     }
                     break;
                 case 'ArrowDown':
@@ -75,17 +123,29 @@ export default function HomePage() {
                         currentRowIndex += 1;
                         currentElementIndex = 0;
                     }
+                    if (flagAudiodesc) {
+                        pauseAudio()
+                        playAudio(audioFile)
+                    }
                     break;
                 case 'ArrowLeft':
                     event.preventDefault();
                     if (currentElementIndex > 0) {
                         currentElementIndex -= 1;
                     }
+                    if (flagAudiodesc) {
+                        pauseAudio()
+                        playAudio(audioFile)
+                    }
                     break;
                 case 'ArrowRight':
                     event.preventDefault();
                     if (currentElementIndex < focusableElements[currentRowIndex].current.length - 1) {
                         currentElementIndex += 1;
+                    }
+                    if (flagAudiodesc) {
+                        pauseAudio()
+                        playAudio(audioFile)
                     }
                     break;
                 case 'Escape':
@@ -100,17 +160,19 @@ export default function HomePage() {
 
         window.addEventListener('keydown', handleKeyDown);
 
-        playAudio(audioQueue[0])
-        audio.current.addEventListener("ended", (e) => {
-          console.log("Cabou o audio")
-          audioQueue.shift()
-          playAudio(audioQueue[0])
-        })
+        if (flagAudiodesc) {
+            playAudio(audioQueue[0])
+            audio.current.addEventListener("ended", (e) => {
+                console.log("Cabou o audio")
+                audioQueue.shift()
+                playAudio(audioQueue[0])
+            })
+        }
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, []);
+    }, [flagAudiodesc]);
 
     const playAudio = (file) => {
         // console.log("playAudio")
@@ -152,38 +214,12 @@ export default function HomePage() {
                 </div>
             </div>
 
-            <div className='flex flex-col h-full justify-center items-center'>
-                {[streaming, cards, currentRecommendations].map((row, rowIndex) => (
-                    <div className="flex flex-row justify-center align-center h-[250px] mt-10 rounded-lg" >
-                        <button className="flex flex-col justify-center w-36 mx-3 align items-center mr-10"
+            <AudiodescFlag.Provider value={[flagAudiodesc, setFlagAudiodesc]}>
+                <div className='flex flex-col h-full justify-center items-center'>
+                    {[streaming, cards, currentRecommendations].map((row, rowIndex) => (
+                        <div className="flex flex-row justify-center align-center h-[250px] mt-10 rounded-lg" >
+                            <button className="flex flex-col justify-center w-36 mx-3 align items-center mr-10"
 
-                            onClick={
-                                () => {
-                                    if (rowIndex === 0) {
-                                        // navigate('/aplicativos');
-                                    } else if (rowIndex === 1) {
-                                        pauseAudio()
-                                        navigate('/tvAberta');
-                                    } else {
-                                        // navigate('/talvezGoste');
-                                    }
-                                }
-                            }>
-                            <img
-                                className="w-[8rem] h-[7rem] rounded-full"
-                                src={rowIcons[rowIndex]}
-                                ref={(el) => {
-                                    focusableElements[rowIndex].current[0] = el;
-                                    if (el) {
-                                        el.onfocus = () => {
-                                            el.style.transform = "scale(1.1)"
-                                            // Atualize as recomendações
-
-                                        };
-                                        el.onblur = () => el.style.transform = "scale(1)";
-                                    }
-                                }}
-                                tabIndex={0}
                                 onClick={
                                     () => {
                                         if (rowIndex === 0) {
@@ -195,66 +231,94 @@ export default function HomePage() {
                                             // navigate('/talvezGoste');
                                         }
                                     }
-                                }
-                            />
-                            <p className="text-xl text-center text-white ">{rowTitles[rowIndex]}</p>
-                        </button>
-                        <div className="flex flex-row items-center align-center justify-center text-white h-full rounded w-full cursor-pointer gap-5">
-                            {row.map((card, cardIndex) => (
-                                <button
-                                    className="flex flex-col items-center justify-center hover:scale-200 w-[200px] mx-3 rounded-lg"
+                                }>
+                                <img
+                                    className="w-[8rem] h-[7rem] rounded-full"
+                                    src={rowIcons[rowIndex]}
                                     ref={(el) => {
-                                        focusableElements[rowIndex].current[cardIndex + 1] = el;
+                                        focusableElements[rowIndex].current[0] = el;
                                         if (el) {
-                                            el.onfocus = () => el.style.transform = "scale(1.1)";
+                                            el.onfocus = () => {
+                                                el.style.transform = "scale(1.1)"
+                                                // Atualize as recomendações
+
+                                            };
                                             el.onblur = () => el.style.transform = "scale(1)";
-
                                         }
-
                                     }}
                                     tabIndex={0}
-                                    onClick={() => {
-                                        if (card.icon === TvAberta || card.icon === TvAbertaIcone) {
-                                            pauseAudio()
-                                            navigate('/tvAberta');
-                                        } else {
-                                            openChannel(card.content, card.icon)
+                                    onClick={
+                                        () => {
+                                            if (rowIndex === 0) {
+                                                // navigate('/aplicativos');
+                                            } else if (rowIndex === 1) {
+                                                pauseAudio()
+                                                navigate('/tvAberta');
+                                            } else {
+                                                // navigate('/talvezGoste');
+                                            }
                                         }
-                                    }}
-                                    onFocus={() => {
-                                        if (rowIndex < 2) { // Para todas as linhas exceto a última
-                                            updateRecommendations(card.name, rowIndex); // Atualize as recomendações
+                                    }
+                                />
+                                <p className="text-xl text-center text-white ">{rowTitles[rowIndex]}</p>
+                            </button>
+                            <div className="flex flex-row items-center align-center justify-center text-white h-full rounded w-full cursor-pointer gap-5">
+                                {row.map((card, cardIndex) => (
+                                    <button
+                                        className="flex flex-col items-center justify-center hover:scale-200 w-[200px] mx-3 rounded-lg"
+                                        ref={(el) => {
+                                            focusableElements[rowIndex].current[cardIndex + 1] = el;
+                                            if (el) {
+                                                el.onfocus = () => el.style.transform = "scale(1.1)";
+                                                el.onblur = () => el.style.transform = "scale(1)";
 
-                                        }
-                                    }}
-                                >
-                                    <div className='focus:border-cyan-200  hover:border-cyan-900  '>
-                                        <img
-                                            className="w-[240px] h-[135px] rounded-lg mx-2  hover:scale-200 transition duration-500 ease-in-out "
-                                            src={card.icon}
-                                            alt="card icon"
-                                            onFocus={() => {
-                                                updateRecommendations(rowTitles[rowIndex]); // Atualize as recomendações
-                                            }}
-                                        />
+                                            }
 
-                                    </div>
-                                </button>
-                            ))}
+                                        }}
+                                        tabIndex={0}
+                                        onClick={() => {
+                                            if (card.icon === TvAberta || card.icon === TvAbertaIcone) {
+                                                pauseAudio()
+                                                navigate('/tvAberta');
+                                            } else {
+                                                openChannel(card.content, card.icon)
+                                            }
+                                        }}
+                                        onFocus={() => {
+                                            if (rowIndex < 2) { // Para todas as linhas exceto a última
+                                                updateRecommendations(card.name, rowIndex); // Atualize as recomendações
+
+                                            }
+                                        }}
+                                    >
+                                        <div className='focus:border-cyan-200  hover:border-cyan-900  '>
+                                            <img
+                                                className="w-[240px] h-[135px] rounded-lg mx-2  hover:scale-200 transition duration-500 ease-in-out "
+                                                src={card.icon}
+                                                alt="card icon"
+                                                onFocus={() => {
+                                                    updateRecommendations(rowTitles[rowIndex]); // Atualize as recomendações
+                                                }}
+                                            />
+
+                                        </div>
+                                    </button>
+                                ))}
+                            </div>
+                            <button
+                                className="flex flex-col items-center justify-center hover:scale-200 w-[5px] mx-[10px] rounded-lg"
+                                onClick={
+                                    () => {
+                                        // ... (código existente)
+                                    }}
+
+                            >
+                                <BsChevronRight className="w-[30px] h-[30px] text-white cursor-pointer" />
+                            </button>
                         </div>
-                        <button
-                            className="flex flex-col items-center justify-center hover:scale-200 w-[5px] mx-[10px] rounded-lg"
-                            onClick={
-                                () => {
-                                    // ... (código existente)
-                                }}
-
-                        >
-                            <BsChevronRight className="w-[30px] h-[30px] text-white cursor-pointer" />
-                        </button>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            </AudiodescFlag.Provider>
             <Footer />
         </>
     );

@@ -9,6 +9,7 @@ import { cards, streaming, universityApps } from '../database';
 import TvAberta from '../assets/tvAberta.png';
 
 import { AudiodescContext } from '../App';
+import { AudiodescFlag } from '../App';
 
 import audioFile from "../audios/05.mp3";
 
@@ -20,6 +21,8 @@ export default function DiscoverChannels() {
     const [isScanning, setIsScanning] = useState(false);
     const navigate = useNavigate();
     const startRef = React.useRef();
+
+    const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag);
 
     const {audioContext} = useContext(AudiodescContext);
     const track = useRef(null);
@@ -45,27 +48,64 @@ export default function DiscoverChannels() {
 
         const handleKeyDown = (event) => {
             switch (event.code) {
-              case 'Escape':
-                pauseAudio()
-                break;
-              default:
-                break;
+                case 'Digit0':
+                  pauseAudio()
+                  navigate('/homePage');
+                  break;
+                case 'Digit1':
+                  pauseAudio()
+                  navigate('/radioDifusorSec');
+                  break;
+                case 'Digit2':
+                  pauseAudio()
+                  navigate('/radioDifusorSecL2');
+                  break;
+                case 'ContextMenu':
+                  pauseAudio()
+                  navigate(-1);
+                  break;
+                case 'KeyA':
+                  pauseAudio()
+                  navigate('/tvAberta');
+                  break;
+                case 'KeyV':
+                  pauseAudio()
+                  window.location.reload();
+                  break;
+                case 'Digit7':
+                  pauseAudio()
+                  window.location.reload();
+                  break;
+                case 'F2':
+                  if (flagAudiodesc) {
+                    pauseAudio()
+                    setFlagAudiodesc(false)
+                  }
+                  else setFlagAudiodesc(true)
+                  break;
+                case 'Escape':
+                    pauseAudio()
+                    break;
+                default:
+                    break;
             }
           };
           window.addEventListener('keydown', handleKeyDown);
       
-          playAudio(audioQueue[0])
-          audio.current.addEventListener("ended", (e) => {
-            console.log("Cabou o audio")
-            audioQueue.shift()
+          if (flagAudiodesc) {
             playAudio(audioQueue[0])
-          })
+            audio.current.addEventListener("ended", (e) => {
+                console.log("Cabou o audio")
+                audioQueue.shift()
+                playAudio(audioQueue[0])
+            })
+          }
 
           // Limpando o evento quando o componente é desmontado
           return () => {
             window.removeEventListener('keydown', handleKeyDown);
           };
-    }, [/*scanProgress*/])
+    }, [/*scanProgress*/flagAudiodesc])
 
     const startScan = () => {
         setScanProgress(0);
@@ -104,8 +144,8 @@ export default function DiscoverChannels() {
 
     const handleButtonClick = async () => {
         if (scanComplete) {
-            navigate("/homePage");
             pauseAudio()
+            navigate("/homePage");
         } else {
             await startScan();
         }
@@ -180,9 +220,11 @@ export default function DiscoverChannels() {
                     </>
                         : null}
                 </div>
-                <button ref={startRef} onClick={handleButtonClick} className='scan-button text-white text-center p-8 rounded-e-sm m-5 text-3xl' style={scanComplete ? { backgroundColor: "#E7625F" } : { backgroundColor: "green" }}>
-                    {scanComplete ? 'Fechar Busca' : isScanning ? 'Buscando...' : 'Iniciar Busca'}
-                </button>
+                <AudiodescFlag.Provider value={[flagAudiodesc, setFlagAudiodesc]}>
+                    <button ref={startRef} onClick={handleButtonClick} className='scan-button text-white text-center p-8 rounded-e-sm m-5 text-3xl' style={scanComplete ? { backgroundColor: "#E7625F" } : { backgroundColor: "green" }}>
+                        {scanComplete ? 'Fechar Busca' : isScanning ? 'Buscando...' : 'Iniciar Busca'}
+                    </button>
+                </AudiodescFlag.Provider>
             </div >
             <Footer />
         </>

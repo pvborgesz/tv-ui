@@ -7,6 +7,7 @@ import TitlePage from '../components/TitlePage';
 import IconBordered from "../components/IconBordered";
 
 import { AudiodescContext } from '../App';
+import { AudiodescFlag } from '../App';
 
 import AudioDescriacao from "../assets/audioDescricao.jpg";
 import libras from "../assets/libras.png";
@@ -21,8 +22,7 @@ import ReactAudioPlayer from 'react-audio-player';
 export default function SelectLanguage() {
   const selectRef = useRef();
   const advanceButtonRef = useRef();
-  const isPlayed1 = useRef(false);
-  const isPlayed2 = useRef(false);
+  const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag);
 
   const {audioContext} = useContext(AudiodescContext);
   const track = useRef(null);
@@ -30,7 +30,7 @@ export default function SelectLanguage() {
   const audioQueue = [audioFile]
 
 
-  useEffect(() => {
+  /*useEffect(() => {
     const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
 
     if (!hasPlayedAudio) {
@@ -38,10 +38,10 @@ export default function SelectLanguage() {
       /*const audio = new Audio(audioFile);
       audio.play().catch((error) => {
         console.error("Falha ao tocar áudio:", error);
-      });*/
+      });
       localStorage.setItem('hasPlayedAudio2', 'true');
     }
-  }, []);
+  }, []);*/
 
   /*useEffect(() => {
     // const audio = new Audio(audioFile);
@@ -99,16 +99,20 @@ export default function SelectLanguage() {
           event.preventDefault();
           if (document.activeElement === selectRef.current) {
             advanceButtonRef.current.focus();
-            pauseAudio()
-            playAudio(audioFile)
+            if(flagAudiodesc) {
+              pauseAudio()
+              playAudio(audioFile)
+            }
           }
           break;
         case 'ArrowLeft':
           event.preventDefault();
           if (document.activeElement === advanceButtonRef.current) {
             selectRef.current.focus();
-            pauseAudio()
-            playAudio(audioFile2)
+            if(flagAudiodesc) {
+              pauseAudio()
+              playAudio(audioFile2)
+            }
           }
           break;
         case 'Enter':
@@ -120,6 +124,41 @@ export default function SelectLanguage() {
         case 'Escape':
           pauseAudio()
           break;
+        case 'F2':
+          if (flagAudiodesc) {
+            pauseAudio()
+            setFlagAudiodesc(false)
+          }
+          else setFlagAudiodesc(true)
+          break;
+        case 'Digit0':
+          pauseAudio()
+          navigate('/homePage');
+          break;
+        case 'Digit1':
+          pauseAudio()
+          navigate('/radioDifusorSec');
+          break;
+        case 'Digit2':
+          pauseAudio()
+          navigate('/radioDifusorSecL2');
+          break;
+        case 'ContextMenu':
+          pauseAudio()
+          navigate(-1);
+          break;
+        case 'KeyA':
+          pauseAudio()
+          navigate('/tvAberta');
+          break;
+        case 'KeyV':
+          pauseAudio()
+          window.location.reload();
+          break;
+        case 'Digit7':
+          pauseAudio()
+          window.location.reload();
+          break;
         default:
           break;
       }
@@ -129,19 +168,21 @@ export default function SelectLanguage() {
     /*audioQueue.forEach(element => {
       playAudio(element)
     })*/
-    playAudio(audioQueue[0])
-    audio.current.addEventListener("ended", (e) => {
-      console.log("Cabou o audio")
-      audioQueue.shift()
+    if(flagAudiodesc) {
       playAudio(audioQueue[0])
-    })
+      audio.current.addEventListener("ended", (e) => {
+        console.log("Cabou o audio")
+        audioQueue.shift()
+        playAudio(audioQueue[0])
+      })
+    }
 
     // Limpando o evento quando o componente é desmontado
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
 
-  }, []);
+  }, [flagAudiodesc]);
 
 
   const playAudio = (file) => {
@@ -232,7 +273,7 @@ export default function SelectLanguage() {
           <p className="text-4xl mt-1.5">Acessível em Libras</p>
         </div>
 
-        <AudiodescContext.Provider value={AudiodescContext}>
+        <AudiodescFlag.Provider value={[flagAudiodesc, setFlagAudiodesc]}>
           <Link
             onClick={pauseAudio}
             ref={advanceButtonRef}
@@ -242,7 +283,7 @@ export default function SelectLanguage() {
             Avançar
             <BsArrowRightShort size={30} />
           </Link>
-        </AudiodescContext.Provider>
+        </AudiodescFlag.Provider>
 
       </footer >
     </>

@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useContext } from "react";
+import { useNavigate } from "react-router";
 import Footer from "../components/FooterCreateProfile";
 import TitlePage from "../components/TitlePage";
 
@@ -12,6 +13,7 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { useRef } from 'react';
 
 import { AudiodescContext } from '../App';
+import { AudiodescFlag } from '../App';
 
 import ClassLivre from "../assets/indicacao.svg"
 import Class10 from "../assets/indicacao_10.svg"
@@ -37,6 +39,13 @@ export default function CreateProfile() {
   const nameRef = useRef();
   const groupRef = useRef();
   const languageRef = useRef();
+  const audiodescRef = useRef();
+  const signRef = useRef();
+  const closedCapRef = useRef();
+  const diagEnhanceRef = useRef();
+  const advanceRef = useRef();
+  const createRef = useRef();
+  const lgpdRef = useRef();
   const livreRef = useRef();
   const dezRef = useRef();
   const dozeRef = useRef();
@@ -44,12 +53,17 @@ export default function CreateProfile() {
   const dezesseisRef = useRef();
   const dezoitoRef = useRef();
 
+  const focusedElementRef = useRef('nameRef');
+
+  const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag);
+  const navigate = useNavigate()
+
   const {audioContext} = useContext(AudiodescContext);
   const track = useRef(null);
   const audio = useRef(null);
   const audioQueue = [audioFile]
 
-  useEffect(() => {
+  /*useEffect(() => {
     const hasPlayedAudio = localStorage.getItem('hasPlayedAudio3');
 
     if (!hasPlayedAudio) {
@@ -58,9 +72,9 @@ export default function CreateProfile() {
       audio.play().catch((error) => {
         console.error("Falha ao tocar áudio:", error);
       });
-      localStorage.setItem('hasPlayedAudio3', 'true');*/
+      localStorage.setItem('hasPlayedAudio3', 'true');
     }
-  }, []);
+  }, []);*/
 
 
   useEffect(() => {
@@ -69,17 +83,61 @@ export default function CreateProfile() {
     // audio.play().catch((error) => {
     //   console.error("Falha ao tocar áudio:", error);
     // });
+    console.log(focusedElementRef.current)
 
-
-    nameRef.current.focus();
+    document.getElementById(focusedElementRef.current).focus()
+    // nameRef.current.focus()
+    
     audioQueue.push(audioFile); // Tem que ser o audio do btn que recebe o foco primeiro na página
 
     const handleKeyDown = (event) => {
       switch (event.code) {
+        case 'Digit0':
+          pauseAudio()
+          navigate('/homePage');
+          break;
+        case 'Digit1':
+          pauseAudio()
+          navigate('/radioDifusorSec');
+          break;
+        case 'Digit2':
+          pauseAudio()
+          navigate('/radioDifusorSecL2');
+          break;
+        case 'ContextMenu':
+          pauseAudio()
+          navigate(-1);
+          break;
+        case 'KeyA':
+          pauseAudio()
+          navigate('/tvAberta');
+          break;
+        case 'KeyV':
+          pauseAudio()
+          window.location.reload();
+          break;
+        case 'Digit7':
+          pauseAudio()
+          window.location.reload();
+          break;
+        case 'F2':
+          focusedElementRef.current = document.activeElement.id
+          console.log(focusedElementRef.current)
+          if (flagAudiodesc) {
+            pauseAudio()
+            setFlagAudiodesc(false)
+          }
+          else setFlagAudiodesc(true)
+          
+          break;
         case 'ArrowUp':
           // if focus on groupRef, go to nameRef
           if (document.activeElement === groupRef.current) {
             nameRef.current.focus();
+            if(flagAudiodesc) {
+              pauseAudio()
+              playAudio(audioFile)
+            }
           }
           event.preventDefault();
 
@@ -90,12 +148,15 @@ export default function CreateProfile() {
           // if focus on nameRef, go to groupRef
           if (document.activeElement === nameRef.current) {
             groupRef.current.focus();
+            if(flagAudiodesc) {
+              pauseAudio()
+              playAudio(audioFile)
+            }
           }
           // if focus on groupRef, go to languageRef
           else if (document.activeElement === groupRef.current) {
             languageRef.current.focus();
           }
-
           break;
         case 'ArrowLeft':
           if (document.activeElement === livreRef.current) {
@@ -119,36 +180,51 @@ export default function CreateProfile() {
           if (document.activeElement === groupRef.current) {
             dezoitoRef.current.focus();
           }
+          if (document.activeElement === advanceRef.current) {
+            createRef.current.focus()
+          }
+          if (document.activeElement === createRef.current) {
+            languageRef.current.focus()
+          }
+          if (document.activeElement === languageRef.current) {
+            audiodescRef.current.focus()
+          }
 
           event.preventDefault();
 
           break;
         case 'ArrowRight':
-          if (document.activeElement === groupRef) {
+          if (document.activeElement === groupRef.current) {
             livreRef.current.focus();
           }
-          if (document.activeElement === livreRef) {
+          if (document.activeElement === livreRef.current) {
             dezRef.current.focus();
           }
-          if (document.activeElement === dezRef) {
+          if (document.activeElement === dezRef.current) {
             dozeRef.current.focus();
           }
-          if (document.activeElement === dozeRef) {
+          if (document.activeElement === dozeRef.current) {
             quatorzeRef.current.focus();
           }
-          if (document.activeElement === quatorzeRef) {
+          if (document.activeElement === quatorzeRef.current) {
             dezesseisRef.current.focus();
           }
-          if (document.activeElement === dezesseisRef) {
+          if (document.activeElement === dezesseisRef.current) {
             dezoitoRef.current.focus();
+          }
+          if (document.activeElement === languageRef.current) {
+            createRef.current.focus()
+          }
+          if (document.activeElement === createRef.current) {
+            advanceRef.current.focus()
           }
 
           event.preventDefault();
 
           break;
-          case 'Escape':
-            pauseAudio()
-            break;
+        case 'Escape':
+          pauseAudio()
+          break;
         default:
           break;
       }
@@ -157,17 +233,19 @@ export default function CreateProfile() {
 
     window.addEventListener('keydown', handleKeyDown);
 
-    playAudio(audioQueue[0])
-    audio.current.addEventListener("ended", (e) => {
-      console.log("Cabou o audio")
-      audioQueue.shift()
+    if(flagAudiodesc) {
       playAudio(audioQueue[0])
-    })
+      audio.current.addEventListener("ended", (e) => {
+        console.log("Cabou o audio")
+        audioQueue.shift()
+        playAudio(audioQueue[0])
+      })
+    }
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [flagAudiodesc]);
 
 
   const handleClick = (event) => {
@@ -222,6 +300,7 @@ export default function CreateProfile() {
       <div className="flex justify-center items-evenly">
         <div className="w-11/12 px-5 py-5 bg-zinc-800 flex flex-col justify-center text-white ml-2 mt-14 gap-8">
           <input
+            id="nameRef"
             className="text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
             type="text"
             placeholder="Nome do Perfil (obrigatório)"
@@ -240,6 +319,7 @@ export default function CreateProfile() {
 
           <div className="flex justify-start">
             <input
+              id="groupRef"
               className="w-5/6 text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
               type="password"
               placeholder="Data de nascimento dd/mm/aaaa"
@@ -312,7 +392,7 @@ export default function CreateProfile() {
           <div className="flex items-center">
             <h3 className="text-3xl pr-5">Idioma Selecionado</h3>
 
-            <select tabIndex={0} ref={languageRef} placeholder="Selecione um Idioma" className="text-lg font-normal text-black border-2 border-white rounded-md p-4 overflow-y-scroll">
+            <select id="languageRef" tabIndex={0} ref={languageRef} placeholder="Selecione um Idioma" className="text-lg font-normal text-black border-2 border-white rounded-md p-4 overflow-y-scroll">
               <option value="">Português</option>
               <option value="">Inglês</option>
               <option value="">Espanhol</option>
@@ -345,26 +425,26 @@ export default function CreateProfile() {
             </select>
           </div>
 
-          <div className="flex align-center justify-evenly text-white flex-grow mt-10 mr-10 mb-10">
+          <div className="flex align-center justify-evenly text-white flex-grow mt-10 mr-10 mb-10" ref={audiodescRef}>
             <div className="flex items-center justify-start mr-10 w-1/4 relative">
               <div id={7} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={7} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={AudioDescriacao} />
               <h3 className="text-xl text-white">Áudiodescrição</h3>
             </div>
 
-            <div className="flex items-center justify-start mx-3 w-1/4 relative">
+            <div className="flex items-center justify-start mx-3 w-1/4 relative" ref={signRef}>
               <div id={8} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={8} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={Libras} />
               <h3 className="text-xl text-white">Acessível em Libras</h3>
             </div>
 
-            <div className="flex items-center justify-start mx-3 w-1/4 relative">
+            <div className="flex items-center justify-start mx-3 w-1/4 relative" ref={closedCapRef}>
               <div id={9} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={9} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={CC} />
               <h3 className="text-xl text-white">Legendas Ocultas</h3>
             </div>
 
-            <div className="flex items-center justify-start mx-3 w-1/4 relative">
+            <div className="flex items-center justify-start mx-3 w-1/4 relative" ref={diagEnhanceRef}>
               <div id={10} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={10} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={AprimorDialogo} />
               <h3 className="text-xl text-white">Aprimoramento de Diálogo</h3>
@@ -384,14 +464,14 @@ export default function CreateProfile() {
       <footer className="flex items-center justify-end text-white mb-5 mt-auto pl-3 pr-10 pb-10">
       <div className="font-normal flex justify-end items-center w-full mt-5">
 
-        <div className="w-full bg-zinc-800 flex flex-row items-left justify-left text-white flex-grow mr-10">
+        <div className="w-full bg-zinc-800 flex flex-row items-left justify-left text-white flex-grow mr-10" ref={lgpdRef}>
           <input className="ml-5" type="checkbox" />
           <h1 className="text-2xl font-normal  ml-10 mr-5">
             Concordo com a coleta e processamento de meus dados para uma melhor experiência, em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD). <a className="text-slate-400" href="#">Saiba mais.</a>
           </h1>
         </div>
 
-        <Link onClick={pauseAudio} to="/createProfile">
+        <Link onClick={pauseAudio} to="/createProfile" ref={createRef}>
           <div className="flex font-normal gap-3 items-center">
             <p className="text-2xl mt-1.5 w-24 text-center">Criar Outro</p>
             <IconBordered>
@@ -400,14 +480,16 @@ export default function CreateProfile() {
           </div>
         </Link>
 
-        <Link onClick={pauseAudio} to="/discoverChannels">
-          <div className="flex font-normal gap-3 items-center pl-5">
-            <p className="text-2xl mt-1.5 w-24 text-center">Avançar</p>
-            <IconBordered>
-              <AiOutlineArrowRight size={40} />
-            </IconBordered>
-          </div>
-        </Link>
+        <AudiodescFlag.Provider value={[flagAudiodesc, setFlagAudiodesc]}>
+          <Link id="advanceRef" onClick={pauseAudio} to="/discoverChannels" ref={advanceRef}>
+            <div className="flex font-normal gap-3 items-center pl-5">
+              <p className="text-2xl mt-1.5 w-24 text-center">Avançar</p>
+              <IconBordered>
+                <AiOutlineArrowRight size={40} />
+              </IconBordered>
+            </div>
+          </Link>
+        </AudiodescFlag.Provider>
       </div>
     </footer>
     </>

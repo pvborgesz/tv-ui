@@ -9,13 +9,20 @@ import { UrlContext } from "../App";
 import { universityApps } from '../database';
 
 import audioFile from "../audios/01.mp3"
+
 import { AudiodescContext } from '../App';
+import { AudiodescFlag } from '../App';
 
 export default function TvAberta() {
     const {audioContext} = useContext(AudiodescContext);
     const track = useRef(null);
     const audio = useRef(null);
     const audioQueue = [audioFile]
+
+    const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag)
+
+    const currentRowIndexRef = useRef(0);
+    const currentCardIndexRef = useRef(0)
 
     const rowRefs = [useRef([]), useRef([])];
     const navigate = useNavigate();
@@ -32,8 +39,8 @@ export default function TvAberta() {
 
     useEffect(() => {
         // Iniciamos o index em 0 para linhas e cartões
-        let currentRowIndex = 0;
-        let currentCardIndex = 0;
+        let currentRowIndex = currentRowIndexRef.current;
+        let currentCardIndex = currentCardIndexRef.current;
 
         const handleKeyDown = (event) => {
             switch (event.code) {
@@ -70,6 +77,44 @@ export default function TvAberta() {
                 case 'Escape':
                     pauseAudio()
                     break;
+                case 'Digit0':
+                  pauseAudio()
+                  navigate('/homePage');
+                  break;
+                case 'Digit1':
+                  pauseAudio()
+                  navigate('/radioDifusorSec');
+                  break;
+                case 'Digit2':
+                  pauseAudio()
+                  navigate('/radioDifusorSecL2');
+                  break;
+                case 'ContextMenu':
+                  pauseAudio()
+                  navigate(-1);
+                  break;
+                case 'KeyA':
+                  pauseAudio()
+                  navigate('/tvAberta');
+                  break;
+                case 'KeyV':
+                  pauseAudio()
+                  window.location.reload();
+                  break;
+                case 'Digit7':
+                  pauseAudio()
+                  window.location.reload();
+                  break;
+                case 'F2':
+                  if (flagAudiodesc) {
+                    pauseAudio()
+                    setFlagAudiodesc(false)
+                  }
+                  else setFlagAudiodesc(true)
+
+                  currentRowIndexRef.current = currentRowIndex
+                  currentCardIndexRef.current = currentCardIndex
+                  break;
                 default:
                     break;
             }
@@ -80,17 +125,19 @@ export default function TvAberta() {
 
         window.addEventListener('keydown', handleKeyDown);
 
-        playAudio(audioQueue[0])
-        audio.current.addEventListener("ended", (e) => {
-          console.log("Cabou o audio")
-          audioQueue.shift()
-          playAudio(audioQueue[0])
-        })
+        if (flagAudiodesc) {
+            playAudio(audioQueue[0])
+            audio.current.addEventListener("ended", (e) => {
+                console.log("Cabou o audio")
+                audioQueue.shift()
+                playAudio(audioQueue[0])
+            })
+        }
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, []);
+    }, [flagAudiodesc]);
 
     const playAudio = (file) => {
       // console.log("playAudio")

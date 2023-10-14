@@ -9,7 +9,9 @@ import { Link } from "react-router-dom";
 import ImageIconRounded from "../components/ImageIconRounded";
 import UserImg from '../assets/user-img.png'
 import audioFile from "../audios/03.mp3";
+
 import { AudiodescContext } from "../App";
+import { AudiodescFlag } from "../App";
 
 
 export default function SelectProfile() {
@@ -28,7 +30,9 @@ export default function SelectProfile() {
   const audio = useRef(null);
   const audioQueue = [audioFile]
 
-  useEffect(() => {
+  const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag);
+
+  /*useEffect(() => {
     // pauseAudio()
     // audioContext = new AudioContext()
 
@@ -39,10 +43,10 @@ export default function SelectProfile() {
       /*const audio = new Audio(audioFile);
       audio.play().catch((error) => {
         console.error("Falha ao tocar áudio:", error);
-      });*/
+      });
       localStorage.setItem('hasPlayedAudio99', 'true');
     }
-  }, []);
+  }, []);*/
 
 
   useEffect(() => {
@@ -52,6 +56,13 @@ export default function SelectProfile() {
 
     const handleKeyDown = (event) => {
       switch (event.key) {
+        case 'F2':
+          if (flagAudiodesc) {
+            pauseAudio()
+            setFlagAudiodesc(false)
+          }
+          else setFlagAudiodesc(true)
+          break;
         case "ArrowLeft":
           if (linksRef.current[0] === document.activeElement) {
             linksRef.current[4].focus();
@@ -64,8 +75,10 @@ export default function SelectProfile() {
           } else {
             linksRef.current[0].focus();
           }
-          pauseAudio()
-          playAudio(audioFile)
+          if(flagAudiodesc) {
+            pauseAudio()
+            playAudio(audioFile)
+          }
           break;
         case "ArrowRight":
           if (linksRef.current[0] === document.activeElement) {
@@ -79,8 +92,10 @@ export default function SelectProfile() {
           } else {
             linksRef.current[0].focus();
           }
-          pauseAudio()
-          playAudio(audioFile)
+          if(flagAudiodesc) {
+            pauseAudio()
+            playAudio(audioFile)
+          }
           break;
         case "ArrowUp":
           linksRef.current[2].focus();
@@ -104,15 +119,17 @@ export default function SelectProfile() {
 
     window.addEventListener('keydown', handleKeyDown);
 
-    playAudio(audioQueue[0])
-    audio.current.addEventListener("ended", (e) => {
-      console.log("Cabou o audio")
-      audioQueue.shift()
+    if(flagAudiodesc) {
       playAudio(audioQueue[0])
-    })
+      audio.current.addEventListener("ended", (e) => {
+        console.log("Cabou o audio")
+        audioQueue.shift()
+        playAudio(audioQueue[0])
+      })
+    }
 
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [location, navigate]);
+  }, [location, navigate, flagAudiodesc]);
 
   const playAudio = (file) => {
     console.log("playAudio")
@@ -160,17 +177,19 @@ export default function SelectProfile() {
           </div>
         </Link>
 
-        <Link
-          className="flex flex-col items-center gap-10 cursor-pointer p-14 hover:bg-zinc-700 hover:scale-105 rounded-xl border-2 h-[370px] justify-center transition-all duration-400 focus:border-[10px]"
-          to={"/createProfile"}
-          ref={(el) => linksRef.current[1] = el}
-          onClick={pauseAudio}
-        >
-          <div className="flex flex-col items-center justify-center  cursor-pointer  rounded-sm w-[360px]">
-            <ImageIconRounded icon={"https://d2gg9evh47fn9z.cloudfront.net/1600px_COLOURBOX5697474.jpg"} />
-            <h4 className="text-2xl pt-10 font-normal mb-1.5">Adicionar Perfil</h4>
-          </div>
-        </Link>
+        <AudiodescFlag.Provider value={[flagAudiodesc, setFlagAudiodesc]}>
+          <Link
+            className="flex flex-col items-center gap-10 cursor-pointer p-14 hover:bg-zinc-700 hover:scale-105 rounded-xl border-2 h-[370px] justify-center transition-all duration-400 focus:border-[10px]"
+            to={"/createProfile"}
+            ref={(el) => linksRef.current[1] = el}
+            onClick={pauseAudio}
+          >
+            <div className="flex flex-col items-center justify-center  cursor-pointer  rounded-sm w-[360px]">
+              <ImageIconRounded icon={"https://d2gg9evh47fn9z.cloudfront.net/1600px_COLOURBOX5697474.jpg"} />
+              <h4 className="text-2xl pt-10 font-normal mb-1.5">Adicionar Perfil</h4>
+            </div>
+          </Link>
+        </AudiodescFlag.Provider>
 
       </div>
 
