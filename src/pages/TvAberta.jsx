@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useRef, useContext } from 'react';
+import React, { useEffect, useRef, useContext, useState } from 'react';
 import ProfileIcon from "../assets/profile.svg";
 import Footer from '../components/FooterHomePage';
 import FooterHomePage from '../components/FooterTvAberta';
@@ -8,16 +8,52 @@ import { UrlContext } from "../App";
 
 import { universityApps } from '../database';
 
-import audioFile from "../audios/01.mp3"
+import audioFile2 from "../audios/RedeMundial.mp3";
+import audioFile3 from "../audios/Athenas.mp3";
+import audioFile4 from "../audios/MN.mp3";
+import audioFile5 from "../audios/RIT.mp3";
+import audioFile6 from "../audios/Gazeta.mp3";
+import audioFile7 from "../audios/Aparecida.mp3";
+
+import audioFile8 from "../audios/NovoTempo.mp3";
+import audioFile9 from "../audios/TvEvang.mp3";
+import audioFile10 from "../audios/RedeBr.mp3";
+import audioFile11 from "../audios/Band.mp3";
+import audioFile12 from "../audios/Futura.mp3";
+import audioFile13 from "../audios/RedeVida.mp3";
+
+import audioFile14 from "../audios/TvNazare.mp3";
+import audioFile15 from "../audios/TvCamara.mp3";
+import audioFile16 from "../audios/Tvp.mp3";
+import audioFile17 from "../audios/Record.mp3";
+import audioFile18 from "../audios/SBT.mp3";
+import audioFile19 from "../audios/CanalSaude.mp3";
+
+import audioFile20 from "../audios/IFMA.mp3";
+import audioFile21 from "../audios/CanalGov.mp3";
+import audioFile22 from "../audios/TvBrasil.mp3";
+import audioFile from "../audios/SuasEmissoras.mp3";
+import audioFileBtn from "../audios/GuiaProgBtn.mp3";
+import audioFileBtn2 from "../audios/HomeBtn.mp3";
+import audioFileLGPD from "../audios/LGPD2.mp3";
 
 import { AudiodescContext } from '../App';
 import { AudiodescFlag } from '../App';
+
+import { useAudioPlayer } from 'react-use-audio-player';
 
 export default function TvAberta() {
     const {audioContext} = useContext(AudiodescContext);
     const track = useRef(null);
     const audio = useRef(null);
-    const audioQueue = [audioFile]
+
+    const { load, pause } = useAudioPlayer();
+
+    const [queueIndex, setQueueIndex] = useState(0)
+
+    const focusedElementRef = useRef('selectRef')
+    const selectedIndexRef = useRef(0)
+    const audioQueue = [audioFile, audioFileLGPD]
 
     const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag)
 
@@ -29,12 +65,26 @@ export default function TvAberta() {
     // useContext
     const { urlValue, setUrlValue } = useContext(UrlContext);
 
+    const emissoras = [audioFile22, audioFile21, audioFile20, audioFile19,
+        audioFile18, audioFile17, audioFile16, audioFile15, audioFile14,
+        audioFile13, audioFile12, audioFile11, audioFile10, audioFile9,
+        audioFile8, audioFile7, audioFile6, audioFile5, audioFile4,
+        audioFile3, audioFile2]
+
     const openChannel = (channelURL, channelIcon) => {
         setUrlValue(channelURL);
         localStorage.setItem("urlValue", channelURL);
         localStorage.setItem("icon", channelIcon);
 
         navigate("/radioDifusor");
+    }
+
+    // https://stackoverflow.com/questions/26866425/array-index-to-matrix-index
+    const arrayToMatrixIdx = (lineLength, arrayIdx) => {
+        const row = Math.floor(arrayIdx / lineLength)
+        const column = arrayIdx % lineLength
+
+        return [row, column]
     }
 
     useEffect(() => {
@@ -48,15 +98,32 @@ export default function TvAberta() {
                     event.preventDefault();
                     // Verificamos se não estamos na primeira linha para não sair do intervalo
                     if (currentRowIndex > 0) {
-                        currentRowIndex -= 1;
-                        currentCardIndex = 0;  // reset card index when moving to another row
+                        currentRowIndex -= 0;
+                        // currentCardIndex = 0;  // reset card index when moving to another row
                     }
                     break;
                 case 'ArrowDown':
                     event.preventDefault();
                     // go down one line in the grid and maintain the current card index
                     if (currentRowIndex < rowRefs.length - 1) {
-                        currentRowIndex += 1;
+                        currentRowIndex += 0;
+                    }
+                    
+                    if (arrayToMatrixIdx(6, currentCardIndex)[1] === 0) {
+                        if (flagAudiodesc) {
+                            pause()
+                            load(audioFileBtn2, {
+                                autoplay: true
+                            })
+                        }
+                    }
+                    else if (arrayToMatrixIdx(6, currentCardIndex)[1] === 5) {
+                        if (flagAudiodesc) {
+                            pause()
+                            load(audioFileBtn, {
+                                autoplay: true
+                            })
+                        }
                     }
 
                     break;
@@ -66,6 +133,12 @@ export default function TvAberta() {
                     if (currentCardIndex > 0) {
                         currentCardIndex -= 1;
                     }
+                    if (flagAudiodesc) {
+                        pause()
+                        load(emissoras[currentCardIndex], {
+                            autoplay: true
+                        })
+                    }
                     break;
                 case 'ArrowRight':
                     event.preventDefault();
@@ -73,42 +146,53 @@ export default function TvAberta() {
                     if (currentCardIndex < rowRefs[currentRowIndex].current.length - 1) {
                         currentCardIndex += 1;
                     }
+                    if (flagAudiodesc) {
+                        pause()
+                        load(emissoras[currentCardIndex], {
+                            autoplay: true
+                        })
+                    }
                     break;
                 case 'Escape':
-                    pauseAudio()
+                    pause()
                     break;
                 case 'Digit0':
-                  pauseAudio()
+                  pause()
                   navigate('/homePage');
                   break;
                 case 'Digit1':
-                  pauseAudio()
+                  pause()
                   navigate('/radioDifusorSec');
                   break;
                 case 'Digit2':
-                  pauseAudio()
+                  pause()
                   navigate('/radioDifusorSecL2');
                   break;
+                case 'Digit3':
+                  pause()
+                  navigate('/importProfile');
+                  break;
                 case 'ContextMenu':
-                  pauseAudio()
+                  pause()
                   navigate(-1);
                   break;
                 case 'KeyA':
-                  pauseAudio()
+                  pause()
                   navigate('/tvAberta');
                   break;
                 case 'KeyV':
-                  pauseAudio()
+                  pause()
                   window.location.reload();
                   break;
                 case 'Digit7':
-                  pauseAudio()
+                  pause()
                   window.location.reload();
                   break;
                 case 'F2':
                   if (flagAudiodesc) {
-                    pauseAudio()
+                    pause()
                     setFlagAudiodesc(false)
+                    setQueueIndex(0)
                   }
                   else setFlagAudiodesc(true)
 
@@ -120,24 +204,28 @@ export default function TvAberta() {
             }
 
             rowRefs[currentRowIndex].current[currentCardIndex].focus();
-            audioQueue.push(audioFile);
         };
 
         window.addEventListener('keydown', handleKeyDown);
-
-        if (flagAudiodesc) {
-            playAudio(audioQueue[0])
-            audio.current.addEventListener("ended", (e) => {
-                console.log("Cabou o audio")
-                audioQueue.shift()
-                playAudio(audioQueue[0])
-            })
-        }
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, [flagAudiodesc]);
+
+    useEffect(() => {
+        console.log(queueIndex)
+        if(flagAudiodesc && queueIndex < audioQueue.length){
+    
+          load(audioQueue[queueIndex], {
+            autoplay: true,
+            onend: () => {
+              setQueueIndex(index => {return queueIndex + 1})
+            }
+          });
+        }
+          
+      }, [queueIndex, load, flagAudiodesc])
 
     const playAudio = (file) => {
       // console.log("playAudio")

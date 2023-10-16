@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import NextButton from "./NextButton";
 
-export default function FooterAppCatUI({ href }) {
+export default function FooterAppCatUI({ href, className }) {
   return (
     <footer className="flex items-center justify-between text-white mt-auto pl-10 pr-10 pb-10">
-      <div className="font-normal flex justify-between items-center w-full">
+      <div className={`font-normal flex justify-between items-center w-full`}>
 
-        <Link to="/appCatUI">
+        <Link className={`${className} focus:border-8`}to="/appCatUI">
           <div className="flex font-normal gap-3 items-center">
             <IconBordered>
               <AiOutlineArrowLeft size={40} />

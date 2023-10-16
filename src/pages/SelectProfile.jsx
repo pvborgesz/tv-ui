@@ -8,9 +8,9 @@ import TitlePage from "../components/TitlePage";
 import { Link } from "react-router-dom";
 import ImageIconRounded from "../components/ImageIconRounded";
 import UserImg from '../assets/user-img.png'
-import audioFile from "../audios/ConfPerfilTitulo.mp3";
-import audioFile2 from "../audios/ContSemPerfil.mp3";
-import audioFile3 from "../audios/ContSemPerfil.mp3";
+import audioFile from "../audios/ConfiguracaoInicialPerfil.mp3";
+import audioFile2 from "../audios/ContinuarSemPerfil.mp3";
+import audioFile3 from "../audios/AdicionarPerfil.mp3";
 
 import { AudiodescContext } from "../App";
 import { AudiodescFlag } from "../App";

@@ -49,6 +49,10 @@ export default function App() {
           event.preventDefault();
           navigate('/radioDifusorSecL2');
           break;
+        case 'Digit3':
+          event.preventDefault();
+          navigate('/importProfile');
+          break;
         case 'Escape':
           event.preventDefault();
           navigate(-1);

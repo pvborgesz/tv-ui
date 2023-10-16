@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 import { BsArrowRightShort } from "react-icons/bs";
 import '../App.css';
 import ReactAudioPlayer from 'react-audio-player';
-import { useGlobalAudioPlayer, useAudioPlayer } from 'react-use-audio-player';
+import { useAudioPlayer } from 'react-use-audio-player';
 
 export default function SelectLanguage() {
   const selectRef = useRef();

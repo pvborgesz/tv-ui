@@ -4,12 +4,12 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import ImageIconRounded from "../components/ImageIconRounded";
 
-export default function ProfileCard({ icon, name, create }) {
+export default function ProfileCard({ icon, name, create, className }) {
   const [href] = useState(create ? "/createProfile" : "/discoverChannels");
 
   return (
     <Link
-      className="flex flex-col items-center gap-10 cursor-pointer p-14 hover:bg-zinc-700 hover:scale-105 rounded-xl border-2 h-[370px] justify-center transition-all duration-400"
+      className={`${className} flex flex-col items-center gap-10 cursor-pointer p-14 hover:bg-zinc-700 focus:border-8 hover:scale-105 rounded-xl border-2 h-[370px] justify-center transition-all duration-400`}
       to={href}
     >
       <div className="flex flex-col items-center justify-center  cursor-pointer  rounded-sm ">

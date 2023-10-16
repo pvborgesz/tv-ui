@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import ImageIconRounded from "./ImageIconRounded";
 import { BsCheck } from "react-icons/bs";
 
-export default function ProfileCard2({ icon, name, create, id }) {
+export default function ProfileCard2({ icon, name, create, id, className }) {
   const [href] = /*useState(create ? "/createProfile" : "/discoverChannels");*/"#"
 
   const handleClick = () => {
@@ -22,7 +22,7 @@ export default function ProfileCard2({ icon, name, create, id }) {
 
   return (
     <Link
-      className="flex flex-col items-center gap-10 cursor-pointer hover:bg-zinc-700 hover:scale-105 rounded-xl border-2 h-[370px] justify-center transition-all duration-400"
+      className={`${className} flex flex-col items-center gap-10 cursor-pointer focus:border-8 hover:bg-zinc-700 hover:scale-105 rounded-xl border-2 h-[370px] justify-center transition-all duration-400`}
       to={href}
       onClick={handleClick}
     >

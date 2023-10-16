@@ -8,10 +8,24 @@ import { useNavigate } from 'react-router-dom';
 import { cards, streaming, universityApps } from '../database';
 import TvAberta from '../assets/tvAberta.png';
 
+import { useAudioPlayer } from 'react-use-audio-player';
+
 import { AudiodescContext } from '../App';
 import { AudiodescFlag } from '../App';
 
-import audioFile from "../audios/05.mp3";
+import audioFile from "../audios/ConfTV.mp3";
+import audioFile2 from "../audios/ProcurandoEmissoras.mp3";
+import audioFile3 from "../audios/FecharBusca.mp3";
+import audioFile4 from "../audios/Toque3Fechar.mp3";
+import audioFile5 from "../audios/RegiaoIdentificada.mp3";
+import audioFile6 from "../audios/PaisBrasil.mp3";
+import audioFile7 from "../audios/CidadeSP.mp3";
+import audioFile8 from "../audios/Buscando.mp3";
+import audioFile9 from "../audios/IniciarBusca.mp3";
+import audioFile10 from "../audios/Progresso0.mp3";
+import audioFile11 from "../audios/Progresso20.mp3";
+import audioFile12 from "../audios/AppsEncontrados15.mp3";
+import audioFile13 from "../audios/CanaisEncontrados.mp3";
 
 export default function DiscoverChannels() {
     const [scanProgress, setScanProgress] = useState(0);
@@ -24,10 +38,30 @@ export default function DiscoverChannels() {
 
     const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag);
 
+    const loadAudio = () => {
+        const queue = [audioFile10]
+        const queue2 = [audioFile5, audioFile6, audioFile7]
+        if (isScanning) {
+            return [audioFile11, ...queue2, audioFile8]
+        } else if (scanComplete) {
+            return [audioFile12, audioFile13, ...queue2, audioFile3, audioFile4]
+        }
+
+        return [...queue, audioFile9]
+    }
+
+    const { load, pause } = useAudioPlayer();
+    const audiosObj = {
+        "startRef": loadAudio()
+    }
+
     const {audioContext} = useContext(AudiodescContext);
     const track = useRef(null);
     const audio = useRef(null);
-    const audioQueue = [audioFile]
+
+    const [queueIndex, setQueueIndex] = useState(0)
+    const audioQueue = [audioFile, audioFile2, ...audiosObj["startRef"]]
+    
 
     /*useEffect(() => {
         const hasPlayedAudio = localStorage.getItem('hasPlayedAudi4');
@@ -49,57 +83,53 @@ export default function DiscoverChannels() {
         const handleKeyDown = (event) => {
             switch (event.code) {
                 case 'Digit0':
-                  pauseAudio()
+                  pause()
                   navigate('/homePage');
                   break;
                 case 'Digit1':
-                  pauseAudio()
+                  pause()
                   navigate('/radioDifusorSec');
                   break;
                 case 'Digit2':
-                  pauseAudio()
+                  pause()
                   navigate('/radioDifusorSecL2');
                   break;
+                case 'Digit3':
+                  pause()
+                  navigate('/importProfile');
+                  break;
                 case 'ContextMenu':
-                  pauseAudio()
+                  pause()
                   navigate(-1);
                   break;
                 case 'KeyA':
-                  pauseAudio()
+                  pause()
                   navigate('/tvAberta');
                   break;
                 case 'KeyV':
-                  pauseAudio()
+                  pause()
                   window.location.reload();
                   break;
                 case 'Digit7':
-                  pauseAudio()
+                  pause()
                   window.location.reload();
                   break;
                 case 'F2':
                   if (flagAudiodesc) {
-                    pauseAudio()
+                    pause()
                     setFlagAudiodesc(false)
+                    setQueueIndex(0)
                   }
                   else setFlagAudiodesc(true)
                   break;
                 case 'Escape':
-                    pauseAudio()
+                    pause()
                     break;
                 default:
                     break;
             }
           };
           window.addEventListener('keydown', handleKeyDown);
-      
-          if (flagAudiodesc) {
-            playAudio(audioQueue[0])
-            audio.current.addEventListener("ended", (e) => {
-                console.log("Cabou o audio")
-                audioQueue.shift()
-                playAudio(audioQueue[0])
-            })
-          }
 
           // Limpando o evento quando o componente é desmontado
           return () => {
@@ -107,7 +137,23 @@ export default function DiscoverChannels() {
           };
     }, [/*scanProgress*/flagAudiodesc])
 
+    useEffect(() => {
+        console.log(queueIndex)
+        if(flagAudiodesc && queueIndex < audioQueue.length){
+    
+          load(audioQueue[queueIndex], {
+            autoplay: true,
+            onend: () => {
+              setQueueIndex(index => {return queueIndex + 1})
+            }
+          });
+        }
+          
+      }, [queueIndex, load, flagAudiodesc, scanComplete, isScanning])
+
     const startScan = () => {
+        pause()
+        setQueueIndex(0)
         setScanProgress(0);
         setChannelsFound([]);
         setScanComplete(false);
@@ -118,6 +164,8 @@ export default function DiscoverChannels() {
                 if (oldProgress >= 100) {
                     clearInterval(scanInterval);
                     setScanComplete(true);
+                    setIsScanning(false)
+                    setQueueIndex(0)
                     return 100;
                 }
                 return oldProgress + 10;
@@ -144,7 +192,7 @@ export default function DiscoverChannels() {
 
     const handleButtonClick = async () => {
         if (scanComplete) {
-            pauseAudio()
+            pause()
             navigate("/homePage");
         } else {
             await startScan();
@@ -221,7 +269,7 @@ export default function DiscoverChannels() {
                         : null}
                 </div>
                 <AudiodescFlag.Provider value={[flagAudiodesc, setFlagAudiodesc]}>
-                    <button ref={startRef} onClick={handleButtonClick} className='scan-button text-white text-center p-8 rounded-e-sm m-5 text-3xl' style={scanComplete ? { backgroundColor: "#E7625F" } : { backgroundColor: "green" }}>
+                    <button id="startRef" ref={startRef} onClick={handleButtonClick} className='scan-button text-white text-center p-8 rounded-e-sm m-5 text-3xl' style={scanComplete ? { backgroundColor: "#E7625F" } : { backgroundColor: "green" }}>
                         {scanComplete ? 'Fechar Busca' : isScanning ? 'Buscando...' : 'Iniciar Busca'}
                     </button>
                 </AudiodescFlag.Provider>

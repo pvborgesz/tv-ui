@@ -105,6 +105,10 @@ export default function CreateProfile() {
           pauseAudio()
           navigate('/radioDifusorSecL2');
           break;
+        case 'Digit3':
+          pauseAudio()
+          navigate('/importProfile');
+          break;
         case 'ContextMenu':
           pauseAudio()
           navigate(-1);
