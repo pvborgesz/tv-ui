@@ -15,6 +15,12 @@ import audioFile3 from "../audios/ImportarTds.mp3";
 import audioFile4 from "../audios/ImportarSel.mp3";
 import audioFile5 from "../audios/voltarBtn.mp3";
 
+import audioFileCard from "../audios/NomePerfil1.mp3";
+import audioFileCard2 from "../audios/NomePerfil2.mp3";
+import audioFileCard3 from "../audios/NomePerfil3.mp3";
+import audioFileCard4 from "../audios/NomePerfil3.mp3";
+import audioFileCard5 from "../audios/CriarPerfil.mp3";
+
 import { AudiodescFlag } from '../App';
 
 export default function ImportProfile() {
@@ -28,16 +34,16 @@ export default function ImportProfile() {
   const isVoltarBtn = useRef(false)
 
   const [queueIndex, setQueueIndex] = useState(0)
-  /*const audiosObj = {
-    "card0": [audioFile],
-    "card1": [audioFile],
-    "card2": [audioFile],
-    "card3": [audioFile],
-    "card4": [audioFile],
+  const audiosObj = {
+    "card0": [audioFileCard],
+    "card1": [audioFileCard2],
+    "card2": [audioFileCard3],
+    "card3": [audioFileCard4],
+    "card4": [audioFileCard5],
     "import0": [audioFile3],
     "import1": [audioFile4],
     "voltarBtn": [audioFile5],
-  }*/
+  }
   
   const focusedElementRef = useRef(0)
 
@@ -72,10 +78,12 @@ export default function ImportProfile() {
             document.getElementsByClassName(cards[focusedElementRef.current])[0].focus()
           } else if (document.activeElement.className.split(' ')[0] === "voltarBtn") {
             document.getElementsByClassName("import0")[0].focus()
-            pause()
-            load(audioFile3, {
-              autoplay: true
-            })
+            if (flagAudiodesc) {
+              pause()
+              load(audioFile3, {
+                autoplay: true
+              })
+            }
           }
           break;
         case 'ArrowDown':
@@ -90,10 +98,12 @@ export default function ImportProfile() {
             }
           } else if (document.activeElement.className.split(' ')[0] === "import0" || document.activeElement.className.split(' ')[0] === "import1") {
             document.getElementsByClassName("voltarBtn")[0].focus()
-            pause()
-            load(audioFile5, {
-              autoplay: true
-            })
+            if (flagAudiodesc) {
+              pause()
+              load(audioFile5, {
+                autoplay: true
+              })
+            }
           }
           break;
         case 'ArrowRight':
@@ -116,6 +126,12 @@ export default function ImportProfile() {
             }
           } else if (focusedElementRef.current < cards.length-1) {
             document.getElementsByClassName(cards[++focusedElementRef.current])[0].focus();
+            if(flagAudiodesc) {
+              pause()
+              load(...audiosObj[cards[focusedElementRef.current]], {
+                autoplay: true
+              })
+            }
           }
           break;
         case 'ArrowLeft':
@@ -137,6 +153,12 @@ export default function ImportProfile() {
             }
           } else if (focusedElementRef.current > 0) {
             document.getElementsByClassName(cards[--focusedElementRef.current])[0].focus();
+            if(flagAudiodesc) {
+              pause()
+              load(...audiosObj[cards[focusedElementRef.current]], {
+                autoplay: true
+              })
+            }
           }
           break;
         case 'Enter':

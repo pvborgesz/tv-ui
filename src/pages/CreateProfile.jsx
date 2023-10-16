@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import Footer from "../components/FooterCreateProfile";
 import TitlePage from "../components/TitlePage";
@@ -32,14 +32,15 @@ import CC from "../assets/legenda_oculta.svg";
 import { BsCheck } from "react-icons/bs";
 
 import audioFile from "../audios/04.mp3";
-
+import { useAudioPlayer } from "react-use-audio-player";
 // import ProfileCard from "../components/ProfileCard";
 
 export default function CreateProfile() {
   const nameRef = useRef();
   const groupRef = useRef();
+  const dateRef = useRef();
   const languageRef = useRef();
-  const audiodescRef = useRef();
+  const audioDescRef = useRef();
   const signRef = useRef();
   const closedCapRef = useRef();
   const diagEnhanceRef = useRef();
@@ -52,23 +53,61 @@ export default function CreateProfile() {
   const quatorzeRef = useRef();
   const dezesseisRef = useRef();
   const dezoitoRef = useRef();
+  const kidProfileRef = useRef();
+  const maleRef = useRef();
+  const femaleRef = useRef();
+  const nbRef = useRef();
+  const chooseAvatarRef = useRef();
 
   const focusedElementRef = useRef('nameRef');
   const selectedIndexRef = useRef(0)
 
   const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag);
   const navigate = useNavigate()
+  
+  const [queueIndex, setQueueIndex] = useState(0)
+  const audiosObj = {
+    "advanceRef": [audioFile],
+    "createRef": [audioFile],
+    "lgpdRef": [audioFile],
+    "groupRef": [audioFile],
+    "nameRef": [audioFile],
+    "livreRef": [audioFile],
+    "dezRef": [audioFile],
+    "dozeRef": [audioFile],
+    "quatorzeRef": [audioFile],
+    "dezesseisRef": [audioFile],
+    "dezoitoRef": [audioFile],
+    "languageRef": [audioFile],
+    "audioDescRef": [audioFile],
+    "signRef": [audioFile],
+    "closedCapRef": [audioFile],
+    "diagEnhanceRef": [audioFile],
+    "dateRef": [audioFile],
+    "kidProfileRef": [audioFile],
+    "maleRef": [audioFile],
+    "femaleRef": [audioFile],
+    "nbRef": [audioFile],
+    "chooseAvatarRef": [audioFile],
+  }
+
+  console.log(focusedElementRef.current)
 
   const {audioContext} = useContext(AudiodescContext);
   const track = useRef(null);
   const audio = useRef(null);
-  const audioQueue = [audioFile]
+  const audioQueue = [audioFile, audioFile, ...audiosObj[focusedElementRef.current]]
+
+  const { load, pause } = useAudioPlayer();
+
 
   /*useEffect(() => {
     const hasPlayedAudio = localStorage.getItem('hasPlayedAudio3');
 
     if (!hasPlayedAudio) {
-      playAudio(audioFile)
+      load(audioFile, {
+        autoplay: true
+      })
       /*const audio = new Audio(audioFile);
       audio.play().catch((error) => {
         console.error("Falha ao tocar áudio:", error);
@@ -94,35 +133,35 @@ export default function CreateProfile() {
     const handleKeyDown = (event) => {
       switch (event.code) {
         case 'Digit0':
-          pauseAudio()
+          pause()
           navigate('/homePage');
           break;
         case 'Digit1':
-          pauseAudio()
+          pause()
           navigate('/radioDifusorSec');
           break;
         case 'Digit2':
-          pauseAudio()
+          pause()
           navigate('/radioDifusorSecL2');
           break;
         case 'Digit3':
-          pauseAudio()
+          pause()
           navigate('/importProfile');
           break;
         case 'ContextMenu':
-          pauseAudio()
+          pause()
           navigate(-1);
           break;
         case 'KeyA':
-          pauseAudio()
+          pause()
           navigate('/tvAberta');
           break;
         case 'KeyV':
-          pauseAudio()
+          pause()
           window.location.reload();
           break;
         case 'Digit7':
-          pauseAudio()
+          pause()
           window.location.reload();
           break;
         case 'F2':
@@ -130,7 +169,7 @@ export default function CreateProfile() {
           selectedIndexRef.current = document.getElementById("languageRef").tabIndex
 
           if (flagAudiodesc) {
-            pauseAudio()
+            pause()
             setFlagAudiodesc(false)
           }
           else setFlagAudiodesc(true)
@@ -141,10 +180,37 @@ export default function CreateProfile() {
           if (document.activeElement === groupRef.current) {
             nameRef.current.focus();
             if(flagAudiodesc) {
-              pauseAudio()
-              playAudio(audioFile)
+              pause()
+              load(audioFile, {
+                autoplay: true
+              })
             }
           }
+          else if (document.activeElement === audioDescRef.current || document.activeElement === signRef.current || document.activeElement === closedCapRef.current || document.activeElement === diagEnhanceRef.current) {
+            languageRef.current.focus()
+          }
+          else if (document.activeElement === languageRef.current) {
+            kidProfileRef.current.focus()
+          }
+          else if (document.activeElement === dateRef.current || document.activeElement === livreRef.current || document.activeElement === dezRef.current || document.activeElement === dozeRef.current || document.activeElement === quatorzeRef.current || document.activeElement === dezesseisRef.current || document.activeElement === dezoitoRef.current) {
+            groupRef.current.focus()
+          }
+          else if (document.activeElement === lgpdRef.current) {
+            audioDescRef.current.focus()
+          }
+          else if (document.activeElement === createRef.current) {
+            diagEnhanceRef.current.focus()
+          }
+          else if (document.activeElement === advanceRef.current) {
+            chooseAvatarRef.current.focus()
+          }
+          else if (document.activeElement === chooseAvatarRef.current) {
+            nameRef.current.focus()
+          }
+          else if (document.activeElement === maleRef.current || document.activeElement === femaleRef.current || document.activeElement === nbRef.current || document.activeElement === kidProfileRef.current) {
+            dateRef.current.focus()
+          }
+
           event.preventDefault();
 
           break;
@@ -155,81 +221,148 @@ export default function CreateProfile() {
           if (document.activeElement === nameRef.current) {
             groupRef.current.focus();
             if(flagAudiodesc) {
-              pauseAudio()
-              playAudio(audioFile)
+              pause()
+              load(audioFile, {
+                autoplay: true
+              })
             }
           }
           // if focus on groupRef, go to languageRef
+          else if (document.activeElement === dateRef.current || document.activeElement === livreRef.current || document.activeElement === dezRef.current || document.activeElement === dozeRef.current || document.activeElement === quatorzeRef.current || document.activeElement === dezesseisRef.current || document.activeElement === dezoitoRef.current) {
+            kidProfileRef.current.focus();
+          }
           else if (document.activeElement === groupRef.current) {
-            languageRef.current.focus();
+            dateRef.current.focus();
+          }
+          else if(document.activeElement === languageRef.current) {
+            audioDescRef.current.focus();
+          }
+          else if (document.activeElement === audioDescRef.current || document.activeElement === signRef.current || document.activeElement === closedCapRef.current) {
+            lgpdRef.current.focus()
+          }
+          else if (document.activeElement === diagEnhanceRef.current) {
+            createRef.current.focus()
+          }
+          else if (document.activeElement === chooseAvatarRef.current) {
+            advanceRef.current.focus()
+          }
+          else if (document.activeElement === maleRef.current || document.activeElement === femaleRef.current || document.activeElement === nbRef.current || document.activeElement === kidProfileRef.current) {
+            languageRef.current.focus()
           }
           break;
         case 'ArrowLeft':
           if (document.activeElement === livreRef.current) {
-            groupRef.current.focus();
+            dateRef.current.focus();
           }
-          if (document.activeElement === dezRef.current) {
+          else if (document.activeElement === dezRef.current) {
             livreRef.current.focus();
           }
-          if (document.activeElement === dozeRef.current) {
+          else if (document.activeElement === dozeRef.current) {
             dezRef.current.focus();
           }
-          if (document.activeElement === quatorzeRef.current) {
+          else if (document.activeElement === quatorzeRef.current) {
             dozeRef.current.focus();
           }
-          if (document.activeElement === dezesseisRef.current) {
+          else if (document.activeElement === dezesseisRef.current) {
             quatorzeRef.current.focus();
           }
-          if (document.activeElement === dezoitoRef.current) {
+          else if (document.activeElement === dezoitoRef.current) {
             dezesseisRef.current.focus();
           }
-          if (document.activeElement === groupRef.current) {
-            dezoitoRef.current.focus();
-          }
-          if (document.activeElement === advanceRef.current) {
+          else if (document.activeElement === advanceRef.current) {
             createRef.current.focus()
           }
-          if (document.activeElement === createRef.current) {
-            languageRef.current.focus()
+          else if (document.activeElement === createRef.current) {
+            lgpdRef.current.focus()
           }
-          if (document.activeElement === languageRef.current) {
-            audiodescRef.current.focus()
+          else if (document.activeElement === languageRef.current) {
+            audioDescRef.current.focus()
+          }
+          else if (document.activeElement === signRef.current) {
+            audioDescRef.current.focus()
+          }
+          else if (document.activeElement === closedCapRef.current) {
+            signRef.current.focus()
+          }
+          else if (document.activeElement === diagEnhanceRef.current) {
+            closedCapRef.current.focus()
+          }
+          else if (document.activeElement === maleRef.current) {
+            kidProfileRef.current.focus()
+          }
+          else if (document.activeElement === femaleRef.current) {
+            maleRef.current.focus()
+          }
+          else if (document.activeElement === nbRef.current) {
+            femaleRef.current.focus()
+          }
+          else if (document.activeElement === chooseAvatarRef.current) {
+            dezoitoRef.current.focus()
           }
 
           event.preventDefault();
 
           break;
         case 'ArrowRight':
-          if (document.activeElement === groupRef.current) {
+          if (document.activeElement === dateRef.current) {
             livreRef.current.focus();
           }
-          if (document.activeElement === livreRef.current) {
+          else if (document.activeElement === livreRef.current) {
             dezRef.current.focus();
           }
-          if (document.activeElement === dezRef.current) {
+          else if (document.activeElement === dezRef.current) {
             dozeRef.current.focus();
           }
-          if (document.activeElement === dozeRef.current) {
+          else if (document.activeElement === dozeRef.current) {
             quatorzeRef.current.focus();
           }
-          if (document.activeElement === quatorzeRef.current) {
+          else if (document.activeElement === quatorzeRef.current) {
             dezesseisRef.current.focus();
           }
-          if (document.activeElement === dezesseisRef.current) {
+          else if (document.activeElement === dezesseisRef.current) {
             dezoitoRef.current.focus();
           }
-          if (document.activeElement === languageRef.current) {
-            createRef.current.focus()
+          else if (document.activeElement === dezoitoRef.current) {
+            chooseAvatarRef.current.focus();
           }
-          if (document.activeElement === createRef.current) {
+          else if (document.activeElement === languageRef.current) {
+            closedCapRef.current.focus()
+          }
+          else if (document.activeElement === createRef.current) {
             advanceRef.current.focus()
           }
-
+          else if (document.activeElement === audioDescRef.current) {
+            signRef.current.focus()
+          }
+          else if (document.activeElement === signRef.current) {
+            closedCapRef.current.focus()
+          }
+          else if (document.activeElement === closedCapRef.current) {
+            diagEnhanceRef.current.focus()
+          }
+          else if (document.activeElement === lgpdRef.current) {
+            createRef.current.focus()
+          }
+          else if (document.activeElement === kidProfileRef.current) {
+            maleRef.current.focus()
+          }
+          else if (document.activeElement === maleRef.current) {
+            femaleRef.current.focus()
+          }
+          else if (document.activeElement === femaleRef.current) {
+            nbRef.current.focus()
+          }
+          else if (document.activeElement === nbRef.current) {
+            chooseAvatarRef.current.focus()
+          }
           event.preventDefault();
 
           break;
         case 'Escape':
-          pauseAudio()
+          pause()
+          break;
+        case 'Enter':
+          document.activeElement.click()
           break;
         default:
           break;
@@ -239,19 +372,24 @@ export default function CreateProfile() {
 
     window.addEventListener('keydown', handleKeyDown);
 
-    if(flagAudiodesc) {
-      playAudio(audioQueue[0])
-      audio.current.addEventListener("ended", (e) => {
-        console.log("Cabou o audio")
-        audioQueue.shift()
-        playAudio(audioQueue[0])
-      })
-    }
-
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [flagAudiodesc]);
+
+  useEffect(() => {
+    console.log(queueIndex)
+    if(flagAudiodesc && queueIndex < audioQueue.length){
+
+      load(audioQueue[queueIndex], {
+        autoplay: true,
+        onend: () => {
+          setQueueIndex(index => {return queueIndex + 1})
+        }
+      });
+    }
+      
+  }, [queueIndex, load, flagAudiodesc])
 
 
   const handleClick = (event) => {
@@ -315,9 +453,10 @@ export default function CreateProfile() {
 
           <div className="flex justify-start">
             <input
+              tabIndex="11" ref={groupRef} id="groupRef"
               className="text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
               type="checkbox"
-              placeholder="Nome do Perfil (obrigatório)"
+              placeholder=""
 
             />
             <h3 className="text-3xl ml-5">Este é um Perfil de Grupo (ex.: família, hóspedes...)</h3>
@@ -325,34 +464,34 @@ export default function CreateProfile() {
 
           <div className="flex justify-start">
             <input
-              id="groupRef"
+              id="dateRef"
               className="w-5/6 text-3xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
               type="password"
               placeholder="Data de nascimento dd/mm/aaaa"
-              ref={groupRef}
+              ref={dateRef}
 
             />
-            <div onClick={handleClick} className="flex flex-col ml-5 relative" ref={livreRef}>
+            <div id="livreRef" tabIndex="0" onClick={handleClick} className="flex flex-col ml-5 relative" ref={livreRef}>
               <div id={1} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={1} src={ClassLivre} alt="" />
             </div>
-            <div onClick={handleClick} className="flex flex-col ml-5 relative" ref={dezRef}>
+            <div id="dezRef" tabIndex="1" onClick={handleClick} className="flex flex-col ml-5 relative" ref={dezRef}>
               <div id={2} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={2} src={Class10} alt="" />
             </div>
-            <div onClick={handleClick} className="flex flex-col ml-5 relative" ref={dozeRef}>
+            <div id="dozeRef" tabIndex="2" onClick={handleClick} className="flex flex-col ml-5 relative" ref={dozeRef}>
               <div id={3} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={3} src={Class12} alt="" />
             </div>
-            <div onClick={handleClick} className="flex flex-col ml-5 relative" ref={quatorzeRef}>
+            <div id="quatorzeRef" tabIndex="3" onClick={handleClick} className="flex flex-col ml-5 relative" ref={quatorzeRef}>
               <div id={4} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={4} src={Class14} alt="" />
             </div>
-            <div onClick={handleClick} className="flex flex-col ml-5 relative" ref={dezesseisRef}>
+            <div id="dezesseisRef" tabIndex="4" onClick={handleClick} className="flex flex-col ml-5 relative" ref={dezesseisRef}>
               <div id={5} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={5} src={Class16} alt="" />
             </div>
-            <div onClick={handleClick} className="flex flex-col ml-5 relative" ref={dezoitoRef}>
+            <div id="dezoitoRef" tabIndex="5" onClick={handleClick} className="flex flex-col ml-5 relative" ref={dezoitoRef}>
               <div id={6} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={6} src={Class18} alt="" />
             </div>
@@ -360,6 +499,9 @@ export default function CreateProfile() {
 
           <div className="flex justify-start">
             <input
+              tabIndex="13"
+              ref={kidProfileRef}
+              id="kidProfileRef"
               className="text-2xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
               type="checkbox"
               placeholder=""
@@ -367,24 +509,33 @@ export default function CreateProfile() {
             <div className="flex">
               <h3 className="text-3xl ml-5">Este é um Perfil de Criança</h3>
 
-              <div className="flex ml-20">
+              <div tabIndex="6" className="flex ml-20">
 
                 <h3 className="text-3xl mr-5">
                   Gênero
                 </h3>
                 <input
+                  tabIndex="14"
+                  ref={maleRef}
+                  id="maleRef"
                   className="mx-1 text-2xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
                   type="checkbox"
                   placeholder=""
                 />
                 <h1 className="mr-2 text-2xl">M</h1>
                 <input
+                  tabIndex="15"
+                  ref={femaleRef}
+                  id="femaleRef"
                   className="mx-1 text-2xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
                   type="checkbox"
                   placeholder=""
                 />
                 <h1 className="mr-2 text-2xl">F</h1>
                 <input
+                  tabIndex="16"
+                  ref={nbRef}
+                  id="nbRef"
                   className="mx-1 text-2xl font-normal bg-zinc-800 text-white border-2 border-white rounded-md p-4"
                   type="checkbox"
                   placeholder=""
@@ -431,26 +582,26 @@ export default function CreateProfile() {
             </select>
           </div>
 
-          <div className="flex align-center justify-evenly text-white flex-grow mt-10 mr-10 mb-10" ref={audiodescRef}>
-            <div className="flex items-center justify-start mr-10 w-1/4 relative">
+          <div className="flex align-center justify-evenly text-white flex-grow mt-10 mr-10 mb-10">
+            <div id="audioDescRef" tabIndex="7" className="flex items-center justify-start mr-10 w-1/4 relative" ref={audioDescRef}>
               <div id={7} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={7} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={AudioDescriacao} />
               <h3 className="text-xl text-white">Áudiodescrição</h3>
             </div>
 
-            <div className="flex items-center justify-start mx-3 w-1/4 relative" ref={signRef}>
+            <div id="signRef" tabIndex="8" className="flex items-center justify-start mx-3 w-1/4 relative" ref={signRef}>
               <div id={8} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={8} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={Libras} />
               <h3 className="text-xl text-white">Acessível em Libras</h3>
             </div>
 
-            <div className="flex items-center justify-start mx-3 w-1/4 relative" ref={closedCapRef}>
+            <div id="closedCapRef" tabIndex="9" className="flex items-center justify-start mx-3 w-1/4 relative" ref={closedCapRef}>
               <div id={9} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={9} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={CC} />
               <h3 className="text-xl text-white">Legendas Ocultas</h3>
             </div>
 
-            <div className="flex items-center justify-start mx-3 w-1/4 relative" ref={diagEnhanceRef}>
+            <div id="diagEnhanceRef" tabIndex="10" className="flex items-center justify-start mx-3 w-1/4 relative" ref={diagEnhanceRef}>
               <div id={10} className="hidden absolute top-[-1.3rem] left-[-1rem] items-center" ><BsCheck color="green" size="30px" /></div>
               <img id={10} onClick={handleClick} className="w-20 h-20 mr-2 border border-white rounded-lg p-2 hover:scale-105 transition-all duration-400 hover:bg-zinc-700" src={AprimorDialogo} />
               <h3 className="text-xl text-white">Aprimoramento de Diálogo</h3>
@@ -460,24 +611,24 @@ export default function CreateProfile() {
         </div>
 
         <div className="flex flex-col justify-center items-center mx-2">
-          <img className="w-52 pb-5" src={ProfileIcon} />
+          <img tabIndex="17" id="chooseAvatarRef" ref={chooseAvatarRef} className="w-52 pb-5" src={ProfileIcon} />
           <h3 className="text-3xl text-white text-center">Escolha seu avatar</h3>
         </div>
 
       </div>
 
-      {/*<Footer onClick={pauseAudio}/>*/}
+      {/*<Footer onClick={pause}/>*/}
       <footer className="flex items-center justify-end text-white mb-5 mt-auto pl-3 pr-10 pb-10">
       <div className="font-normal flex justify-end items-center w-full mt-5">
 
-        <div className="w-full bg-zinc-800 flex flex-row items-left justify-left text-white flex-grow mr-10" ref={lgpdRef}>
-          <input className="ml-5" type="checkbox" />
+        <div className="w-full bg-zinc-800 flex flex-row items-left justify-left text-white flex-grow mr-10">
+          <input ref={lgpdRef} id="lgpdRef" tabIndex="12" className="ml-5" type="checkbox" />
           <h1 className="text-2xl font-normal  ml-10 mr-5">
             Concordo com a coleta e processamento de meus dados para uma melhor experiência, em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD). <a className="text-slate-400" href="#">Saiba mais.</a>
           </h1>
         </div>
 
-        <Link onClick={pauseAudio} to="/createProfile" ref={createRef}>
+        <Link onClick={pause} to="/createProfile" ref={createRef}>
           <div className="flex font-normal gap-3 items-center">
             <p className="text-2xl mt-1.5 w-24 text-center">Criar Outro</p>
             <IconBordered>
@@ -487,7 +638,7 @@ export default function CreateProfile() {
         </Link>
 
         <AudiodescFlag.Provider value={[flagAudiodesc, setFlagAudiodesc]}>
-          <Link id="advanceRef" onClick={pauseAudio} to="/discoverChannels" ref={advanceRef}>
+          <Link id="advanceRef" onClick={pause} to="/discoverChannels" ref={advanceRef}>
             <div className="flex font-normal gap-3 items-center pl-5">
               <p className="text-2xl mt-1.5 w-24 text-center">Avançar</p>
               <IconBordered>
