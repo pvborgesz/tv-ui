@@ -31,7 +31,35 @@ import CC from "../assets/legenda_oculta.svg";
 
 import { BsCheck } from "react-icons/bs";
 
-import audioFile from "../audios/04.mp3";
+import audioFile from "../audios/CriandoPerfil.mp3";
+import audioFile2 from "../audios/NomePerfil.mp3";
+import audioFile3 from "../audios/PerfilGp.mp3";
+import audioFile4 from "../audios/DataNasc.mp3";
+import audioFile5 from "../audios/PerfilCrianca.mp3";
+import audioFile6 from "../audios/LivreBotao.mp3";
+import audioFile7 from "../audios/10anos.mp3";
+import audioFile8 from "../audios/12Anos.mp3";
+import audioFile9 from "../audios/14Anos.mp3";
+import audioFile10 from "../audios/16Anos.mp3";
+import audioFile11 from "../audios/18Anos.mp3";
+import audioFile12 from "../audios/NBBotao.mp3";
+import audioFile13 from "../audios/MasculinoBotao.mp3";
+import audioFile14 from "../audios/FemininoBotao.mp3";
+import audioFile15 from "../audios/Genero.mp3";
+import audioFile16 from "../audios/BotaoSelecao.mp3";
+import audioFile17 from "../audios/CaixaTexto.mp3";
+import audioFile18 from "../audios/AudiodescBotao.mp3";
+import audioFile19 from "../audios/LibrasBotao.mp3";
+import audioFile20 from "../audios/LegendasBotao.mp3";
+import audioFile21 from "../audios/AprimoramentoDialogoBotao.mp3";
+import audioFile22 from "../audios/PortuguesBotao2.mp3";
+import audioFile23 from "../audios/IdiomaSelecionado.mp3";
+import audioFile24 from "../audios/AvancarBotao2.mp3";
+import audioFile25 from "../audios/CriarOutroBtn.mp3";
+import audioFile26 from "../audios/ConcordoLGPD.mp3";
+import audioFile27 from "../audios/EscolhaAvatar.mp3";
+import audioFile28 from "../audios/SaibaMaisBtn.mp3";
+
 import { useAudioPlayer } from "react-use-audio-player";
 // import ProfileCard from "../components/ProfileCard";
 
@@ -58,6 +86,7 @@ export default function CreateProfile() {
   const femaleRef = useRef();
   const nbRef = useRef();
   const chooseAvatarRef = useRef();
+  const saibaMaisRef = useRef();
 
   const focusedElementRef = useRef('nameRef');
   const selectedIndexRef = useRef(0)
@@ -67,28 +96,29 @@ export default function CreateProfile() {
   
   const [queueIndex, setQueueIndex] = useState(0)
   const audiosObj = {
-    "advanceRef": [audioFile],
-    "createRef": [audioFile],
-    "lgpdRef": [audioFile],
-    "groupRef": [audioFile],
-    "nameRef": [audioFile],
-    "livreRef": [audioFile],
-    "dezRef": [audioFile],
-    "dozeRef": [audioFile],
-    "quatorzeRef": [audioFile],
-    "dezesseisRef": [audioFile],
-    "dezoitoRef": [audioFile],
-    "languageRef": [audioFile],
-    "audioDescRef": [audioFile],
-    "signRef": [audioFile],
-    "closedCapRef": [audioFile],
-    "diagEnhanceRef": [audioFile],
-    "dateRef": [audioFile],
-    "kidProfileRef": [audioFile],
-    "maleRef": [audioFile],
-    "femaleRef": [audioFile],
-    "nbRef": [audioFile],
-    "chooseAvatarRef": [audioFile],
+    "advanceRef": [audioFile24],
+    "createRef": [audioFile25],
+    "lgpdRef": [audioFile26, audioFile16],
+    "groupRef": [audioFile3, audioFile16],
+    "nameRef": [audioFile2, audioFile17],
+    "livreRef": [audioFile6],
+    "dezRef": [audioFile7],
+    "dozeRef": [audioFile8],
+    "quatorzeRef": [audioFile9],
+    "dezesseisRef": [audioFile10],
+    "dezoitoRef": [audioFile11],
+    "languageRef": [audioFile23, audioFile22],
+    "audioDescRef": [audioFile18],
+    "signRef": [audioFile19],
+    "closedCapRef": [audioFile20], 
+    "diagEnhanceRef": [audioFile21],
+    "dateRef": [audioFile4, audioFile17],
+    "kidProfileRef": [audioFile5, audioFile16],
+    "maleRef": [audioFile15, audioFile13],
+    "femaleRef": [audioFile15, audioFile14],
+    "nbRef": [audioFile15, audioFile12],
+    "chooseAvatarRef": [audioFile27],
+    "saibaMaisRef": [audioFile28],
   }
 
   console.log(focusedElementRef.current)
@@ -96,7 +126,7 @@ export default function CreateProfile() {
   const {audioContext} = useContext(AudiodescContext);
   const track = useRef(null);
   const audio = useRef(null);
-  const audioQueue = [audioFile, audioFile, ...audiosObj[focusedElementRef.current]]
+  const audioQueue = [audioFile, ...audiosObj[focusedElementRef.current]]
 
   const { load, pause } = useAudioPlayer();
 
@@ -171,6 +201,7 @@ export default function CreateProfile() {
           if (flagAudiodesc) {
             pause()
             setFlagAudiodesc(false)
+            setQueueIndex(0)
           }
           else setFlagAudiodesc(true)
           
@@ -181,34 +212,112 @@ export default function CreateProfile() {
             nameRef.current.focus();
             if(flagAudiodesc) {
               pause()
-              load(audioFile, {
-                autoplay: true
+              load(audioFile2, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile17, {
+                    autoplay: true
+                  })
+                }
               })
             }
           }
           else if (document.activeElement === audioDescRef.current || document.activeElement === signRef.current || document.activeElement === closedCapRef.current || document.activeElement === diagEnhanceRef.current) {
             languageRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile23, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile22, {
+                    autoplay: true
+                  })
+                }
+              })
+            }
           }
           else if (document.activeElement === languageRef.current) {
             kidProfileRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile5, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile16, {
+                    autoplay: true
+                  })
+                }
+              })
+            }
           }
           else if (document.activeElement === dateRef.current || document.activeElement === livreRef.current || document.activeElement === dezRef.current || document.activeElement === dozeRef.current || document.activeElement === quatorzeRef.current || document.activeElement === dezesseisRef.current || document.activeElement === dezoitoRef.current) {
             groupRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile3, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile16, {
+                    autoplay: true
+                  })
+                }
+              })
+            }
           }
           else if (document.activeElement === lgpdRef.current) {
             audioDescRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile18, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === createRef.current) {
             diagEnhanceRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile21, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === advanceRef.current) {
             chooseAvatarRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile27, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === chooseAvatarRef.current) {
             nameRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile2, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile17, {
+                    autoplay: true
+                  })
+                }
+              })
+            }
           }
           else if (document.activeElement === maleRef.current || document.activeElement === femaleRef.current || document.activeElement === nbRef.current || document.activeElement === kidProfileRef.current) {
             dateRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile4, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile17, {
+                    autoplay: true
+                  })
+                }
+              })
+            }
           }
 
           event.preventDefault();
@@ -222,82 +331,290 @@ export default function CreateProfile() {
             groupRef.current.focus();
             if(flagAudiodesc) {
               pause()
-              load(audioFile, {
-                autoplay: true
+              load(audioFile3, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile16, {
+                    autoplay: true
+                  })
+                }
               })
             }
           }
           // if focus on groupRef, go to languageRef
           else if (document.activeElement === dateRef.current || document.activeElement === livreRef.current || document.activeElement === dezRef.current || document.activeElement === dozeRef.current || document.activeElement === quatorzeRef.current || document.activeElement === dezesseisRef.current || document.activeElement === dezoitoRef.current) {
             kidProfileRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile5, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile16, {
+                    autoplay: true
+                  })
+                }
+              })
+            }
           }
           else if (document.activeElement === groupRef.current) {
             dateRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile4, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile17, {
+                    autoplay: true
+                  })
+                }
+              })
+            }
           }
           else if(document.activeElement === languageRef.current) {
             audioDescRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile18, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === audioDescRef.current || document.activeElement === signRef.current || document.activeElement === closedCapRef.current) {
             lgpdRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile26, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile16, {autoplay: true})
+                }
+              })
+            }
           }
           else if (document.activeElement === diagEnhanceRef.current) {
             createRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile25, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === chooseAvatarRef.current) {
             advanceRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile24, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === maleRef.current || document.activeElement === femaleRef.current || document.activeElement === nbRef.current || document.activeElement === kidProfileRef.current) {
             languageRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile23, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile22, {autoplay: true})
+                }
+              })
+            }
           }
           break;
         case 'ArrowLeft':
           if (document.activeElement === livreRef.current) {
             dateRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile4, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile17, {
+                    autoplay: true
+                  })
+                }
+              })
+            }
           }
           else if (document.activeElement === dezRef.current) {
             livreRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile6, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === dozeRef.current) {
             dezRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile7, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === quatorzeRef.current) {
             dozeRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile8, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === dezesseisRef.current) {
             quatorzeRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile9, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === dezoitoRef.current) {
             dezesseisRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile10, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === advanceRef.current) {
             createRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile25, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === createRef.current) {
+            saibaMaisRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile28, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile16, {autoplay: true})
+                }
+              })
+            }
+          }
+          else if (document.activeElement === saibaMaisRef.current) {
             lgpdRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile26, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile16, {autoplay: true})
+                }
+              })
+            }
           }
           else if (document.activeElement === languageRef.current) {
             audioDescRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile18, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === signRef.current) {
             audioDescRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile18, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === closedCapRef.current) {
             signRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile19, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === diagEnhanceRef.current) {
             closedCapRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile20, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === maleRef.current) {
             kidProfileRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile5, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile16, {
+                    autoplay: true
+                  })
+                }
+              })
+            }
           }
           else if (document.activeElement === femaleRef.current) {
             maleRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile15, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile13, {
+                    autoplay: true,
+                    onend: () => {
+                      load(audioFile16, {
+                        autoplay: true,
+    
+                      })
+                    }
+                    
+                  })
+                }
+              })
+            }
           }
           else if (document.activeElement === nbRef.current) {
             femaleRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile15, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile14, {
+                    autoplay: true,
+                    onend: () => {
+                      load(audioFile16, {
+                        autoplay: true,
+                        
+                      })
+                    }
+
+                  })
+                }
+              })
+            }
           }
           else if (document.activeElement === chooseAvatarRef.current) {
             dezoitoRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile11, {
+                autoplay: true
+              })
+            }
           }
 
           event.preventDefault();
@@ -306,54 +623,198 @@ export default function CreateProfile() {
         case 'ArrowRight':
           if (document.activeElement === dateRef.current) {
             livreRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile6, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === livreRef.current) {
             dezRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile7, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === dezRef.current) {
             dozeRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile8, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === dozeRef.current) {
             quatorzeRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile9, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === quatorzeRef.current) {
             dezesseisRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile10, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === dezesseisRef.current) {
             dezoitoRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile11, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === dezoitoRef.current) {
             chooseAvatarRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile27, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === languageRef.current) {
             closedCapRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile20, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === createRef.current) {
             advanceRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile24, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === audioDescRef.current) {
             signRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile19, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === signRef.current) {
             closedCapRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile20, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === closedCapRef.current) {
             diagEnhanceRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile21, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === lgpdRef.current) {
+            saibaMaisRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile28, {
+                autoplay: true
+              })
+            }
+          }
+          else if (document.activeElement === saibaMaisRef.current) {
             createRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile25, {
+                autoplay: true
+              })
+            }
           }
           else if (document.activeElement === kidProfileRef.current) {
             maleRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile15, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile13, {
+                    autoplay: true,
+                    onend: () => {
+                      load(audioFile16, {
+                        autoplay: true,
+                      })
+                    }
+                  })
+                }
+              })
+            }
           }
           else if (document.activeElement === maleRef.current) {
             femaleRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile15, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile14, {
+                    autoplay: true,
+                    onend: () => {
+                      load(audioFile16, {
+                        autoplay: true,
+    
+                      })
+                    }
+                    
+                  })
+                }
+              })
+            }
           }
           else if (document.activeElement === femaleRef.current) {
             nbRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile15, {
+                autoplay: true,
+                onend: () => {
+                  load(audioFile12, {
+                    autoplay: true,
+                    onend: () => {
+                      load(audioFile16, {
+                        autoplay: true,
+    
+                      })
+                    }
+                  })
+                }
+              })
+            }
           }
           else if (document.activeElement === nbRef.current) {
             chooseAvatarRef.current.focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile27, {
+                autoplay: true
+              })
+            }
           }
           event.preventDefault();
 
@@ -624,11 +1085,11 @@ export default function CreateProfile() {
         <div className="w-full bg-zinc-800 flex flex-row items-left justify-left text-white flex-grow mr-10">
           <input ref={lgpdRef} id="lgpdRef" tabIndex="12" className="ml-5" type="checkbox" />
           <h1 className="text-2xl font-normal  ml-10 mr-5">
-            Concordo com a coleta e processamento de meus dados para uma melhor experiência, em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD). <a className="text-slate-400" href="#">Saiba mais.</a>
+            Concordo com a coleta e processamento de meus dados para uma melhor experiência, em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD). <a id="saibaMaisRef" tabIndex="18" ref={saibaMaisRef} className="text-slate-400" href="#">Saiba mais.</a>
           </h1>
         </div>
 
-        <Link onClick={pause} to="/createProfile" ref={createRef}>
+        <Link onClick={pause} to="/createProfile" ref={createRef} id="createRef">
           <div className="flex font-normal gap-3 items-center">
             <p className="text-2xl mt-1.5 w-24 text-center">Criar Outro</p>
             <IconBordered>
