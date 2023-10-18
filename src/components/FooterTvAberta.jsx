@@ -14,7 +14,7 @@ export default function FooterTvAberta({ href }) {
         <footer className="flex items-center justify-end text-white mb-5 mt-auto pl-3 pr-10 pb-10 flex-col">
             <div className="font-normal flex items-center w-full mt-5 flex-row justify-between">
 
-                <Link to="/createProfile">
+                <Link tabIndex="0" id="homeRef" to="/homePage">
                     <div className="flex font-normal gap-3 items-center ml-10">
                         <IconBordered>
                             <AiOutlineHome size={40} />
@@ -25,7 +25,7 @@ export default function FooterTvAberta({ href }) {
 
 
 
-                <Link to="/discoverChannels">
+                <Link tabIndex="1" id="guiaProgRef" to="#">
                     <div className="flex font-normal gap-3 items-center align-middle mr-10">
                         <p className="text-xl mt-1.5 w-24 text-center mr-12">Guia de
                             Programação</p>

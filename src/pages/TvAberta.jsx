@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useContext, useState } from 'react';
 import ProfileIcon from "../assets/profile.svg";
 import Footer from '../components/FooterHomePage';
-import FooterHomePage from '../components/FooterTvAberta';
+import FooterTvAberta from '../components/FooterTvAberta';
 import { useNavigate } from "react-router";
 import { UrlContext } from "../App";
 
@@ -46,6 +46,8 @@ export default function TvAberta() {
     const {audioContext} = useContext(AudiodescContext);
     const track = useRef(null);
     const audio = useRef(null);
+    const guiaProgRef = useRef();
+    const homeRef = useRef();
 
     const { load, pause } = useAudioPlayer();
 
@@ -109,29 +111,32 @@ export default function TvAberta() {
                         currentRowIndex += 0;
                     }
                     
-                    if (arrayToMatrixIdx(6, currentCardIndex)[1] === 0) {
+                    if (arrayToMatrixIdx(6, currentCardIndex)[1] === 0 && arrayToMatrixIdx(6, currentCardIndex)[0] === 2) {
                         if (flagAudiodesc) {
                             pause()
                             load(audioFileBtn2, {
                                 autoplay: true
                             })
                         }
+                        document.getElementById("homeRef").focus()
                     }
-                    else if (arrayToMatrixIdx(6, currentCardIndex)[1] === 5) {
+                    else if (arrayToMatrixIdx(6, currentCardIndex)[1] === 5 && arrayToMatrixIdx(6, currentCardIndex)[0] === 2) {
                         if (flagAudiodesc) {
                             pause()
                             load(audioFileBtn, {
                                 autoplay: true
                             })
                         }
+                        document.getElementById("guiaProgRef").focus()
                     }
 
                     break;
                 case 'ArrowLeft':
                     event.preventDefault();
                     // Verificamos se não estamos no primeiro card para não sair do intervalo
-                    if (currentCardIndex > 0) {
+                    if (currentCardIndex > 0 && (document.activeElement.id !== "guiaProgRef" || document.activeElement.id !== "homeRef")) {
                         currentCardIndex -= 1;
+                        rowRefs[currentRowIndex].current[currentCardIndex].focus();
                     }
                     if (flagAudiodesc) {
                         pause()
@@ -143,8 +148,9 @@ export default function TvAberta() {
                 case 'ArrowRight':
                     event.preventDefault();
                     // Verificamos se não estamos no último card para não sair do intervalo
-                    if (currentCardIndex < rowRefs[currentRowIndex].current.length - 1) {
+                    if (currentCardIndex < rowRefs[currentRowIndex].current.length - 1 && (document.activeElement.id !== "guiaProgRef" || document.activeElement.id !== "homeRef")) {
                         currentCardIndex += 1;
+                        rowRefs[currentRowIndex].current[currentCardIndex].focus();
                     }
                     if (flagAudiodesc) {
                         pause()
@@ -203,7 +209,7 @@ export default function TvAberta() {
                     break;
             }
 
-            rowRefs[currentRowIndex].current[currentCardIndex].focus();
+            // rowRefs[currentRowIndex].current[currentCardIndex].focus();
         };
 
         window.addEventListener('keydown', handleKeyDown);
@@ -285,7 +291,7 @@ export default function TvAberta() {
                 </div>
             </div>
 
-            <FooterHomePage />
+            <FooterTvAberta />
         </>
     )
 }

@@ -16,6 +16,7 @@ import audioFile2 from "../audios/SelecioneIdiomaTitulo.wav";
 import audioFile3 from "../audios/PortuguesBotao.mp3";
 import audioFile4 from "../audios/AvancarBotao.mp3";
 import audioFile5 from "../audios/AudiodescricaoBotao.mp3";
+import audioFile6 from "../audios/AcessivelLibras.mp3";
 import { FaHandsAslInterpreting } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { BsArrowRightShort } from "react-icons/bs";
@@ -39,7 +40,9 @@ export default function SelectLanguage() {
   const [queueIndex, setQueueIndex] = useState(0)
   const audiosObj = {
     "advanceRef": [audioFile4],
-    "selectRef": [audioFile3]
+    "selectRef": [audioFile3],
+    "audiodescRef": [audioFile5],
+    "signRef": [audioFile6],
   }
   
   const focusedElementRef = useRef('selectRef')
@@ -50,7 +53,7 @@ export default function SelectLanguage() {
     const hasPlayedAudio = localStorage.getItem('hasPlayedAudio2');
 
     if (!hasPlayedAudio) {
-      playAudio(audioFile)
+      load(audioFile, {autoplay: true})
       /*const audio = new Audio(audioFile);
       audio.play().catch((error) => {
         console.error("Falha ao tocar áudio:", error);
@@ -71,14 +74,14 @@ export default function SelectLanguage() {
       switch (event.code) {
         case 'ArrowUp':
           event.preventDefault();
-          if (selectRef.current.selectedIndex > 0) {
+          if (document.activeElement === selectRef.current && selectRef.current.selectedIndex > 0) {
             selectRef.current.selectedIndex -= 1;
           }
-          else if (document.activeElement === audiodescRef.current) {
+          if (document.activeElement === audiodescRef.current || document.activeElement === signRef.current || document.activeElement === advanceButtonRef.current) {
             selectRef.current.focus()
             if(flagAudiodesc) {
               pause()
-              playAudio(audioFile2)
+              load(audioFile3, {autoplay: true})
             }
           }
           break;
@@ -90,7 +93,7 @@ export default function SelectLanguage() {
           break;
         case 'ArrowRight':
           event.preventDefault();
-          if (document.activeElement === selectRef.current) {
+          if (document.activeElement === selectRef.current || document.activeElement === signRef.current) {
             advanceButtonRef.current.focus();
             if(flagAudiodesc) {
               pause()
@@ -99,14 +102,32 @@ export default function SelectLanguage() {
               })
             }
           }
+          else if (document.activeElement === audiodescRef.current) {
+            signRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile6, {
+                autoplay: true
+              })
+            }
+          }
           break;
         case 'ArrowLeft':
           event.preventDefault();
           if (document.activeElement === advanceButtonRef.current) {
-            selectRef.current.focus();
+            signRef.current.focus();
             if(flagAudiodesc) {
               pause()
-              load(audioFile2, {
+              load(audioFile6, {
+                autoplay: true
+              })
+            }
+          }
+          else if (document.activeElement === signRef.current) {
+            audiodescRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile5, {
                 autoplay: true
               })
             }
@@ -116,6 +137,15 @@ export default function SelectLanguage() {
             if(flagAudiodesc) {
               pause()
               load(audioFile5, {
+                autoplay: true
+              })
+            }
+          }
+          else if (document.activeElement === advanceRef.current) {
+            signRef.current.focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile6, {
                 autoplay: true
               })
             }
@@ -152,6 +182,10 @@ export default function SelectLanguage() {
         case 'Digit2':
           pause()
           navigate('/radioDifusorSecL2');
+          break;
+        case 'Digit3':
+          pause()
+          navigate('/importProfile');
           break;
         case 'ContextMenu':
           pause()
@@ -287,13 +321,13 @@ export default function SelectLanguage() {
             <img src={AudioDescriacao} className="w-[85px]" />
           </IconBordered>
 
-          <p ref={audiodescRef} className="text-4xl mt-1.5 focus:border-white-400">Audiodescrição</p>
+          <p ref={audiodescRef} tabIndex="0" id="audiodescRef" className="text-4xl mt-1.5 focus:border-white-400">Audiodescrição</p>
 
           <IconBordered>
             {/* <FaHandsAslInterpreting size={40} /> */}
             <img src={libras} className="w-[85px]" />
           </IconBordered>
-          <p ref={signRef} className="text-4xl mt-1.5">Acessível em Libras</p>
+          <p ref={signRef} tabIndex="1" id="signRef" className="text-4xl mt-1.5">Acessível em Libras</p>
         </div>
 
         <AudiodescFlag.Provider value={[flagAudiodesc, setFlagAudiodesc]}>

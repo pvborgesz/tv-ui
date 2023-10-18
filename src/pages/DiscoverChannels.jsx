@@ -26,6 +26,7 @@ import audioFile10 from "../audios/Progresso0.mp3";
 import audioFile11 from "../audios/Progresso20.mp3";
 import audioFile12 from "../audios/AppsEncontrados15.mp3";
 import audioFile13 from "../audios/CanaisEncontrados.mp3";
+import audioFile14 from "../audios/AudiodescricaoBotao.mp3";
 
 export default function DiscoverChannels() {
     const [scanProgress, setScanProgress] = useState(0);
@@ -35,6 +36,7 @@ export default function DiscoverChannels() {
     const [isScanning, setIsScanning] = useState(false);
     const navigate = useNavigate();
     const startRef = React.useRef();
+    const audiodescRef = React.useRef();
 
     const [flagAudiodesc, setFlagAudiodesc] = useContext(AudiodescFlag);
 
@@ -52,16 +54,18 @@ export default function DiscoverChannels() {
 
     const { load, pause } = useAudioPlayer();
     const audiosObj = {
-        "startRef": loadAudio()
+        "startRef": loadAudio(),
+        "audiodescRef": [audioFile14]
     }
 
     const {audioContext} = useContext(AudiodescContext);
     const track = useRef(null);
     const audio = useRef(null);
 
+    const focusedElementRef = useRef('startRef')
+
     const [queueIndex, setQueueIndex] = useState(0)
-    const audioQueue = [audioFile, audioFile2, ...audiosObj["startRef"]]
-    
+    const audioQueue = [audioFile, audioFile2, ...audiosObj[focusedElementRef.current]]
 
     /*useEffect(() => {
         const hasPlayedAudio = localStorage.getItem('hasPlayedAudi4');
@@ -77,11 +81,38 @@ export default function DiscoverChannels() {
     }, []);*/
 
     useEffect(() => {
-        startRef.current.focus();
+        document.getElementById(focusedElementRef.current).focus()
+        // startRef.current.focus();
         audioQueue.push(audioFile); // Tem que ser o audio do btn que recebe o foco primeiro na página
 
         const handleKeyDown = (event) => {
             switch (event.code) {
+                case 'ArrowDown':
+                  if (document.activeElement === startRef.current) {
+                    document.getElementById("audiodescRef").focus()
+                    if(flagAudiodesc) {
+                      pause()
+                      load(audioFile14, {autoplay: true})
+                    }
+                  }
+                  
+                  break;
+                case 'ArrowUp':
+                  if (document.activeElement.id === "audiodescRef") {
+                    startRef.current.focus()
+                    if(flagAudiodesc) {
+                      pause()
+                      if (isScanning) {
+                        load(audioFile8, {autoplay: true})
+                      } else if (scanComplete) {
+                        load(audioFile3, {autoplay: true})
+                      } else {
+                        load(audioFile9, {autoplay: true})
+                      }
+                    }
+                  }
+                  
+                  break
                 case 'Digit0':
                   pause()
                   navigate('/homePage');
@@ -115,6 +146,8 @@ export default function DiscoverChannels() {
                   window.location.reload();
                   break;
                 case 'F2':
+                  focusedElementRef.current = document.activeElement.id
+
                   if (flagAudiodesc) {
                     pause()
                     setFlagAudiodesc(false)
@@ -257,13 +290,13 @@ export default function DiscoverChannels() {
                 </div>
 
                 <div className='flex flex-col items-center justify-center'>
-                    {isScanning ? <>
+                    {scanComplete ? <>
                         <p className='scan-info text-2xl text-white text-center mb-10'>
                             Região Identificada:
                         </p>
 
                         <p className='scan-info text-2xl text-white text-center mb-10'>
-                            <strong>País</strong>: Brasil  <br /> <strong>Cidade</strong>: São Paulo
+                            <strong>País</strong>: Brasil  <br /> <strong>Cidade</strong>: São Luís
                         </p>
                     </>
                         : null}
@@ -274,7 +307,7 @@ export default function DiscoverChannels() {
                     </button>
                 </AudiodescFlag.Provider>
             </div >
-            <Footer />
+            <Footer btnRef={audiodescRef.current}/>
         </>
     )
 }

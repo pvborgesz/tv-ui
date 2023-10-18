@@ -10,7 +10,7 @@ import libras from "../assets/libras.png";
 import { FaHandsAslInterpreting } from "react-icons/fa6";
 import NextButton from "./NextButton";
 
-export default function Footer({ href }, ref) {
+export default function Footer({ href, ids, tabIdxs }, ref) {
   const {audioContext} = useContext(AudiodescContext);
   const track = useRef(null);
   const audio = useRef(null);
@@ -48,13 +48,13 @@ export default function Footer({ href }, ref) {
           <img src={AudioDescriacao} className="w-[85px]" />
         </IconBordered>
 
-        <p className="text-4xl mt-1.5">Audiodescrição</p>
+        <p id={ids? ids[0] : ""} tabIndex={tabIdxs[0]} className="text-4xl mt-1.5">Audiodescrição</p>
 
         <IconBordered>
           {/* <FaHandsAslInterpreting size={40} /> */}
           <img src={libras} className="w-[85px]" />
         </IconBordered>
-        <p className="text-4xl mt-1.5">Acessível em Libras</p>
+        <p id={ids? ids[1] : ""} tabIndex={tabIdxs[1]} className="text-4xl mt-1.5">Acessível em Libras</p>
       </div>
 
       {href && <NextButton ref={ref} href={href} />}

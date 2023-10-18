@@ -156,11 +156,21 @@ export default function HomePage() {
                                 autoplay: true
                             })
                         }
-                        telespecRef.current.focus()
+                        document.getElementById("telespecRef").focus()
                     }
                     else if (currentRowIndex > 0) {
                         currentRowIndex -= 1;
                         currentElementIndex = 0;
+                        focusableElements[currentRowIndex].current[currentElementIndex].focus();
+                        if (flagAudiodesc) {
+                            pause()
+                            load(audioMatrix[currentRowIndex][currentElementIndex], {
+                                autoplay: true
+                            })
+                        }
+                    }
+                    else if (document.activeElement.id === "confRef") {
+                        focusableElements[currentRowIndex].current[currentElementIndex].focus();
                         if (flagAudiodesc) {
                             pause()
                             load(audioMatrix[currentRowIndex][currentElementIndex], {
@@ -178,14 +188,21 @@ export default function HomePage() {
                                 autoplay: true
                             })
                         }
-                        confRef.current.focus()
+                        document.getElementById("confRef").focus()
                     }
                     else if (document.activeElement === telespecRef.current) {
+                        if (flagAudiodesc) {
+                            pause()
+                            load(audioMatrix[currentRowIndex][currentElementIndex], {
+                                autoplay: true
+                            })
+                        }
                         focusableElements[currentRowIndex].current[currentElementIndex].focus();
                     }
                     else if (currentRowIndex < focusableElements.length - 1) {
                         currentRowIndex += 1;
                         currentElementIndex = 0;
+                        focusableElements[currentRowIndex].current[currentElementIndex].focus();
                         if (flagAudiodesc) {
                             pause()
                             load(audioMatrix[currentRowIndex][currentElementIndex], {
@@ -198,6 +215,7 @@ export default function HomePage() {
                     event.preventDefault();
                     if (currentElementIndex > 0) {
                         currentElementIndex -= 1;
+                        focusableElements[currentRowIndex].current[currentElementIndex].focus();
                     }
                     if (flagAudiodesc) {
                         pause()
@@ -210,6 +228,7 @@ export default function HomePage() {
                     event.preventDefault();
                     if (currentElementIndex < focusableElements[currentRowIndex].current.length - 1) {
                         currentElementIndex += 1;
+                        focusableElements[currentRowIndex].current[currentElementIndex].focus();
                     }
                     if (flagAudiodesc) {
                         pause()
@@ -224,8 +243,7 @@ export default function HomePage() {
                 default:
                     break;
             }
-            focusableElements[currentRowIndex].current[currentElementIndex].focus();
-            audioQueue.push(audioFile);
+            // audioQueue.push(audioFile);
         };
 
         window.addEventListener('keydown', handleKeyDown);
@@ -268,8 +286,7 @@ export default function HomePage() {
         <>
             <div className="flex justify-end">
                 <div className="flex flex-col w-1/4 justify-center items-end h-full mr-5">
-                    <div id="telespecRef" className="flex flex-row items-center justify-end mt-10 p-10 focus-within:border-sky-500">
-                        <input className="hidden" ref={telespecRef} ></input>
+                    <div ref={telespecRef} tabIndex="1" id="telespecRef" className="flex flex-row items-center justify-end mt-10 p-10 focus-within:border-sky-500">
                         <h3 className="pr-3 text-2xl text-right text-sky-400">Telespectador</h3>
                         <img className="w-24" src={UserImg} />
                     </div>
@@ -381,7 +398,7 @@ export default function HomePage() {
                     ))}
                 </div>
             </AudiodescFlag.Provider>
-            <Footer />
+            <Footer btnRef={confRef} />
         </>
     );
 

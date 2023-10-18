@@ -11,6 +11,8 @@ import UserImg from '../assets/user-img.png'
 import audioFile from "../audios/ConfiguracaoInicialPerfil.mp3";
 import audioFile2 from "../audios/ContinuarSemPerfil.mp3";
 import audioFile3 from "../audios/AdicionarPerfil.mp3";
+import audioFile4 from "../audios/AudiodescricaoBotao.mp3";
+import audioFile5 from "../audios/AcessivelLibras.mp3";
 
 import { AudiodescContext } from "../App";
 import { AudiodescFlag } from "../App";
@@ -35,7 +37,9 @@ export default function SelectProfile() {
   const [queueIndex, setQueueIndex] = useState(0)
   const audiosObj = {
     "linksRef0": [audioFile2],
-    "linksRef1": [audioFile3]
+    "linksRef1": [audioFile3],
+    "audiodescRef": [audioFile4],
+    "signRef": [audioFile5]
   }
 
   const focusedElementRef = useRef('linksRef0');
@@ -89,44 +93,102 @@ export default function SelectProfile() {
             linksRef.current[4].focus();
           } else if (linksRef.current[1] === document.activeElement) {
             linksRef.current[0].focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile2, {
+                autoplay: true
+              })
+            }
           } else if (linksRef.current[2] === document.activeElement) {
             linksRef.current[1].focus();
           } else if (linksRef.current[3] === document.activeElement) {
             linksRef.current[2].focus();
-          } else {
+          }
+          else if (document.activeElement.id === "signRef") {
+            document.getElementById("audiodescRef").focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile4, {
+                autoplay: true
+              })
+            }
+          }
+          /*else {
             linksRef.current[0].focus();
-          }
-          if(flagAudiodesc) {
-            pause()
-            load(audioFile2, {
-              autoplay: true
-            })
-          }
+          }*/
           break;
         case "ArrowRight":
           if (linksRef.current[0] === document.activeElement) {
             linksRef.current[1].focus();
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile3, {
+                autoplay: true
+              })
+            }
           } else if (linksRef.current[1] === document.activeElement) {
             linksRef.current[2].focus();
           } else if (linksRef.current[2] === document.activeElement) {
             linksRef.current[3].focus();
           } else if (linksRef.current[3] === document.activeElement) {
             linksRef.current[4].focus();
-          } else {
+          } 
+          else if (document.activeElement.id === "audiodescRef") {
+            document.getElementById("signRef").focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile5, {
+                autoplay: true
+              })
+            }
+          }
+          else {
             linksRef.current[0].focus();
           }
-          if(flagAudiodesc) {
-            pause()
-            load(audioFile3, {
-              autoplay: true
-            })
-          }
+          
           break;
         case "ArrowUp":
-          linksRef.current[2].focus();
+          if (document.activeElement.id === "signRef"){
+            linksRef.current[1].focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile3, {
+                autoplay: true
+              })
+            }
+          }
+          else if (document.activeElement.id === "audiodescRef") {
+            linksRef.current[0].focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile2, {
+                autoplay: true
+              })
+            }
+          }
+
+          // linksRef.current[2].focus();
           break;
         case "ArrowDown":
-          linksRef.current[3].focus();
+          //linksRef.current[3].focus();
+          if (document.activeElement === linksRef.current[0]){
+            document.getElementById("audiodescRef").focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile4, {
+                autoplay: true
+              })
+            }
+          }
+          else if (document.activeElement === linksRef.current[1]){
+            document.getElementById("signRef").focus()
+            if(flagAudiodesc) {
+              pause()
+              load(audioFile5, {
+                autoplay: true
+              })
+            }
+          }
           break;
         case 'Enter':
           event.preventDefault();
@@ -226,7 +288,7 @@ export default function SelectProfile() {
 
       </div>
 
-      <Footer />
+      <Footer tabIdxs={['1', '2']} ids={["audiodescRef", "signRef"]}/>
     </>
   );
 }
