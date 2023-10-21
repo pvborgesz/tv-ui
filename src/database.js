@@ -30,11 +30,11 @@ import UEMA from "./assets/UEMA.png";
 import UFMG from "./assets/UFMG.png";
 import UFPA from "./assets/UFPA.png";
 
-import recommendation1 from "./assets/recommendation1.png";
-import recommendation2 from "./assets/recommendation2.png";
-import recommendation3 from "./assets/recommendation3.png";
-import recommendation4 from "./assets/recommendation4.png";
-import recommendation5 from "./assets/recommendation5.png";
+import recommendation1 from "./assets/recomendTvBrasil2.jpg";
+import recommendation2 from "./assets/recomendTvBrasil.jpg";
+import recommendation3 from "./assets/recomendTvBrasil3.jpg";
+import recommendation4 from "./assets/recomendTvBrasil4.jpg";
+import recommendation5 from "./assets/recomendTvBrasil5.jpg";
 
 import ufjfVideo from "./assets/ufjfVideo1.mp4";
 

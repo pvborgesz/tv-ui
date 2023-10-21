@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from "react";
 import ProfileIcon from "../assets/profile.svg";
 import RadioDifusorIcon from "../assets/radiodifusor_icon.svg";
 import IndicacaoIcon from "../assets/indicacao.svg";
+import TvBrasil from "../assets/image6.png";
 import PlayIcon from "../assets/play.svg";
 import BtnFcIcon from "../assets/btn_fc.svg";
 import ProgBarIcon from "../assets/prog_bar.svg";
@@ -103,7 +104,7 @@ export default function RadioDifusorSec() {
 
         <div className="bg-zinc-900 flex flex-row h-full w-11/12 items-center justify-center text-white flex-grow mb-5">
           <div className="flex justify-center w-1/4 mr-10">
-            <img className="w-full" src={icon} />
+            <img className="w-full" src={TvBrasil} />
           </div>
 
           <div className="flex flex-col items-center align-center justify-center text-white bg-zinc-900 h-full rounded w-11/12">
@@ -113,7 +114,7 @@ export default function RadioDifusorSec() {
                 <iframe
                   width="100%"
                   height="100%"
-                  src={`${urlValue}`}
+                  src={`https://www.youtube.com/embed/w1DAHKloWSM?si=Rv2Y5J2nfpz3L3tq&amp;?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0`}
                   allow="autoplay; encrypted-media"
                   allowFullScreen
                   style={{
@@ -129,7 +130,7 @@ export default function RadioDifusorSec() {
                 <div className="flex relative bg-black w-100">
 
                   <iframe
-                    src={`${urlValue}`}
+                    src={`https://www.youtube.com/embed/w1DAHKloWSM?si=Rv2Y5J2nfpz3L3tq&amp;?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0`}
                     allow="autoplay; encrypted-media"
                     // allowFullScreen
                     style={{
