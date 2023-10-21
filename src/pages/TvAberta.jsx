@@ -11,8 +11,8 @@ import { universityApps } from '../database';
 import audioFile2 from "../audios/RedeMundial.mp3";
 import audioFile3 from "../audios/Athenas.mp3";
 import audioFile4 from "../audios/MN.mp3";
-import audioFile5 from "../audios/RIT.mp3";
-import audioFile6 from "../audios/Gazeta.mp3";
+import audioFile5 from "../audios/Gazeta.mp3";
+import audioFile6 from "../audios/Globo.mp3";
 import audioFile7 from "../audios/Aparecida.mp3";
 
 import audioFile8 from "../audios/NovoTempo.mp3";

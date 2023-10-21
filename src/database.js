@@ -50,7 +50,10 @@ import RecordIcon from "./assets/Record.svg";
 import TVPIcon from "./assets/TVP.svg";
 import TVCamaraIcon from "./assets/TvCamara.svg";
 import TVNazareIcon from "./assets/TvNazare.svg";
+import TVSenado from "./assets/TvSenado.svg";
 import RedeVidaIcon from "./assets/RedeVida.png";
+import RedeVidaEdu from "./assets/RedeVidaEdu.svg";
+import RedeUniao from "./assets/RedeUniao.svg";
 import FuturaIcon from "./assets/Futura.png";
 import BandIcon from "./assets/Band.png";
 import TvEvangelizarIcon from "./assets/TvEvangelizar.svg";
@@ -90,8 +93,8 @@ import nacional from "./assets/nacional.png";
 export const cards = [
   {
     name: "UFJF",
-    icon: image2,
-    content: ufjfVideo,
+    icon: image3,
+    content: "https://www.youtube.com/embed/Yj4eO703ia0?si=DrnofRedbwRlEZCi&amp;controls=0&autoplay=1&loop=1",
     relatedRecommendations: [
       { name: "Rec1", icon: image9 },
       { name: "Rec2", icon: image7 },
@@ -102,9 +105,9 @@ export const cards = [
   },
   {
     name: "UFC",
-    icon: image3,
+    icon: TVSenado,
     content:
-      "https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0",
+      "https://www.youtube.com/embed/smpaHY1Eqag?si=Ir2yvbXnkbYSmL_c&amp;controls=0&autoplay=1&loop=1",
     relatedRecommendations: [
       { name: "Rec1", icon: RedeTvIcon },
       { name: "Rec2", icon: Group2 },
@@ -115,9 +118,9 @@ export const cards = [
   },
   {
     name: "UFF",
-    icon: image4,
+    icon: image2,
     content:
-      "https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0",
+      "https://www.youtube.com/embed/hfWx2_1IJxc?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0",
     relatedRecommendations: [
       { name: "Rec1", icon: Group2 },
       { name: "Rec2", icon: UFMA },
@@ -128,9 +131,9 @@ export const cards = [
   },
   {
     name: "UFMA",
-    icon: image5,
+    icon: RedeUniao,
     content:
-      "https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0",
+      "https://www.youtube.com/embed/ukAgAcDaQ-Y?si=LNYQm2kfplhgjf6W&amp;controls=0&autoplay=1&mute=0",
     relatedRecommendations: [
       { name: "Rec1", icon: image2 },
       { name: "Rec2", icon: image4 },
@@ -141,9 +144,9 @@ export const cards = [
   },
   {
     name: "UFPB",
-    icon: image6,
+    icon: RedeVidaEdu,
     content:
-      "https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0",
+      "https://www.youtube.com/embed/B-xAcubMKms?si=IsWGJ7Ykht6J_tch&amp;controls=0&autoplay=1&mute=0",
     relatedRecommendations: [
       { name: "Rec1", icon: image9 },
       { name: "Rec2", icon: image12 },
@@ -391,13 +394,13 @@ export const universityApps = [
     name: "Canal Saúde",
     icon: CanalSaudeIcon,
     content:
-      "https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0",
+      "https://www.youtube.com/embed/-_UUKW5y9aY?si=XklnrDm2-PREb6CS&amp;controls=0&autoplay=1&mute=0",
   },
   {
     name: "SBT",
     icon: SBTIcon,
     content:
-      "https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0",
+      "https://www.youtube.com/embed/4ksJml0fHik?si=N5XGI1xvNFyblL6f&amp;controls=0&autoplay=1&loop=1&mute=0",
   },
   {
     name: "Record TV",
