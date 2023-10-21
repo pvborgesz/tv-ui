@@ -228,21 +228,21 @@ export const streaming = [
 
 export const recommendations = [
   {
-    name: "App3",
-    icon: App3,
+    name: "UFF",
+    icon: UFF,
 
     content:
       "https://www.youtube.com/embed/L2XF-cKm8jg?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0",
   },
   {
-    name: "App4",
-    icon: App4,
+    name: "UFJF",
+    icon: UFJF,
     content:
       "https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0",
   },
   {
-    name: "UFJF",
-    icon: UFJF,
+    name: "UFRN",
+    icon: UFRN,
     content:
       "https://www.youtube.com/embed/-UUV_1mwFqk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0",
   },
