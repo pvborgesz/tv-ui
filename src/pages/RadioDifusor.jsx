@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from "react";
 import Footer from "../components/FooterRadiodifusor";
 
 import RadioDifusorIcon from "../assets/radiodifusor_icon.svg";
-import IndicacaoIcon from "../assets/indicacao.svg";
+import IndicacaoIcon from "../assets/indicacao_livre.svg";
 import PlayIcon from "../assets/play.svg";
 import BtnFcIcon from "../assets/btn_fc.svg";
 import ProgBarIcon from "../assets/prog_bar.svg";
@@ -19,7 +19,6 @@ export default function RadioDifusor() {
   const navigate = useNavigate();
 
   useEffect(() => {
-
     const interval = setInterval(() => {
       setCounter((counter) => counter - 1);
     }, 2000);
@@ -39,23 +38,28 @@ export default function RadioDifusor() {
     const openChannel = (channelURL) => {
       localStorage.setItem("urlValue", channelURL);
       navigate("/radioDifusor");
-    }
+    };
 
     // when page up key is pressed, go to RadioDifusorSecL2
     document.addEventListener("keydown", (event) => {
       if (event.code === "PageUp") {
-        openChannel("https://www.youtube.com/embed/AKeUssuu3Is?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0");
+        openChannel(
+          "https://www.youtube.com/embed/AKeUssuu3Is?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0"
+        );
         navigate("/radioDifusor");
       } else if (event.code === "PageDown") {
-        openChannel("https://www.youtube.com/embed/tO01J-M3g0U?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0");
+        openChannel(
+          "https://www.youtube.com/embed/tO01J-M3g0U?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0"
+        );
         navigate("/radioDifusor");
-      }
-      else if (event.code === "KeyL") {
-        openChannel("https://www.youtube.com/embed/tO01J-M3g0U?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0");
+      } else if (event.code === "KeyL") {
+        openChannel(
+          "https://www.youtube.com/embed/tO01J-M3g0U?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=0"
+        );
         navigate("/radioDifusorSecL2");
       }
       if (event.code === "ContextMenu") {
-        navigate('/homePage');
+        navigate("/homePage");
       }
     });
 
@@ -75,7 +79,7 @@ export default function RadioDifusor() {
         <div className="bg-zinc-900 flex flex-col h-full items-left justify-left text-white flex-grow ml-5 mr-10 mt-[10rem]">
           <div className="flex flex-col items-center align-center justify-center text-white h-4/5 rounded">
             <div className="flex justify-center items-center h-4/5 zIndex-9">
-              {flag ?
+              {flag ? (
                 <iframe
                   width="100%"
                   height="100%"
@@ -91,13 +95,10 @@ export default function RadioDifusor() {
                     height: "100%",
                     width: "100%",
                     transform: "translate(-50%, -50%)",
-                  }
-                  }
-
+                  }}
                 />
-                :
+              ) : (
                 <div className="flex relative bg-black w-100 ">
-
                   <iframe
                     src={`${urlValue}`}
                     allow="autoplay; encrypted-media"
@@ -115,8 +116,8 @@ export default function RadioDifusor() {
                   {/* <p className="absolute top-1/2 leading-3 left-[35%] text-white z-20 bg-black p-2 rounded">
                     Conteúdo em tela cheia em: {counter} segundos.
                   </p> */}
-                </div>}
-
+                </div>
+              )}
             </div>
 
             <div className="flex flex-col justify-end mb-5">
@@ -131,19 +132,22 @@ export default function RadioDifusor() {
 
           <div className="grid grid-cols-2 mt-[15rem]">
             <div className="flex flex-col items-end justify-center w-full p-5 border-r-4 mt-10">
-              <h1 className="text-5xl font-normal mb-0">Título do Programa Atual</h1>
+              <h1 className="text-5xl font-normal mb-0">
+                Título do Programa Atual
+              </h1>
               <h3 className="text-4xl">{new Date().toLocaleTimeString()}</h3>
             </div>
 
             <div className="flex items-center py-5 pl-5">
               <h1 className="text-3xl pr-5 py-2">
-                Descrição informativa sobre o programa atual, podendo ocupar duas linhas trunc...
+                Descrição informativa sobre o programa atual, podendo ocupar
+                duas linhas trunc...
               </h1>
               <img src={IndicacaoIcon} alt="Indicacao Icon" />
             </div>
           </div>
         </div>
-      </div >
+      </div>
       <Footer />
     </>
   );

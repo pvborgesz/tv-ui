@@ -5,6 +5,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SelectLanguage from "./pages/SelectLanguage.jsx";
 import SelectProfile from "./pages/SelectProfile.jsx";
+import EPG from "./pages/EPG.jsx";
 import ImportProfile from "./pages/ImportProfile.jsx";
 import ChangeProfile from "./pages/ChangeProfile.jsx";
 import CreateProfile from "./pages/CreateProfile.jsx";
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
+      {
+        path: "EPG",
+        element: <EPG />,
+      },
       {
         path: "fabricante",
         element: <Fabricante />,

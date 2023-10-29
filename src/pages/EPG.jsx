@@ -5,14 +5,18 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import AppsIcon from "../assets/apps-icon.png";
 import TvAberta from "../assets/tvAberta.png";
 import AnotherIcon from "../assets/popular-recommendation.png";
-import ProfileIcon from "../assets/profile.svg";
 import UserImg from "../assets/user-img.png";
+
 import Footer from "../components/FooterHomePage";
+import HeaderTitleProfile from "../components/HeaderTitleProfile";
+
 import { useNavigate } from "react-router";
 import { UrlContext } from "../App";
 
 import { cards, streaming, recommendations } from "../database";
-import { BsChevronRight } from "react-icons/bs";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { AiOutlineStar, AiFillStar, AiOutlineDownload } from "react-icons/ai";
+import { LuDownload } from "react-icons/lu";
 
 import TvAbertaIcone from "../assets/TV-ABERTA-icone.png";
 
@@ -46,8 +50,16 @@ import audioTelespecBtn from "../audios/TelespecBtn.mp3";
 import audioConfBtn from "../audios/ConfBtn.mp3";
 
 import "../css/homePage.css";
+import RadiodifusorIcon from "../assets/EPG/tv.png";
 
-export default function HomePage() {
+import IndicacaoLivre from "../assets/indicacao_livre.svg";
+import Indicacao10 from "../assets/indicacao_10.svg";
+import Indicacao12 from "../assets/indicacao_12.svg";
+import Indicacao14 from "../assets/indicacao_14.svg";
+import Indicacao16 from "../assets/indicacao_16.svg";
+import Indicacao18 from "../assets/indicacao_18.svg";
+
+export default function EPG() {
   const navigate = useNavigate();
 
   const { urlValue, setUrlValue } = useContext(UrlContext);
@@ -313,125 +325,277 @@ export default function HomePage() {
   const rowIcons = [AppsIcon, TvAberta, AnotherIcon];
   const rowTitles = ["Aplicativos", "TV Aberta", "Recomendações"];
 
+  const contentRadiodifusores = [
+    [
+      {
+        id: 1,
+        indicacao: "14",
+        inicio: "13:00", // usar timestamp
+        termino: "14:00", // usar timestamp
+        starred: false,
+        content: "Programa Anterior",
+        downloadable: false,
+        type: "",
+      },
+      {
+        id: 2,
+        indicacao: "16",
+        inicio: "13:00", // usar timestamp
+        termino: "14:00", // usar timestamp
+        starred: false,
+        content: "Programa Atual",
+        downloadable: false,
+        onAir: true,
+        live: true,
+        type: "",
+      },
+      {
+        id: 3,
+        indicacao: "18",
+        inicio: "13:00", // usar timestamp
+        termino: "14:00", // usar timestamp
+        starred: true,
+        content: "Programa a Seguir",
+        downloadable: false,
+        downloaded: true,
+        type: "",
+      },
+    ],
+    [
+      {
+        id: 4,
+        indicacao: "12",
+        inicio: "12:30", // usar timestamp
+        termino: "14:00", // usar timestamp
+        starred: false,
+        content: "Programa anterior",
+        downloadable: true,
+        type: "serie",
+        serieName: "Temporada X, episódio Y",
+        resumo:
+          "Primeiras linhas de resumo sobre o programa anterior do radiodifusor 2",
+        advice: "Assista agora!",
+      },
+      {
+        id: 5,
+        indicacao: "livre",
+        inicio: "13:00", // usar timestamp
+        termino: "14:00", // usar timestamp
+        starred: false,
+        resumo:
+          "Primeiras linhas de resumo sobre o programa atual do radiodifusor 2",
+        content: "Programa Atual Radiodifusor 2",
+        downloadable: false,
+        live: true,
+        onAir: true,
+        type: "",
+        advice: "Veja do início!",
+      },
+      {
+        id: 6,
+        indicacao: "10",
+        inicio: "16:30", // usar timestamp
+        termino: "17:00", // usar timestamp
+        starred: false,
+        content: "Programa a Seguir",
+        downloadable: false,
+        type: "",
+        resumo:
+          "Primeiras linhas de resumo sobre o programa a seguir do radiodifusor 2",
+        advice: "Assista agora!",
+      },
+    ],
+    [
+      {
+        id: 7,
+        indicacao: "14",
+        inicio: "13:00", // usar timestamp
+        termino: "14:00", // usar timestamp
+        starred: false,
+        content: "Programa Anterior",
+        downloadable: false,
+        type: "",
+      },
+      {
+        id: 8,
+        indicacao: "12",
+        inicio: "13:00", // usar timestamp
+        termino: "14:00", // usar timestamp
+        starred: false,
+        content: "Programa Atual Radiodifusor 3",
+        downloadable: true,
+        live: true,
+        onAir: true,
+        type: "",
+      },
+      {
+        id: 9,
+        indicacao: "14",
+        inicio: "13:00", // usar timestamp
+        termino: "14:00", // usar timestamp
+        starred: false,
+        content: "Programa a Seguir",
+        downloadable: false,
+        type: "",
+      },
+    ],
+  ];
+
+  const indicacoes = {
+    livre: IndicacaoLivre,
+    10: Indicacao10,
+    12: Indicacao12,
+    14: Indicacao14,
+    16: Indicacao16,
+    18: Indicacao18,
+  };
+
   return (
     <>
-      <div className="flex justify-end">
-        <div className="flex flex-col w-1/4 justify-center items-end h-full mr-5">
-          <div
-            ref={telespecRef}
-            tabIndex="1"
-            id="telespecRef"
-            className="flex flex-row items-center justify-end mt-10 p-10 focus-within:border-sky-500"
-          >
-            <h3 className="pr-3 text-2xl text-right text-sky-400">
-              Telespectador
-            </h3>
-            <img className="w-24" src={UserImg} />
-          </div>
+      <HeaderTitleProfile />
+
+      <div className="flex  h-full flex-col justify-center items-center mx-5 mt-5 bg-zinc-800">
+        {/* <div className="flex w-full bg-red-500 flex-row text-zinc-300">
+          <span className="text-3xl">Anterior</span>
+          <span className="text-3xl">Agora</span>
+          <span className="text-3xl">A seguir</span>
+        </div> */}
+        <div
+          className="flex-flex-col w-full ml-5
+        "
+        >
+          {contentRadiodifusores.map((item, index) => {
+            return (
+              <div
+                className="flex flex-row justify-center align-center h-[200px] mt-10 rounded-lg w-full"
+                key={index}
+              >
+                <div className="flex items-center h-full  mr-16">
+                  <div className="flex items-center flex-col">
+                    <img src={RadiodifusorIcon} alt="" />
+                    <span className="text-white text-lg">
+                      Radiodifusor {index + 1}
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  className="flex flex-col items-center justify-center hover:scale-200 mx-5 rounded-lg"
+                  onClick={() => {
+                    // ... (código existente)
+                  }}
+                >
+                  <BsChevronLeft
+                    size={50}
+                    className="text-white cursor-pointer"
+                  />
+                </button>
+                <div className="flex flex-1 h-ful">
+                  {item.map((programa, indexPrograma) => {
+                    return (
+                      <div
+                        className={
+                          "flex p-3 bg-zinc-700 hover:scale-105 hover:border-4 hover:border-white ease-in-out transition-all duration-300 rounded-lg mx-5 flex-1 flex-col items-center justify-between"
+                        }
+                        key={indexPrograma}
+                      >
+                        {/* header content */}
+                        <div className="flex w-full flex-row items-center gap-2 ">
+                          <img
+                            src={indicacoes[programa.indicacao]}
+                            className="w-8 h-8"
+                            alt=""
+                          />
+
+                          <span className="text-white">
+                            {programa.inicio} - {programa.termino}
+                          </span>
+
+                          {programa.onAir && (
+                            <div className="bg-red-700 text-white py-[0.125rem] px-4">
+                              NO AR
+                            </div>
+                          )}
+
+                          {programa.live && (
+                            <div className="text-red-600 font-medium ml-auto bg-white px-4 py-[0.125rem] uppercase">
+                              ao vivo
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="text-3xl font-bold text-zinc-300">
+                          {programa.content}
+                        </div>
+
+                        {programa.type === "serie" && (
+                          <span className="text-zinc-300">
+                            {programa.serieName}
+                          </span>
+                        )}
+
+                        {programa.resumo && (
+                          <span className="text-lg text-zinc-400 mx-2">
+                            {programa.resumo}
+                          </span>
+                        )}
+
+                        {/* footer */}
+                        <div className="flex w-full flex-row items-center gap-2">
+                          {programa.starred ? (
+                            <AiFillStar
+                              size={20}
+                              fill="#ffdf00"
+                              className="hover:cursor-pointer"
+                            />
+                          ) : (
+                            <AiOutlineStar
+                              size={20}
+                              fill="#aaa"
+                              className="hover:cursor-pointer"
+                            />
+                          )}
+
+                          {programa.downloadable & !programa.downloaded ? (
+                            <LuDownload
+                              size={20}
+                              className="text-zinc-400 hover:cursor-pointer"
+                            />
+                          ) : programa.downloaded ? (
+                            <LuDownload
+                              size={20}
+                              className="text-[#ffdf00] hover:cursor-pointer"
+                            />
+                          ) : (
+                            <></>
+                          )}
+
+                          {programa.advice && (
+                            <div className="ml-auto px-3 py-[0.125rem] bg-green-800 text-white font-medium">
+                              {programa.advice}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <button
+                  className="flex flex-col items-center justify-center hover:scale-200 mx-5 rounded-lg"
+                  onClick={() => {
+                    // ... (código existente)
+                  }}
+                >
+                  <BsChevronRight
+                    size={50}
+                    className="text-white cursor-pointer"
+                  />
+                </button>
+              </div>
+            );
+          })}
         </div>
       </div>
-
-      <AudiodescFlag.Provider value={[flagAudiodesc, setFlagAudiodesc]}>
-        <div className="flex flex-col h-full justify-center items-center">
-          {[streaming, cards, currentRecommendations].map((row, rowIndex) => (
-            <div className="flex flex-row justify-center align-center h-[250px] mt-10 rounded-lg">
-              <button
-                className="flex flex-col justify-center w-36 mx-3 align items-center mr-10"
-                onClick={() => {
-                  if (rowIndex === 0) {
-                    // navigate('/aplicativos');
-                  } else if (rowIndex === 1) {
-                    pause();
-                    navigate("/tvAberta");
-                  } else {
-                    // navigate('/talvezGoste');
-                  }
-                }}
-              >
-                <img
-                  className="w-[8rem] h-[7rem] rounded-full"
-                  src={rowIcons[rowIndex]}
-                  ref={(el) => {
-                    focusableElements[rowIndex].current[0] = el;
-                    if (el) {
-                      el.onfocus = () => {
-                        el.style.transform = "scale(1.1)";
-                        // Atualize as recomendações
-                      };
-                      el.onblur = () => (el.style.transform = "scale(1)");
-                    }
-                  }}
-                  tabIndex={0}
-                  onClick={() => {
-                    if (rowIndex === 0) {
-                      // navigate('/aplicativos');
-                    } else if (rowIndex === 1) {
-                      pause();
-                      navigate("/tvAberta");
-                    } else {
-                      // navigate('/talvezGoste');
-                    }
-                  }}
-                />
-                <p className="text-xl text-center text-white ">
-                  {rowTitles[rowIndex]}
-                </p>
-              </button>
-              <div className="flex flex-row items-center align-center justify-center text-white h-full rounded w-full cursor-pointer gap-5">
-                {row.map((card, cardIndex) => (
-                  <button
-                    className="flex flex-col items-center justify-center hover:scale-200 w-[200px] mx-3 rounded-lg"
-                    ref={(el) => {
-                      focusableElements[rowIndex].current[cardIndex + 1] = el;
-                      if (el) {
-                        el.onfocus = () => (el.style.transform = "scale(1.1)");
-                        el.onblur = () => (el.style.transform = "scale(1)");
-                      }
-                    }}
-                    tabIndex={0}
-                    onClick={() => {
-                      if (
-                        card.icon === TvAberta ||
-                        card.icon === TvAbertaIcone
-                      ) {
-                        pause();
-                        navigate("/tvAberta");
-                      } else {
-                        openChannel(card.content, card.icon);
-                      }
-                    }}
-                    onFocus={() => {
-                      if (rowIndex < 2) {
-                        // Para todas as linhas exceto a última
-                        updateRecommendations(card.name, rowIndex); // Atualize as recomendações
-                      }
-                    }}
-                  >
-                    <div className="focus:border-cyan-200  hover:border-cyan-900  ">
-                      <img
-                        className="w-[240px] h-[135px] rounded-lg mx-2  hover:scale-200 transition duration-500 ease-in-out "
-                        src={card.icon}
-                        alt="card icon"
-                        onFocus={() => {
-                          updateRecommendations(rowTitles[rowIndex]); // Atualize as recomendações
-                        }}
-                      />
-                    </div>
-                  </button>
-                ))}
-              </div>
-              <button
-                className="flex flex-col items-center justify-center hover:scale-200 w-[5px] mx-[10px] rounded-lg"
-                onClick={() => {
-                  // ... (código existente)
-                }}
-              >
-                <BsChevronRight className="w-[30px] h-[30px] text-white cursor-pointer" />
-              </button>
-            </div>
-          ))}
-        </div>
-      </AudiodescFlag.Provider>
       <Footer btnRef={confRef} />
     </>
   );
